@@ -62,7 +62,10 @@ To show the status:
     \Write the compiler's abort message then the CRLF string to StdOut;
     \Exit.
   If the compiler's  abort path is not blank,
-    Write the compiler's abort message then the CRLF string then 
+    Write the escape byte then "[31m"
+    then the compiler's abort message 
+    then the escape byte then "[0m" 
+    then the CRLF string then 
     "File: '" then the escape byte then "[96m" 
     then the compiler's abort path
     then the escape byte then "[0m" 
@@ -471,9 +474,9 @@ To add a variable to some variables given a kind and a locus:
   Append the variable to the variables.
   Put the locus into the variable's locus.
   
-  The adding built-in memory routines timer is a timer.
+The adding built-in memory routines timer is a timer.
   
-  The adding built-in startup routine timer is a timer.
+The adding built-in startup routine timer is a timer.
   
 To address some entries:
   Get an entry from the entries.
@@ -614,7 +617,7 @@ To address some variables given an address:
   Address the variable given the address.
   Repeat.
   
-  The addressing timer is a timer.
+The addressing timer is a timer.
   
 To advance a buffer:
   Append the return byte to the buffer.
@@ -778,9 +781,10 @@ To blurt a dos header into a buffer:
   Blurt bytes given the dos header's whereabouts and the dos header's magnitude and the buffer and 0.
   
 To blurt some entries into a buffer:
-  Get an entry from the entries.
-  If the entry is nil, exit.
-  Blurt the entry into the buffer.
+  [Loop.]
+    Get an entry from the entries.
+    If the entry is nil, exit.
+    Blurt the entry into the buffer.
   Repeat.
   
 To blurt an entry into a buffer:
@@ -854,7 +858,7 @@ To blurt some variables into a buffer:
   
 A borough has a base address, a length and a size.
   
-  The break tag is a tag equal to 1.
+The break tag is a tag equal to 1.
   
 To bubble a monikette:
   If the monikette is nil, exit.
@@ -872,12 +876,12 @@ To calculate the length of a type:
   If the type's fields are empty, put the type's base type's length into the type's length; exit.
   Put 0 into the type's length.
   Loop.
-  If the compiler's abort flag is set, exit.
-  Get a field from the type's fields.
-  If the field is nil, exit.
-  If the field's redefinition target name is not blank, repeat.
-  Calculate the length of the field's type.
-  Add the field's type's length times the field's count to the type's length.
+    If the compiler's abort flag is set, exit.
+    Get a field from the type's fields.
+    If the field is nil, exit.
+    If the field's redefinition target name is not blank, repeat.
+    Calculate the length of the field's type.
+    Add the field's type's length times the field's count to the type's length.
   Repeat.
   
 To calculate the lengths of some types:
@@ -891,31 +895,32 @@ To calculate the offsets in a type:
   If the type is nil, exit.
   Put 0 into an offset.
   Loop.
-  If the compiler's abort flag is set, exit.
-  Get a field from the type's fields.
-  If the field is nil, exit.
-  If the field's redefinition target name is not blank, repeat.
-  Put the offset into the field's offset.
-  Add the field's type's length times the field's count to the offset.
+    If the compiler's abort flag is set, exit.
+    Get a field from the type's fields.
+    If the field is nil, exit.
+    If the field's redefinition target name is not blank, repeat.
+    Put the offset into the field's offset.
+    Add the field's type's length times the field's count to the offset.
   Repeat.
   
 To calculate the offsets in some types:
-  If the compiler's abort flag is set, exit.
-  Get a type from the types.
-  If the type is nil, exit.
-  Calculate the offsets in the type.
+    If the compiler's abort flag is set, exit.
+    Get a type from the types.
+    If the type is nil, exit.
+    Calculate the offsets in the type.
   Repeat.
   
 To calculate the redefinition offsets in a type:
   If the type is nil, exit.
   Loop.
-  If the compiler's abort flag is set, exit.
-  Get a field from the type's fields.
-  If the field is nil, exit.
-  If the field's redefinition target name is blank, repeat.
-  Find another field given the field's redefinition target name and the type's fields.
-  If the other field is nil, abort with "Invalid redefine. I can't find the '" then the field's redefinition target name then "' field." and the field's locus; exit.
-  Put the other field's offset into the field's offset.
+    If the compiler's abort flag is set, exit.
+    Get a field from the type's fields.
+    If the field is nil, exit.
+    If the field's redefinition target name is blank, repeat.
+    Find another field given the field's redefinition target name and the type's fields.
+    If the other field is nil, 
+      Abort with "Invalid redefine. I can't find the '" then the field's redefinition target name then "' field." and the field's locus; exit.
+    Put the other field's offset into the field's offset.
   Repeat.
   
 To calculate the redefinition offsets in some types:
@@ -925,13 +930,13 @@ To calculate the redefinition offsets in some types:
   Calculate the redefinition offsets in the type.
   Repeat.
   
-  The calculating timer is a timer.
+The calculating timer is a timer.
   
-  The call external tag is a tag equal to 2.
+The call external tag is a tag equal to 2.
   
-  The call indirect tag is a tag equal to 3.
+The call indirect tag is a tag equal to 3.
   
-  The call internal tag is a tag equal to 4.
+The call internal tag is a tag equal to 4.
   
 To check for invalid optional info on a type:
   If the compiler's abort flag is set, exit.
@@ -959,7 +964,7 @@ To clear a term:
   Void the term's variable.
   Clear the term's phrase.
   
-  The code borough is a borough.
+The code borough is a borough.
   
 To compile the bodies of the routines:
   Compile the body of the routine called "initialize before run".
@@ -2050,15 +2055,15 @@ To create a variable given a kind:
   Put the kind into the variable's kind.
   Put 1 into the variable's count.
   
-  The current header address is an address.
+The current header address is an address.
   
-  The current name address is an address.
+The current name address is an address.
   
-  The current routine is a routine.
+The current routine is a routine.
   
-  The current thunk address is an address.
+The current thunk address is an address.
   
-  The data borough is a borough.
+The data borough is a borough.
   
 To decide if any of some monikettes are negative words:
   \Loop.
@@ -2600,7 +2605,7 @@ To decide if a variable is duplicated in some variables:
   If the other variable's name is the variable's name, say yes.
   Repeat.
   
-  The dereference tag is a tag equal to 5.
+The dereference tag is a tag equal to 5.
   
 A dos header is a record with
 A wyrd called signature,
@@ -2645,7 +2650,7 @@ To eliminate duplicate nicknames given a variable and an index:
   Clear the other variable's nickname.
   Clear the variable's nickname.
   
-  The end if tag is a tag equal to 6.
+The end if tag is a tag equal to 6.
   
 An entry is a thing with
 A name address,
@@ -2653,9 +2658,9 @@ A thunk address,
 A name,
 An address.
   
-  The epilog tag is a tag equal to 7.
+The epilog tag is a tag equal to 7.
   
-  The exit tag is a tag equal to 8.
+The exit tag is a tag equal to 8.
   
 An expression is a term.
   
@@ -2685,7 +2690,7 @@ To finalize the compiler:
   Destroy the types.
   Destroy the source files.
   
-  The finalize tag is a tag equal to 9.
+The finalize tag is a tag equal to 9.
   
 To find an entry given a string and some entries:
   Void the entry.
@@ -2897,15 +2902,15 @@ To get a count given some imports (all entries plus markers):
   
 A global body is a substring.
   
-  The global index is an index.
+The global index is an index.
   
 A global is a variable.
   
-  The globals are some globals.
+The globals are some globals.
   
-  The image base is an address equal to 4194304 [$00400000].
+The image base is an address equal to 4194304 [$00400000].
   
-  The import borough is a borough.
+The import borough is a borough.
   
 An import header is a record with
 An address called original first thunk,
@@ -2921,9 +2926,9 @@ A name,
 An import header,
   Some entries.
   
-  The imports are some imports.
+The imports are some imports.
   
-  The increment tag is a tag equal to 10.
+The increment tag is a tag equal to 10.
   
 To index a global:
   If the compiler's abort flag is set, exit.
@@ -2994,7 +2999,7 @@ To index a type given a name:
   If the locus is nil, put the existing type's locus into the locus. \ point the error to a type in the source code, not a generated type
   Abort with "I think I've seen this '" then the name then "' type somewhere before; it must be a duplicate." and the locus.
   
-  The indexing utilities timer is a timer.
+The indexing utilities timer is a timer.
   
 To initialize the compiler:
   
@@ -3100,11 +3105,11 @@ To initialize a pe header (version information):
   Put 0 [$0000] into the pe header's subsystemminorversion.
   Put 3 [$0003] into the pe header's subsystem.  \ was 2
   
-  The intel tag is a tag equal to 11.
+The intel tag is a tag equal to 11.
   
 An intermediate is a local.
   
-  The jump false tag is a tag equal to 12.
+The jump false tag is a tag equal to 12.
   
 To link:
   Round up borough sizes.
@@ -3118,7 +3123,7 @@ To link:
   Blurt the literals into the compiler's exe.
   Blurt the routines into the compiler's exe.
   
-  The linking timer is a timer.
+The linking timer is a timer.
   
 To list:
   Clear the compiler's listing.
@@ -3368,21 +3373,21 @@ To list some variables under a string in a buffer:
   List the variables in the buffer.
   Advance the buffer.
   
-  The literal index is an index.
+The literal index is an index.
   
 A literal is a variable.
   
-  The literals are some literals.
+The literals are some literals.
   
-  The load address tag is a tag equal to 13.
+The load address tag is a tag equal to 13.
   
-  The load eax tag is a tag equal to 14.
+The load eax tag is a tag equal to 14.
   
 A local is a variable.
   
 A locus is a byte pointer.
   
-  The loop tag is a tag equal to 15.
+The loop tag is a tag equal to 15.
   
 A moniker is a string.
   
@@ -3492,7 +3497,7 @@ A nibble substring is a substring.
   
 A nickname is a name.
   
-  The not tag is a tag equal to 16.
+The not tag is a tag equal to 16.
   
 To offset the locals in a routine:
   If the routine is nil, exit.
@@ -3538,7 +3543,7 @@ To offset the parameters in some routines:
   Offset the parameters in the routine.
   Repeat.
   
-  The offsetting timer is a timer.
+The offsetting timer is a timer.
   
 A parameter is a variable.
   
@@ -3652,13 +3657,13 @@ To pluralize a string: \ nouns only
   If the string ends with "z", append "es" to the string; exit.
   Append "s" to the string.
   
-  The prolog tag is a tag equal to 17.
+The prolog tag is a tag equal to 17.
   
 A prototype string has a first byte pointer and a last byte pointer.
   
-  The push address tag is a tag equal to 18.
+The push address tag is a tag equal to 18.
   
-  The push value tag is a tag equal to 19.
+The push value tag is a tag equal to 19.
   
 To put the compiler's exe path into a path:
   Extract a designator from the compiler's directory.
@@ -3715,7 +3720,7 @@ To load some source files:
   Load the source file.
   Repeat.
   
-  The loading timer is a timer.
+The loading timer is a timer.
   
 To reduce some monikettes for utility use:
   Get a monikette from the monikettes.
@@ -3773,7 +3778,7 @@ To remove any negatives from some monikettes returning a flag:
   If the monikette's string ends with "n't", reverse the flag; remove trailing bytes from the monikette's string given 3; repeat.
   Repeat.
   
-  The repeat tag is a tag equal to 21.
+The repeat tag is a tag equal to 21.
   
 To resolve a field:
   If the compiler's abort flag is set, exit.
@@ -3941,9 +3946,9 @@ To resolve a variable (explicit type name):
   Find the variable's type given the variable's type name and the type index.
   If the variable's type is nil, abort with "I can't find the '" then the variable's type name then "' type." and the variable's locus; exit.
   
-  The resolving globals timer is a timer.
+The resolving globals timer is a timer.
   
-  The resolving types timer is a timer.
+The resolving types timer is a timer.
   
 To round up borough sizes:
   Put the import borough's length into the import borough's size.
@@ -3953,13 +3958,13 @@ To round up borough sizes:
   Put the code borough's length into the code borough's size.
   Round the code borough's size up to the nearest multiple of 4096.
   
-  The routine address tag is a tag equal to 22.
+The routine address tag is a tag equal to 22.
   
 A routine body is a substring.
   
 A routine header is a substring.
   
-  The routine index is an index.
+The routine index is an index.
   
 A routine is a thing with
   A locus (reference),
@@ -4265,7 +4270,7 @@ To scan a type given a rider (unit of measure):
   Move the rider (compiler rules).
   Index the type.
   
-  The scanning timer is a timer.
+The scanning timer is a timer.
   
 A scratch is a local.
   
@@ -4461,9 +4466,9 @@ To transmogrify some routines:
   Transmogrify the routine.
   Repeat.
   
-  The transmogrifying timer is a timer.
+The transmogrifying timer is a timer.
   
-  The type index is an index.
+The type index is an index.
   
 A type is a thing with
   A locus (reference),
