@@ -1,4 +1,4 @@
-\ copyright © 2006, 2017 the osmosian order (4700)
+\ copyright © 2006, 2025 the osmosian order (4700)
   
   \ firstparam=esp+4/ebp+8, secondparam=esp+8/ebp+12, etc...
 
@@ -20,15 +20,15 @@ To compile the project:
     the codepage
     returning a number called error status code.
   If the error status code is 0 [null],
-    Cluck;
+    \Cluck;
     Write "Error setting Console CodePage to STDOUT." then the CRLF string to StdOut;
     Write "If you are using the NppExec console, ignore the above message." then the CRLF string to StdOut.
   Get a string called project directory from the command line arguments.
   If the project directory is blank,
-    Cluck;
+    \Cluck;
     Write "|--------------------------------------------------------------------------------------|" then the CRLF string to StdOut;
-    Write "| " then the escape byte then 
-    "[33m" then "Warning. To use this compiler, you must inform the project path on the command line." 
+    Write "| " then the escape byte then "[33m" then
+     "Warning. To use this compiler, you must inform the project path on the command line." 
     then the escape byte then "[0m" then " |" then the CRLF string to StdOut;
     Write "|                                                                                      |" then the CRLF string to StdOut;
     Write "|  C:\compiler_path.exe\ D:\some random folder\current_project_folder\                 |" then the CRLF string to StdOut;
@@ -93,13 +93,14 @@ To abort with a string and a rider:
   Abort with the string and the rider's source's last.
   
 To add the allocate and deallocate and finalize and destroy routines:
-  If the compiler's abort flag is set, exit.
-  Get a type from the types.
-  If the type is nil, exit.
-  Add the finalize routine for the type.
-  Add the allocate routine for the type.
-  Add the deallocate routine for the type.
-  Add the destroy routine for the type.
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a type from the types.
+    If the type is nil, exit.
+    Add the finalize routine for the type.
+    Add the allocate routine for the type.
+    Add the deallocate routine for the type.
+    Add the destroy routine for the type.
   Repeat.
   
 To add the allocate routine for a type:
@@ -148,7 +149,8 @@ To add the deallocate routine for a type:
   Add a routine to the routines given nil.
   Append "deallocate a " then the type's name to the routine's header string.
   Append "if the " then the type's name then " is nil, exit. " to the routine's body string.
-  If the type's target type should be finalized, append "~finalize the " then the type's name then "'s target. " to the routine's body string.
+  If the type's target type should be finalized, 
+    Append "~finalize the " then the type's name then "'s target. " to the routine's body string.
   Append "unassign the " then the type's name then "." to the routine's body string.
   Slap the routine's routine header on the routine's header string.
   Slap the routine's routine body on the routine's body string.
@@ -158,8 +160,10 @@ To add the destroy routine for a type:
   If the type is nil, exit.
   If the compiler's abort flag is set, exit.
   If the type should not be forgotten, exit.
-  If the type can be reduced to "things", add the destroy routine for the type (things); exit.
-  If the type can be reduced to "pointer", add the destroy routine for the type (pointer); exit.
+  If the type can be reduced to "things", 
+    Add the destroy routine for the type (things); exit.
+  If the type can be reduced to "pointer", 
+    Add the destroy routine for the type (pointer); exit.
   
 To add the destroy routine for a type (pointer):
   If the type is nil, exit.
@@ -169,14 +173,16 @@ To add the destroy routine for a type (pointer):
   Add a routine to the routines given nil.
   Append "destroy a " then the type's name to the routine's header string.
   Append "if the " then the type's name then " is nil, exit. " to the routine's body string.
-  If the type's target type can be reduced to "pointer", append "destroy the " then the type's name then "'s target. " to the routine's body string.
-  If the type's target type can be reduced to "things", append "destroy the " then the type's name then "'s target. " to the routine's body string.
+  If the type's target type can be reduced to "pointer", 
+    Append "destroy the " then the type's name then "'s target. " to the routine's body string.
+  If the type's target type can be reduced to "things", 
+    Append "destroy the " then the type's name then "'s target. " to the routine's body string.
   Loop.
-  Get a field from the type's target type's fields.
-  If the field is nil, break.
-  If the field's reference flag is set, repeat.
-  If the field's type should not be forgotten, repeat.
-  Append "destroy the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
+    Get a field from the type's target type's fields.
+    If the field is nil, break.
+    If the field's reference flag is set, repeat.
+    If the field's type should not be forgotten, repeat.
+    Append "destroy the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
   Repeat.
   Append "deallocate the " then the type's name then ". " to the routine's body string.
   Slap the routine's routine header on the routine's header string.
@@ -233,10 +239,10 @@ To add the finalize routine for a type (record):
   Append "~finalize a " then the type's name to the routine's header string.
   Append "intel $50. " to the routine's body string. \ push eax
   Loop.
-  Get a field from the type's fields.
-  If the field is nil, break.
-  If the field's type should not be finalized, repeat.
-  Append "~finalize the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
+    Get a field from the type's fields.
+    If the field is nil, break.
+    If the field's type should not be finalized, repeat.
+    Append "~finalize the " then the type's name then "'s " then the field's name then ". " to the routine's body string.
   Repeat.
   Append "intel $58." to the routine's body string. \ pop eax
   Slap the routine's routine header on the routine's header string.
