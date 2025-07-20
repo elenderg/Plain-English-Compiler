@@ -33,7 +33,7 @@ To compile the project:
     Write "|                                                                                      |" then the CRLF string to StdOut;
     Write "|  C:\compiler_path.exe\ D:\some random folder\current_project_folder\                 |" then the CRLF string to StdOut;
     Write "|                                                                                      |" then the CRLF string to StdOut;
-    Write "|--------------------------------------------------------------------------------------|" then the CRLF string to StdOut;
+    Write "|--------------------------------------------------------------------------------------|" to StdOut;
   Exit.
   If the project directory's last byte pointer's target is not the backslash byte,
     Append the backslash byte to the project directory.
@@ -60,11 +60,17 @@ To compile the project:
 To show the status: 
   \If the compiler's  abort path is blank,
     \Write the compiler's abort message then the CRLF string to StdOut;
-    \Exit.    
+    \Exit.
   If the compiler's  abort path is not blank,
     Write the compiler's abort message then the CRLF string then 
-    "File '" then the compiler's abort path then "'" then the CRLF string then 
-    "Line number: " then the compiler's abort row#  then the CRLF string 
+    "File: '" then the escape byte then "[96m" 
+    then the compiler's abort path
+    then the escape byte then "[0m" 
+    then "'" then the CRLF string then 
+    "Line number: " then the escape byte then "[97m" 
+    then the compiler's abort row#  
+    then the escape byte then "[0m" 
+    then the CRLF string 
     to Stdout;
     Exit.
 

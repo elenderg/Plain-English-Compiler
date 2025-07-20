@@ -8,6 +8,316 @@
   \   there is always at least one row.
   \   there is always a return byte at the end of the last row.
 
+To write in green a string to StdOut;
+To write a string to StdOut in green;
+To write a string in green to StdOut:
+  Write the escape byte then "[92m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in red a string to StdOut;
+To write a string in red to StdOut:
+  Write the escape byte then "[31m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in blue a string to StdOut;
+To write a string in blue to StdOut:
+  Write the escape byte then "[34m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in cyan a string to StdOut;
+To write a string in cyan to StdOut:
+  Write the escape byte then "[36m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in light yellow a string to StdOut;
+To write a string in light yellow to StdOut:
+  Write the escape byte then "[93m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in reset a string to StdOut;
+To write a string in reset to StdOut:
+  Write the escape byte then "[0m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in bold a string to StdOut;
+To write a string in bold to StdOut:
+  Write the escape byte then "[1m" then the string then the escape byte then "[0m" to StdOut.
+
+To write with underscore a string to StdOut;
+To write a string with underscore to StdOut:
+  Write the escape byte then "[4m" then the string then the escape byte then "[0m" to StdOut.
+
+To write with inverted colors a string to StdOut;
+To write a string with inverted colors to StdOut:
+  Write the escape byte then "[7m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong black a string to StdOut;
+To write a string in strong black  to StdOut:
+  Write the escape byte then "[30m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong red a string to StdOut;
+To write a string in strong red  to StdOut:
+  Write the escape byte then "[31m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong green a string to StdOut;
+To write a string in strong green  to StdOut:
+  Write the escape byte then "[32m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong yellow a string to StdOut;
+To write a string in strong yellow  to StdOut:
+  Write the escape byte then "[33m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong blue a string to StdOut;
+To write a string in strong blue  to StdOut:
+  Write the escape byte then "[34m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong magenta a string to StdOut;
+To write a string in strong magenta  to StdOut:
+  Write the escape byte then "[35m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong cyan a string to StdOut;
+To write a string in strong cyan  to StdOut:
+  Write the escape byte then "[36m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in strong white a string to StdOut;
+To write a string in strong white  to StdOut:
+  Write the escape byte then "[37m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong black a string to StdOut;
+To write a string on the background using strong black  to StdOut:
+  Write the escape byte then "[40m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong red a string to StdOut;
+To write a string on the background using strong red  to StdOut:
+  Write the escape byte then "[41m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong green a string to StdOut;
+To write a string on the background using strong green  to StdOut:
+  Write the escape byte then "[42m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong yellow a string to StdOut;
+To write a string on the background using strong yellow  to StdOut:
+  Write the escape byte then "[43m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong blue a string to StdOut;
+To write a string on the background using strong blue  to StdOut:
+  Write the escape byte then "[44m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong magenta a string to StdOut;
+To write a string on the background using strong magenta  to StdOut:
+  Write the escape byte then "[45m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong cyan a string to StdOut;
+To write a string on the background using strong cyan  to StdOut:
+  Write the escape byte then "[46m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using strong white a string to StdOut;
+To write a string on the background using strong white  to StdOut:
+  Write the escape byte then "[47m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque black a string to StdOut;
+To write a string in opaque black  to StdOut:
+  Write the escape byte then "[90m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque red a string to StdOut;
+To write a string in opaque red  to StdOut:
+  Write the escape byte then "[91m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque green a string to StdOut;
+To write a string in opaque green  to StdOut:
+  Write the escape byte then "[92m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque yellow a string to StdOut;
+To write a string in opaque yellow  to StdOut:
+  Write the escape byte then "[93m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque blue a string to StdOut;
+To write a string in opaque blue  to StdOut:
+  Write the escape byte then "[94m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque magenta a string to StdOut;
+To write a string in opaque magenta  to StdOut:
+  Write the escape byte then "[95m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque cyan a string to StdOut;
+To write a string in opaque cyan  to StdOut:
+  Write the escape byte then "[96m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in opaque white a string to StdOut;
+To write a string in opaque white  to StdOut:
+  Write the escape byte then "[97m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque black a string to StdOut;
+To write a string on the background using opaque black  to StdOut:
+  Write the escape byte then "[100m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque red a string to StdOut;
+To write a string on the background using opaque red  to StdOut:
+  Write the escape byte then "[101m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque green a string to StdOut;
+To write a string on the background using opaque green  to StdOut:
+  Write the escape byte then "[102m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque yellow a string to StdOut;
+To write a string on the background using opaque yellow  to StdOut:
+  Write the escape byte then "[103m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque blue a string to StdOut;
+To write a string on the background using opaque blue  to StdOut:
+  Write the escape byte then "[104m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque magenta a string to StdOut;
+To write a string on the background using opaque magenta  to StdOut:
+  Write the escape byte then "[105m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque cyan a string to StdOut;
+To write a string on the background using opaque cyan  to StdOut:
+  Write the escape byte then "[106m" then the string then the escape byte then "[0m" to StdOut.
+
+To write on the background using opaque white a string to StdOut;
+To write a string on the background using opaque white  to StdOut:
+  Write the escape byte then "[107m" then the string then the escape byte then "[0m" to StdOut.
+
+To write in reset a string on the new line to StdOut;
+To write a string in reset on the new line to StdOut:
+  Write the escape byte then "[0m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in bold a string on the new line to StdOut;
+To write a string in bold on the new line to StdOut:
+  Write the escape byte then "[1m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write with underscore a string on the new line to StdOut;
+To write a string with underscore on the new line to StdOut:
+  Write the escape byte then "[4m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write with inverted colors a string on the new line to StdOut;
+To write a string with inverted colors on the new line to StdOut:
+  Write the escape byte then "[7m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong black a string on the new line to StdOut;
+To write a string in strong black  on the new line to StdOut:
+  Write the escape byte then "[30m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong red a string on the new line to StdOut;
+To write a string in strong red  on the new line to StdOut:
+  Write the escape byte then "[31m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong green a string on the new line to StdOut;
+To write a string in strong green  on the new line to StdOut:
+  Write the escape byte then "[32m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong yellow a string on the new line to StdOut;
+To write a string in strong yellow  on the new line to StdOut:
+  Write the escape byte then "[33m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong blue a string on the new line to StdOut;
+To write a string in strong blue  on the new line to StdOut:
+  Write the escape byte then "[34m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong magenta a string on the new line to StdOut;
+To write a string in strong magenta  on the new line to StdOut:
+  Write the escape byte then "[35m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong cyan a string on the new line to StdOut;
+To write a string in strong cyan  on the new line to StdOut:
+  Write the escape byte then "[36m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in strong white a string on the new line to StdOut;
+To write a string in strong white  on the new line to StdOut:
+  Write the escape byte then "[37m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong black a string on the new line to StdOut;
+To write a string on the background using strong black  on the new line to StdOut:
+  Write the escape byte then "[40m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong red a string on the new line to StdOut;
+To write a string on the background using strong red  on the new line to StdOut:
+  Write the escape byte then "[41m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong green a string on the new line to StdOut;
+To write a string on the background using strong green  on the new line to StdOut:
+  Write the escape byte then "[42m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong yellow a string on the new line to StdOut;
+To write a string on the background using strong yellow  on the new line to StdOut:
+  Write the escape byte then "[43m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong blue a string on the new line to StdOut;
+To write a string on the background using strong blue  on the new line to StdOut:
+  Write the escape byte then "[44m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong magenta a string on the new line to StdOut;
+To write a string on the background using strong magenta  on the new line to StdOut:
+  Write the escape byte then "[45m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong cyan a string on the new line to StdOut;
+To write a string on the background using strong cyan  on the new line to StdOut:
+  Write the escape byte then "[46m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using strong white a string on the new line to StdOut;
+To write a string on the background using strong white  on the new line to StdOut:
+  Write the escape byte then "[47m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque black a string on the new line to StdOut;
+To write a string in opaque black  on the new line to StdOut:
+  Write the escape byte then "[90m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque red a string on the new line to StdOut;
+To write a string in opaque red  on the new line to StdOut:
+  Write the escape byte then "[91m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque green a string on the new line to StdOut;
+To write a string in opaque green  on the new line to StdOut:
+  Write the escape byte then "[92m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque yellow a string on the new line to StdOut;
+To write a string in opaque yellow  on the new line to StdOut:
+  Write the escape byte then "[93m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque blue a string on the new line to StdOut;
+To write a string in opaque blue  on the new line to StdOut:
+  Write the escape byte then "[94m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque magenta a string on the new line to StdOut;
+To write a string in opaque magenta  on the new line to StdOut:
+  Write the escape byte then "[95m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque cyan a string on the new line to StdOut;
+To write a string in opaque cyan  on the new line to StdOut:
+  Write the escape byte then "[96m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write in opaque white a string on the new line to StdOut;
+To write a string in opaque white  on the new line to StdOut:
+  Write the escape byte then "[97m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque black a string on the new line to StdOut;
+To write a string on the background using opaque black  on the new line to StdOut:
+  Write the escape byte then "[100m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque red a string on the new line to StdOut;
+To write a string on the background using opaque red  on the new line to StdOut:
+  Write the escape byte then "[101m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque green a string on the new line to StdOut;
+To write a string on the background using opaque green  on the new line to StdOut:
+  Write the escape byte then "[102m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque yellow a string on the new line to StdOut;
+To write a string on the background using opaque yellow  on the new line to StdOut:
+  Write the escape byte then "[103m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque blue a string on the new line to StdOut;
+To write a string on the background using opaque blue  on the new line to StdOut:
+  Write the escape byte then "[104m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque magenta a string on the new line to StdOut;
+To write a string on the background using opaque magenta  on the new line to StdOut:
+  Write the escape byte then "[105m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque cyan a string on the new line to StdOut;
+To write a string on the background using opaque cyan  on the new line to StdOut:
+  Write the escape byte then "[106m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+To write on the background using opaque white a string on the new line to StdOut;
+To write a string on the background using opaque white  on the new line to StdOut:
+  Write the escape byte then "[107m" then the string then the escape byte then "[0m" then the CRLF string to StdOut.
+
+
 To use the next line of StdOut;
 To go to the next line of StdOut;
 To jump to the next line of StdOut;
