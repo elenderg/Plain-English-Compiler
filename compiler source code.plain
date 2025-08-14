@@ -1,6 +1,6 @@
 \ copyright © 2006, 2025 the osmosian order (4700)
   
-  \ firstparam=esp+4/ebp+8, secondparam=esp+8/ebp+12, etc...
+  \ firstparam=esp+4/ebp+8, secondparam=esp+8/ebp+12, etc…
 
  \ The trigger
 
@@ -41,7 +41,7 @@ To compile the project:
     Cluck;
     Write "Error. The directory " then the project directory then " could not be found in the filesystem" then the CRLF string to StdOut;
     Exit.
-  Write in strong yellow " Compiling project at '" then the project directory then "' ..." then the CRLF string to StdOut. \ Compilation starts here
+  Write in strong yellow " Compiling project at '" then the project directory then "' …" then the CRLF string to StdOut. \ Compilation starts here
   Write the CRLF string to StdOut.
   Compile the project directory.
   If the compiler's abort flag is set, 
@@ -1070,22 +1070,22 @@ To compile a directory:
   
 To compile a directory (add and compile the built-in startup routine):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Adding and compiling the built-in startup routine..." then the CRLF string to Stdout.
-  \Write "Adding and compiling the built-in startup routine..." then the CRLF string to StdOut.
+  Write in strong blue " Adding and compiling the built-in startup routine…" then the CRLF string to Stdout.
+  \Write "Adding and compiling the built-in startup routine…" then the CRLF string to StdOut.
   Start the adding built-in startup routine timer.
   Add and compile the initialize before run and run and finalize after run routine.
   Stop the adding built-in startup routine timer.
   
 To compile a directory (add the built-in memory routines):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Adding the built-in memory routines..." then the CRLF string to Stdout.
+  Write in strong blue " Adding the built-in memory routines…" then the CRLF string to Stdout.
   Start the adding built-in memory routines timer.
   Add the allocate and deallocate and finalize and destroy routines.
   Stop the adding built-in memory routines timer.
   
 To compile a directory (address):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Calculating addresses..." then the CRLF string to Stdout.
+  Write in strong blue " Calculating addresses…" then the CRLF string to Stdout.
   Start the addressing timer.
   Put 4096 into an address.
   Put the address into the import borough's base.
@@ -1104,7 +1104,7 @@ To compile a directory (address):
   
 To compile a directory (calculate lengths and offsets of types):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Calculating lengths and offsets of types..." then the CRLF string to Stdout.
+  Write in strong blue " Calculating lengths and offsets of types…" then the CRLF string to Stdout.
   Start the calculating timer.
   Calculate the lengths of the types.
   Calculate the offsets in the types.
@@ -1113,21 +1113,21 @@ To compile a directory (calculate lengths and offsets of types):
   
 To compile a directory (compile the bodies of the routines):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Compiling the bodies of the routines..." then the CRLF string to Stdout.
+  Write in strong blue " Compiling the bodies of the routines…" then the CRLF string to Stdout.
   Start the compiling routine bodies timer.
   Compile the bodies of the routines.
   Stop the compiling routine bodies timer.
   
 To compile a directory (compile the headers of the routines):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Compiling the headers of the routines..." then the CRLF string to Stdout.
+  Write in strong blue " Compiling the headers of the routines…" then the CRLF string to Stdout.
   Start the compiling routine headers timer.
   Compile the headers of the routines.
   Stop the compiling routine headers  timer.
   
 To compile a directory (index the routines for utility use):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Indexing the routines for utility use..." then the CRLF string to Stdout.
+  Write in strong blue " Indexing the routines for utility use…" then the CRLF string to Stdout.
   Start the indexing utilities timer.
   Index the routines for utility use.
   Scrub the utility index.
@@ -1136,14 +1136,14 @@ To compile a directory (index the routines for utility use):
   
 To compile a directory (link):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Linking..." then the CRLF string to Stdout.
+  Write in strong blue " Linking…" then the CRLF string to Stdout.
   Start the linking timer.
   Link.
   Stop the linking timer.
   
 To compile a directory (offset parameters and variables):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Offsetting parameters and variables..." then the CRLF string to Stdout.
+  Write in strong blue " Offsetting parameters and variables…" then the CRLF string to Stdout.
   Start the offsetting timer.
   Offset the parameters in the routines.
   Offset the locals in the routines.
@@ -1151,21 +1151,21 @@ To compile a directory (offset parameters and variables):
   
 To compile a directory (load the source files):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Loading the source files..." then the CRLF string to Stdout.
+  Write in strong blue " Loading the source files…" then the CRLF string to Stdout.
   Start the loading timer.
   Load the source files.
   Stop the loading timer.
   
 To compile a directory (resolve the globals):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Resolving the globals..." then the CRLF string to Stdout.
+  Write in strong blue " Resolving the globals…" then the CRLF string to Stdout.
   Start the resolving globals timer.
   Resolve the globals.
   Stop the resolving globals timer.
   
 To compile a directory (resolve the types):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Resolving the types..." then the CRLF string to Stdout.
+  Write in strong blue " Resolving the types…" then the CRLF string to Stdout.
   Start the resolving types timer.
   Resolve the types (expand things).
   Resolve the types (index plurals).
@@ -1175,13 +1175,13 @@ To compile a directory (resolve the types):
   
 To compile a directory (scan the source files):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Scanning the source files..." then the CRLF string to Stdout.
+  Write in strong blue " Scanning the source files…" then the CRLF string to Stdout.
   Start the scanning timer.
   Scan the source files.
   Stop the scanning timer.
   
 To compile a directory (start):
-  Write in strong blue " Starting..." then the CRLF string to Stdout.
+  Write in strong blue " Starting…" then the CRLF string to Stdout.
   Finalize the compiler.
   Start the compiler's timer.
   Initialize the compiler given the directory.
@@ -1193,7 +1193,7 @@ To compile a directory (stop):
   
 To compile a directory (transmogrify):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Transmogrifying..." then the CRLF string to Stdout.
+  Write in strong blue " Transmogrifying…" then the CRLF string to Stdout.
   Start the transmogrifying timer.
   Transmogrify the routines.
   Stop the transmogrifying timer.
@@ -3228,7 +3228,7 @@ To list a refer in a buffer:
   If the refer is nil, exit.
   Append "/refer" to the buffer (with separator).
   Append the refer's string to the buffer.
-  If the refer's pointer is nil, append "..." to the buffer.
+  If the refer's pointer is nil, append "…" to the buffer.
   Append "/" to the buffer.
   Advance the buffer.
   
