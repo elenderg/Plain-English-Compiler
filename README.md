@@ -89,7 +89,7 @@ DIVIDED BY
 THEN
 ```
 
-**Imperative verbs (built-in commands):**
+**Main Imperative verbs (built-in commands):**
 ```
 ADD
 SUBTRACT
@@ -112,7 +112,7 @@ DESTROY
 UNASSIGN
 ```
 
-**Prepositions (used in parsing and monikettes):**
+**Main Prepositions (used in parsing and monikettes):**
 ```
 IN
 INTO
@@ -136,9 +136,11 @@ OR
 ```
 
 **Literals:**
-- Numbers (`123`, `0`, `-45`)
 - Strings (`"Hello, World!"`)
+- Numbers (`123`, `0`, `-45`)
 - Ratios (`3/4`)
+- Mixed Numbers (`1-3/4`)
+- Hexadecimal Number (`$DEADBEEF`)
 
 ---
 
@@ -154,15 +156,12 @@ To move the origin to coordinates:
     Put 0 into the origin's x.
     Put 0 into the origin's y.
     Write in strong green "Origin reset" to StdOut.
-
-If the origin's x is greater than 100, exit.
+    If the origin's x is greater than 100, exit.
 ```
 
 ---
 
 ## 2. Built-in Types
-
-From `Compiler Source Code.txt` and `Standard Library.txt`:
 
 **Primitive types:**
 ```
@@ -171,7 +170,7 @@ number       — general integer type
 string       — variable-length sequence of bytes
 pointer      — generic memory reference
 ratio        — fractional number
-thing        — generic record container
+thing        — doubly linked list
 record       — structured fields
 ```
 
@@ -281,8 +280,6 @@ If the a-key is equal to 65,
 
 ## 4. Standard Library Routines
 
-From `Standard Library.txt`:
-
 **Console Output with Colors:**
 ```
 Write in strong red "Error!" to StdOut.
@@ -329,7 +326,7 @@ Add a pdf outline entry.
 
 **Example:**
 ```plaintext
-Add a pdf object given page.
+Add a pdf object given the page.
 Add a pdf outline entry with "Introduction".
 ```
 
