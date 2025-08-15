@@ -744,7 +744,7 @@ To adjust a box given a number and another number and a third number and a fourt
   
 To adjust an item:
   Put the item's win32finddata's dwfileattributes into a number.
-  Bitwise and the number with 16 [file_attribute_directory].
+  Bitwise AND the number with 16 [file_attribute_directory].
   If the number is 0, put "file" into the item's kind.
   If the number is not 0, put "directory" into the item's kind.
   Put the item's win32finddata's cfilename's whereabouts into a pchar.
@@ -992,7 +992,7 @@ To begin a sheet given a box:
   If the pdf state's document flag is set, begin the sheet given the box (pdf style); exit.
   Call "kernel32.dll" "GlobalLock" with the printer device mode handle returning a pdevmode.
   If the pdevmode is nil, exit.
-  Bitwise or the pdevmode's dmfields with 1 [dm_orientation].
+  Bitwise OR the pdevmode's dmfields with 1 [dm_orientation].
   Put 1 [dmorient_portrait] into the pdevmode's dmorientation.
   If the box's width is greater than the box's height, put 2 [dmorient_landscape] into the pdevmode's dmorientation.
   Call "gdi32.dll" "ResetDCA" with the printer canvas and the pdevmode.
@@ -1751,7 +1751,7 @@ To convert a hex string to a number:
 To convert an l-param to a key: \ assumes l-param from wm_char message
   Put the l-param into the key.
   Shift the key right 16 bits.
-  Bitwise and the key with 255.
+  Bitwise AND the key with 255.
   Call "user32.dll" "MapVirtualKeyA" with the key and 1 returning the key.
   If the numlock key was not toggled, exit.
   If the key is the insert key, put the numpad-zero key into the key; exit.
@@ -1793,7 +1793,7 @@ To convert a nibble string to a hex string:
   Shift the nibble left 4 bits.
   Add 1 to the substring's first.
   Convert the substring's first's target to another nibble.
-  Bitwise or the nibble with the other nibble.
+  Bitwise OR the nibble with the other nibble.
   Append the nibble to the hex string.
   Add 1 to the substring's first.
   Repeat.
@@ -1868,7 +1868,7 @@ To convert a query string to a string:
   Shift the nibble left 4 bits.
   Add 1 to the substring's first.
   Convert the substring's first's target to another nibble.
-  Bitwise or the nibble with the other nibble.
+  Bitwise OR the nibble with the other nibble.
   Add 1 to the substring's first.
   Append the nibble to the string.
   Repeat.
@@ -1991,7 +1991,7 @@ To convert a string to a pointer: \ assumes pointer is in nibble format
   If the shift count is less than 0, exit.
   Put the substring's first's target into a number.
   Shift the number left the shift count.
-  Bitwise or the pointer as a number with the number.
+  Bitwise OR the pointer as a number with the number.
   Add 1 to the substring's first.
   Subtract 8 from the shift count.
   Repeat.
@@ -3443,7 +3443,7 @@ To decide if a key was down:
 To decide if a key was toggled:
   Call "user32.dll" "GetKeyState" with the key returning a wyrd.
   Put the wyrd into a number.
-  Bitwise and the number with 1.
+  Bitwise AND the number with 1.
   If the number is 1, say yes.
   Say no.
   
@@ -3453,7 +3453,7 @@ To decide if a key was up:
   
 To decide if a key with an l-param is any repeated escape or modifier key:
   Put the l-param into a number.
-  Bitwise and the number with 1073741824 [$40000000].
+  Bitwise AND the number with 1073741824 [$40000000].
   If the number is 0, say no.
   If the key is the escape key, say yes.
   If the key is any modifier key, say yes.
@@ -3535,7 +3535,7 @@ To decide if a number is negative:
   
 To decide if a number is odd:
   Privatize the number.
-  Bitwise and the number with 1.
+  Bitwise AND the number with 1.
   If the number is 0, say no.
   Say yes.
   
@@ -3602,7 +3602,7 @@ To decide if a path is read-only:
   Privatize the path.
   Null terminate the path.
   Call "kernel32.dll" "GetFileAttributesA" with the path's first returning a number.
-  Bitwise and the number with 1 [file_attribute_readonly].
+  Bitwise AND the number with 1 [file_attribute_readonly].
   If the number is not 0, say yes.
   Say no.
   
@@ -6219,7 +6219,7 @@ To get a bucket# given a string and an index: \ based on the djb2 algorithm
   Add 3 to the substring's first.
   If the substring is blank, break.
   Repeat.
-  Bitwise and the bucket# with the largest number.
+  Bitwise AND the bucket# with the largest number.
   Divide the bucket# by the index's bucket count giving a quotient and the bucket#.
   
 To get a byte from a string:
@@ -10897,7 +10897,7 @@ To put the system's last winsock error into a number:
   
 To put the system's tick count into some ticks: \ wraps every 24.8 days or so
   Call "kernel32.dll" "GetTickCount" returning the ticks.
-  Bitwise and the ticks with the largest number.
+  Bitwise AND the ticks with the largest number.
   
 To put a terminal in the middle of a box;
 To center a terminal in a box:
@@ -12379,7 +12379,7 @@ To set a path to read-write mode:
   Privatize the path.
   Null terminate the path.
   Call "kernel32.dll" "GetFileAttributesA" with the path's first returning a number.
-  Bitwise and the number with -2 [everything except file_attribute_readonly].
+  Bitwise AND the number with -2 [everything except file_attribute_readonly].
   Call "kernel32.dll" "SetFileAttributesA" with the path's first and the number.
   
 The seven byte is a byte equal to 55.
@@ -12487,7 +12487,7 @@ To shut down the cgi:
   Finalize the module.
   Finalize winsock.
   
-  A side is 1 unit.
+A side is 1 unit.
   
 The silent flag is a flag.
   
@@ -12684,7 +12684,7 @@ To split a byte into a nibble and another nibble:
   Put the byte into the nibble.
   Shift the nibble right 4 bits.
   Put the byte into the other nibble.
-  Bitwise and the other nibble with 15.
+  Bitwise AND the other nibble with 15.
   
 To split a line into another line and a third line:
   Privatize the line.

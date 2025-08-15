@@ -1070,7 +1070,8 @@ To compile a directory:
   
 To compile a directory (add and compile the built-in startup routine):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Adding and compiling the built-in startup routine…" then the CRLF string to Stdout.
+  Write in strong green "                        [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [11/17]  Adding and compiling built-in startup routine…" to StdOut.
   \Write "Adding and compiling the built-in startup routine…" then the CRLF string to StdOut.
   Start the adding built-in startup routine timer.
   Add and compile the initialize before run and run and finalize after run routine.
@@ -1078,14 +1079,16 @@ To compile a directory (add and compile the built-in startup routine):
   
 To compile a directory (add the built-in memory routines):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Adding the built-in memory routines…" then the CRLF string to Stdout.
+  Write in strong green "              [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [08/17]  Adding built-in memory routines…" to Stdout.
   Start the adding built-in memory routines timer.
   Add the allocate and deallocate and finalize and destroy routines.
   Stop the adding built-in memory routines timer.
   
 To compile a directory (address):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Calculating addresses…" then the CRLF string to Stdout.
+  Write in strong green "        [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [13/17]  Calculating addresses…" to Stdout.
   Start the addressing timer.
   Put 4096 into an address.
   Put the address into the import borough's base.
@@ -1104,7 +1107,8 @@ To compile a directory (address):
   
 To compile a directory (calculate lengths and offsets of types):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Calculating lengths and offsets of types…" then the CRLF string to Stdout.
+  Write in strong green "                       [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [07/17]  Calculating type sizes and offsets…" to Stdout.
   Start the calculating timer.
   Calculate the lengths of the types.
   Calculate the offsets in the types.
@@ -1113,21 +1117,24 @@ To compile a directory (calculate lengths and offsets of types):
   
 To compile a directory (compile the bodies of the routines):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Compiling the bodies of the routines…" then the CRLF string to Stdout.
+  Write in strong green "              [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [10/17]  Compiling routine bodies…" to Stdout.
   Start the compiling routine bodies timer.
   Compile the bodies of the routines.
   Stop the compiling routine bodies timer.
   
 To compile a directory (compile the headers of the routines):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Compiling the headers of the routines…" then the CRLF string to Stdout.
+  Write in strong green "                        [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [06/17]  Compiling routine headers…" to Stdout.
   Start the compiling routine headers timer.
   Compile the headers of the routines.
   Stop the compiling routine headers  timer.
   
 To compile a directory (index the routines for utility use):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Indexing the routines for utility use…" then the CRLF string to Stdout.
+  Write in strong green "                 [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [09/17]  Indexing routines for internal use…" to Stdout.
   Start the indexing utilities timer.
   Index the routines for utility use.
   Scrub the utility index.
@@ -1136,14 +1143,16 @@ To compile a directory (index the routines for utility use):
   
 To compile a directory (link):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Linking…" then the CRLF string to Stdout.
+  Write in strong green "          [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [15/17]  Linking…" to Stdout.
   Start the linking timer.
   Link.
   Stop the linking timer.
   
 To compile a directory (offset parameters and variables):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Offsetting parameters and variables…" then the CRLF string to Stdout.
+  Write in strong green "   [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [12/17]  Assigning parameter and variable offsets…" to Stdout.
   Start the offsetting timer.
   Offset the parameters in the routines.
   Offset the locals in the routines.
@@ -1151,21 +1160,24 @@ To compile a directory (offset parameters and variables):
   
 To compile a directory (load the source files):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Loading the source files…" then the CRLF string to Stdout.
+  Write in strong green "                            [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [02/17]  Loading source files…" to Stdout.
   Start the loading timer.
   Load the source files.
   Stop the loading timer.
   
 To compile a directory (resolve the globals):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Resolving the globals…" then the CRLF string to Stdout.
+  Write in strong green "                      [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [05/17]  Resolving global symbols…" to Stdout.
   Start the resolving globals timer.
   Resolve the globals.
   Stop the resolving globals timer.
   
 To compile a directory (resolve the types):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Resolving the types…" then the CRLF string to Stdout.
+  Write in strong green "                           [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [04/17]  Resolving type definitions…" to Stdout.
   Start the resolving types timer.
   Resolve the types (expand things).
   Resolve the types (index plurals).
@@ -1175,13 +1187,14 @@ To compile a directory (resolve the types):
   
 To compile a directory (scan the source files):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Scanning the source files…" then the CRLF string to Stdout.
+  Write in strong green "                            [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [03/17]  Scanning source files…" to Stdout.
   Start the scanning timer.
   Scan the source files.
   Stop the scanning timer.
   
 To compile a directory (start):
-  Write in strong blue " Starting…" then the CRLF string to Stdout.
+  Write in strong blue " [01/17]  Starting compilation…" to Stdout.
   Finalize the compiler.
   Start the compiler's timer.
   Initialize the compiler given the directory.
@@ -1189,18 +1202,22 @@ To compile a directory (start):
   
 To compile a directory (stop):
   Stop the compiler's timer.
-  Write in strong blue " Ending." then the CRLF string to Stdout.
+  Write in strong green "                   [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [17/17]  Ending." to Stdout.
+  Write in strong green "                                          [OK]" then the CRLF string to Stdout.
   
 To compile a directory (transmogrify):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Transmogrifying…" then the CRLF string to Stdout.
+  Write in strong green "                           [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [14/17]  Generating intermediate representation…" to Stdout.
   Start the transmogrifying timer.
   Transmogrify the routines.
   Stop the transmogrifying timer.
   
 To compile a directory (write the exe):
   If the compiler's abort flag is set, exit.
-  Write in strong blue " Writing. the exe file.." then the CRLF string to Stdout.
+  Write in strong green "                                         [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [16/17]  Writing. the executable file.." to Stdout.
   Start the writing timer.
   Write the compiler's exe to the compiler's exe path.
   If the i/o error is not blank, abort with the i/o error.
