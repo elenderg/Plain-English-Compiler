@@ -32,10 +32,10 @@ Hello, world!
 ### Prerequisites
 - **Windows** (32-bit or 64-bit) — main target platform.
 
-Philosophy
+### Philosophy
 
 The Plain English Compiler is built on the belief that:
-If you can explain it in English, you should be able to make a computer do it.
+***If you can explain it in English, you should be able to make a computer do it.***  
 Instead of cryptic symbols and boilerplate, the syntax mirrors natural English sentences, making it more intuitive for beginners, writers, and non-technical audiences.
 
 ### Contributing
