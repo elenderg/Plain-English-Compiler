@@ -86,100 +86,56 @@ To abort with a string and a byte pointer:
   Prepend " Error in '" then the file name then "''. " to the compiler's abort message.
   Show the status.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+To find a path and a row# given a byte pointer:
+  Clear the path.
+  Put 0 into the row#.
+  Find a source file given the byte pointer.
+  If the source file is nil, exit.
+  Put the source file's path into the path.
+  Find the row# given the source file and the byte pointer.
+
+To find a source file given a byte pointer:
+  If the byte pointer is nil,
+    Void the source file;
+    Exit.
+  Loop.
+    Get the source file from the source files.
+    If the source file is nil, exit.
+    If the byte pointer is less than the source file's buffer's first byte pointer, repeat.
+    If the byte pointer is greater than the source file's buffer's last byte pointer, repeat.
+
+To show the status:
+  \If the compiler's  abort path is blank,
+    \Write the compiler's abort message then the CRLF string to StdOut;
+    \Exit.
+  If the compiler's  abort path is not blank,
+    Write 
+      the escape byte then
+      "[31m" then
+      the CRLF string then
+      "          [ERROR]" then
+      the CRLF string  then
+      the CRLF string  then
+      "         '" then
+      the compiler's abort message then
+      the escape byte  then
+      "[0m" then
+      the CRLF string 
+      then"          File: '"  then
+      the escape byte  then
+      "[96m" then
+      the compiler's abort path then
+      the escape byte  then
+      "[0m" then
+      "'"  then
+      the CRLF string  then
+      "          Line number: "  then
+      the escape byte  then
+      "[97m" then
+      the compiler's abort row# then
+      the escape byte  then
+      "[0m" then
+      the CRLF string
+    to Stdout;
+    Exit.
 

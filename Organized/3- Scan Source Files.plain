@@ -1,0 +1,193 @@
+To compile a directory (scan the source files):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                            [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [03/16]" to StdOut.
+  Write "  Scanning source files…" to Stdout.
+  Start the scanning timer.
+  Scan the source files.
+  Stop the scanning timer.
+
+To scan some source files:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a source file from the source files.
+    If the source file is nil, exit.
+    Scan the source file.
+  Repeat.
+
+To scan a source file:
+  If the source file is nil, exit.
+  If the compiler's abort flag is set, exit.
+  Slap a rider on the source file's buffer.
+  Move the rider (compiler rules).
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is blank, exit.
+    If the rider's token substring is the start of any type,
+      Scan a type given the rider;
+      Repeat.
+    If the rider's token substring is the start of any global,
+      Scan a global given the rider;
+      Repeat.
+    If the rider's token substring is the start of any routine,
+      Scan a routine given the rider;
+      Repeat.
+    Abort with "I was hoping for a definition but all I found was '" then the rider's token substring then "'." and the rider.
+  Repeat.
+
+To move a rider (compiler rules):
+  [Loop.]
+    If the compiler's abort flag is set,
+      Clear the rider's token substring;
+      Exit.
+    Move the rider returning an error string (code rules).
+    If the error string is not blank,
+      Abort with the error string and the rider's token substring's first byte pointer;
+      Exit.
+    If the rider's token substring is blank, exit.
+    If the rider's token substring's first byte pointer's target is noise, repeat.
+    If the rider's token substring's first byte pointer's target is the backslash byte, repeat.
+    If the rider's token substring's first byte pointer's target is the left-bracket byte, repeat.
+
+To move a rider returning an error string (code rules):
+  Clear the error string.
+  Move the rider (code rules).
+  If the rider's token substring is blank, exit.
+  If the rider's token substring's first byte pointer's target is the left-bracket byte,
+    Move the rider returning the error string (code rules - validate remark);
+    Exit.
+  If the rider's token substring's first byte pointer's target is the double-quote byte,
+    Move the rider returning the error string (code rules - validate string);
+    Exit.
+  If the rider's token substring's first byte pointer's target is the left-paren byte,
+    Move the rider returning the error string (code rules - validate qualifier);
+    Exit.
+
+To move a rider (code rules):
+  Position the rider's token on the rider's source.
+  If the rider's source substring is blank, exit.
+  If the rider's source substring's first byte pointer's target is noise,
+    Move the rider (code rules - noise);
+    Exit.
+  If the rider's source substring's first byte pointer's target is the backslash byte,
+    Move the rider (code rules - comment);
+    Exit.
+  If the rider's source substring's first byte pointer's target is the left-bracket byte,
+    Move the rider (code rules - remark);
+    Exit.
+  If the rider's source substring's first byte pointer's target is the double-quote byte,
+    Move the rider (code rules - string);
+    Exit.
+  If the rider's source substring's first byte pointer's target is the left-paren byte,
+    Move the rider (code rules - qualifier);
+    Exit.
+  If the rider's source substring's first byte pointer's target is any mark,
+    Move the rider (code rules - mark);
+    Exit.
+  If the rider is on any possessive,
+    Move the rider (code rules - possessive);
+    Exit.
+  Move the rider (code rules - glom).
+
+To move a rider (code rules - noise):
+  [Loop.]
+    Bump the rider.
+    If the rider's source substring is blank, exit.
+    If the rider's source substring's first byte pointer's target is noise, repeat.
+
+To move a rider (code rules - comment):
+  [Loop.]
+    Bump the rider.
+    If the rider's source substring is blank, exit.
+    If the rider's source substring's first byte pointer's target is not the return byte, repeat.
+
+To move a rider (code rules - remark):
+  [Loop.]
+    If the rider's source substring is blank, exit.
+    If the rider's source substring's first byte pointer's target is the return byte, break.
+    If the rider's source substring's first byte pointer's target is the left-bracket byte,
+      Add 1 to a count.
+    If the rider's source substring's first byte pointer's target is the right-bracket byte,
+      Subtract 1 from the count.
+    Bump the rider.
+    If the count is 0, break.
+  Repeat.
+
+To move a rider (code rules - string):
+  [Loop.]
+    Bump the rider.
+    If the rider's source substring is blank, exit.
+    If the rider's source substring's first byte pointer's target is the return byte, exit.
+    If the rider is on any nested double-quote,
+      Bump the rider;
+      Repeat.
+    If the rider's source substring's first byte pointer's target is the double-quote byte,
+      Bump the rider;
+      Exit.
+  Repeat.
+
+To decide if a rider is on any nested double-quote:
+  If the rider's source substring starts with """""", say yes.
+  Say no.
+
+To move a rider (code rules - qualifier):
+  [Loop.]
+    If the rider's source substring is blank, exit.
+    If the rider's source substring's first byte pointer's target is the return byte, break.
+    If the rider's source substring's first byte pointer's target is the left-paren byte,
+      Add 1 to a count.
+    If the rider's source substring's first byte pointer's target is the right-paren byte,
+      Subtract 1 from the count.
+    Bump the rider.
+    If the count is 0, break.
+  Repeat.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

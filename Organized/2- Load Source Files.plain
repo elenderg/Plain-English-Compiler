@@ -1,0 +1,38 @@
+To compile a directory (load the source files):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                            [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [02/16]" to StdOut.
+  Write "  Loading source files…" to Stdout.
+  Start the loading timer.
+  Load the source files.
+  Stop the loading timer.
+
+To load some source files:
+  Put ".plain" to a string called file extension.
+  Null terminate the file extension.
+  Loop.
+    If the compiler's abort flag is set, exit.
+    Get an item from the compiler's directory.
+    If the item is not found, break.
+    If the item's kind is not "file", repeat.
+    If the item's extension is not the file extension, repeat.
+    \If the item looks reamish, repeat.
+    Add a source file to the source files given the item's path.
+    Load the source file.
+  Repeat.
+
+To add a source file to some source files given a path:
+  Create the source file.
+  Append the source file to the source files.
+  Put the path into the source file's path.
+
+To create a source file:
+  Allocate memory for the source file.
+
+To load a source file:
+  If the source file is nil, exit.
+  Load the source file's path into the source file's buffer.
+  If the i/o error is not blank,
+    Abort with "Error #3. Could not load the file '" then the source file's path then "'.";
+    Exit.
+

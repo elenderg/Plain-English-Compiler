@@ -12023,12 +12023,15 @@ To read a path into a buffer:
   If the handle is -1 [invalid_handle_value],
     Put "Error opening file '" then the path then "'." into the i/o error;
     Exit.
-  Call "kernel32.dll" "GetFileSize" with the handle and nil returning a size.
-  Reassign the buffer's first given the size.
-  Put the buffer's first plus the size minus 1 into the buffer's last.
+  Call "kernel32.dll" "GetFileSize" with 
+    the handle and 
+    nil 
+    returning a size.
+  Reassign the buffer's first byte pointer given the size.
+  Put the buffer's first byte pointer plus the size minus 1 into the buffer's last byte pointer.
   Call "kernel32.dll" "ReadFile" with
     the handle and 
-    the buffer's first and
+    the buffer's first byte pointer and
     the size and
     a number's whereabouts and
     0
