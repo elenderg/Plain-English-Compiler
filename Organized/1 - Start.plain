@@ -1,0 +1,185 @@
+To compile a directory (start):
+  Write in strong blue " [01/16]" to StdOut.
+  Write "  Starting compilation…" to Stdout.
+  Finalize the compiler.
+  Start the compiler's timer.
+  Initialize the compiler given the directory.
+  Add the built-in types.
+
+To finalize the compiler:
+  Destroy the utility index.
+  Destroy the routine index.
+  Destroy the literal index.
+  Destroy the global index.
+  Destroy the type index.
+  Destroy the imports.
+  Destroy the routines.
+  Destroy the literals.
+  Destroy the globals.
+  Destroy the types.
+  Destroy the source files.
+
+To initialize the compiler given a directory:
+  Put the directory into the compiler's directory.
+  Put 0 into the compiler's name count.
+  Clear the compiler's abort flag.
+  Clear the compiler's abort message.
+  Clear the compiler's abort path.
+  Put 0 into the compiler's abort row#.
+  Void the current routine.
+  Create the type index with 4027 [buckets].
+  Create the global index with 4027 [buckets].
+  Create the literal index with 4027 [buckets].
+  Create the routine index with 7919 [buckets].
+  Create the utility index with 4027 [buckets].
+
+To add the built-in types:
+  Add a built-in type given "byte" and "bytes" and 1.
+  Add another built-in type given "record" and "records" and 0.
+
+To add a built-in type given a name and a plural name and a length:
+  Add the built-in type to the types given the name and the plural name and the name.
+  Put the length into the built-in type's length.
+  Put the built-in type into the built-in type's base type.
+  Index the built-in type.
+
+To add a type to some types given a name and a plural name and a base name:
+  Add the type to the types given the name and the plural name and the base name and nil.
+
+To add a type to some types given a name and a plural name and a base name and a locus:
+  Create the type.
+  Append the type to the types.
+  Put the locus into the type's locus.
+  Put the name into the type's name.
+  Put the plural name into the type's plural name.
+  Put the base name into the type's base name.
+
+To create a type:
+  Allocate memory for the type.
+  Put 0/1 into the type's scale.
+  Put -1 into the type's length.
+
+To index a type:
+  If the type is nil, exit.
+  If the compiler's abort flag is set, exit.
+  Index the type given the type's name.
+
+To index a type given a name:
+  If the type is nil, exit.
+  If the compiler's abort flag is set, exit.
+  Find an existing type given the name and the type index.
+  If the existing type is nil, 
+    Index the type given the name and the type index;
+    Exit.
+  Put the type's locus into a locus.
+  If the locus is nil,
+    Put the existing type's locus into the locus. \ point the error to a type in the source code, does not point to a generated type
+  Abort with "Error #2. Duplicate definition of type '" then the name then "'. Rename one of the definitions or remove the duplicate." and the locus.
+
+To abort with a string and a byte pointer:
+  If the compiler's abort flag is set, exit.
+  Set the compiler's abort flag.
+  Put the string into the compiler's abort message.
+  Find the compiler's abort path and the compiler's abort row# given the byte pointer.
+  If the compiler's abort path is blank, exit.
+  Extract a file name from the compiler's abort path.
+  Prepend " Error in '" then the file name then "''. " to the compiler's abort message.
+  Show the status.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,70 @@
+To run:
+  Start up.
+  \Initialize the compiler.
+  Compile the project.
+  \Handle events.
+  Finalize the compiler.
+  \Write a new line on StdOut.
+  \Write "Compilation finished." then the CRLF string to Stdout.
+  Shut down.
+
+To compile the project:
+  Put 1252 into a number called CodePage.
+  Call "kernel32.dll" "SetConsoleOutputCP" with
+    the codepage
+    returning a number called error status code.
+  If the error status code is 0 [null],
+    \Cluck;
+    Write "Error #0. Unable to configure the console output encoding. Some characters may not display correctly." then the CRLF string to StdOut;
+    Write "If you are using the NppExec console, ignore the message above." then the CRLF string to StdOut.
+  Get a string called project directory from the command line arguments.
+  If the project directory is blank,
+    \Cluck;
+    Write "|--------------------------------------------------------------------------------------|" then the CRLF string to StdOut;
+    Write "| " then the escape byte then "[33m" then
+     "Warning. To use this compiler, you must inform the project path on the command line."
+    then the escape byte then "[0m" then " |" then the CRLF string to StdOut;
+    Write "|                                                                                      |" then the CRLF string to StdOut;
+    Write "|  C:\compiler_path.exe\ D:\some random folder\current_project_folder\                 |" then the CRLF string to StdOut;
+    Write "|                                                                                      |" then the CRLF string to StdOut;
+    Write "|--------------------------------------------------------------------------------------|" to StdOut;
+  Exit.
+  If the project directory's last byte pointer's target is not the backslash byte,
+    Append the backslash byte to the project directory.
+  If the project directory is not in the file system,
+    Cluck;
+    Write "Error #1. The directory " then the project directory then " could not be found in the filesystem" then the CRLF string to StdOut;
+    Exit.
+  Write in strong yellow " Compiling project at '" then the project directory then "' …" then the CRLF string to StdOut. \ Compilation starts here
+  Write the CRLF string to StdOut.
+  Compile the project directory.
+  If the compiler's abort flag is set,
+    \Abort with the compiler's abort message;
+    \Write the compiler's abort message to StdOut;
+    \Show the status;
+    Exit.
+  Write the CRLF string then "          Compilation time: " then the compiler's timer's string then " ms." then the CRLF string to StdOut.
+
+To show status a string:
+  \Put the string into the compiler's abort message.
+  \Show the status.
+  Write the string then the CRLF string to StdOut.
+
+To compile a directory:
+  Compile the directory (start).
+  Compile the directory (load the source files).
+  Compile the directory (scan the source files).
+  Compile the directory (resolve the types).
+  Compile the directory (resolve the globals).
+  Compile the directory (compile the headers of the routines).
+  Compile the directory (calculate lengths and offsets of types).
+  Compile the directory (add the built-in memory routines).
+  Compile the directory (index the routines for utility use).
+  Compile the directory (compile the bodies of the routines).
+  Compile the directory (add and compile the built-in startup routine).
+  Compile the directory (offset parameters and variables).
+  Compile the directory (address).
+  Compile the directory (transmogrify).
+  Compile the directory (link).
+  Compile the directory (write the exe).
+  Compile the directory (stop).
