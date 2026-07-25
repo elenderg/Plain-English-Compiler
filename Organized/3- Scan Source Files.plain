@@ -32,7 +32,7 @@ To scan a source file:
     If the rider's token substring is the start of any routine,
       Scan a routine given the rider;
       Repeat.
-    Abort with "I was hoping for a definition but all I found was '" then the rider's token substring then "'." and the rider.
+    Abort with "Error #4. Expected the start of a type definition, global variable declaration, or routine declaration, but found '" then the rider's token substring then "'." then the CRLF string then "Note: this is often caused by an unsupported character encoding or incorrect line endings." and the rider.
   Repeat.
 
 To move a rider (compiler rules):
@@ -135,12 +135,726 @@ To move a rider (code rules - qualifier):
     If the rider's source substring is blank, exit.
     If the rider's source substring's first byte pointer's target is the return byte, break.
     If the rider's source substring's first byte pointer's target is the left-paren byte,
-      Add 1 to a count.
+      Add 1 to a number called count.
     If the rider's source substring's first byte pointer's target is the right-paren byte,
       Subtract 1 from the count.
     Bump the rider.
     If the count is 0, break.
   Repeat.
+
+To decide if a byte is any mark:
+  If the byte is the period byte, say yes.
+  If the byte is the comma byte, say yes.
+  If the byte is the semi-colon byte, say yes.
+  If the byte is the colon byte, say yes.
+  If the byte is the exclamation  byte, say yes.
+  If the byte is the question-mark byte, say yes.
+  Say no.
+
+To move a rider (code rules - mark):
+  Bump the rider.
+
+To move a rider (code rules - possessive):
+  Bump the rider.
+  If the rider's source substring is blank, exit.
+  If the rider's source substring starts with "s",
+    Bump the rider.
+
+To move a rider (code rules - glom):
+  [Loop.]
+    Bump the rider.
+    If the rider's source substring is blank, exit.
+    If the rider is on any possessive, exit.
+    If the rider's source substring's first byte pointer's target is any glom byte, repeat.
+
+To decide if a rider is on any possessive:
+  If the rider's source substring is blank, say no.
+  If the rider's source substring's first byte pointer's target is not the single-quote byte, say no.
+  If the rider is on any possessive (type 1 - single-quote, s, non-glom-byte), say yes.
+  If the rider is on any possessive (type 2 - preceding s, single-quote, non-glom-byte), say yes.
+  Say no.
+
+To decide if a rider is on any possessive (type 1 - single-quote, s, non-glom-byte):
+  If the rider's source substring does not start with "'s", say no.
+  Privatize the rider.
+  Add 2 to the rider's source substring's first byte pointer.
+  If the rider's source substring is blank, say yes.
+  If the rider's source substring's first byte pointer's target is not any glom byte, say yes.
+  Say no.
+
+To decide if a byte is any glom byte:
+  If the byte is any letter, say yes.
+  If the byte is any digit, say yes.
+  If the byte is the tilde byte, say yes.
+  If the byte is the at-sign byte, say yes.
+  If the byte is the number-sign byte, say yes.
+  If the byte is the percent-sign byte, say yes.
+  If the byte is the ampersand byte, say yes.
+  If the byte is the underscore byte, say yes.
+  If the byte is the single-quote byte, say yes.
+  If the byte is the dash byte, say yes.
+  If the byte is the cross byte, say yes.
+  If the byte is the slash byte, say yes.
+  Say no.
+
+To decide if a rider is on any possessive (type 2 - preceding s, single-quote, non-glom-byte):
+  Privatize the rider.
+  If the rider's source substring's first byte pointer is the rider's original's first byte pointer, say no.
+  Subtract 1 from the rider's source substring's first byte pointer.
+  If the rider's source substring's first byte pointer's target is not the little-s byte or the big-s byte, say no.
+  Add 2 to the rider's source substring's first byte pointer.
+  If the rider's source substring is blank, say yes.
+  If the rider's source substring's first byte pointer's target is not any glom byte, say yes.
+  Say no.
+
+To move a rider returning an error string (code rules - validate remark):
+  If the rider's token's length is less than 2,
+    Put "Error #5. Unterminated block comment. Remarks need to end with ']'." into the error string;
+    Exit.
+  If the rider's token's last's target is not the right-bracket byte,
+    Put "Error #6. Unterminated block comment. Remarks need to end with ']'." into the error string;
+    Exit.
+
+To move a rider returning an error string (code rules - validate string):
+  If the rider's token's length is less than 2,
+    Put "Error #7. Unterminated string literal. Strings literals need to end with '""'. Add the missing closing quote." into the error string;
+    Exit.
+  If the rider's token's last's target is not the double-quote byte,
+    Put "Error #8. Unterminated string literal. Strings literals need to end with '""'. Add the missing closing quote." into the error string;
+    Exit.
+
+To move a rider returning an error string (code rules - validate qualifier):
+  If the rider's token's length is less than 2,
+    Put "Error #9. Qualifiers need to end with ')'. Add the missing closing parenthesis." into the error string;
+    Exit.
+  If the rider's token's last's target is not the right-paren byte,
+    Put "Error #10. Qualifiers need to end with ')'. Add the missing closing parenthesis." into the error string;
+    Exit.
+
+To decide if a string is the start of any type:
+  If the string is "a", say yes.
+  If the string is "an", say yes.
+  If the string is "some", say yes.
+  Say no.
+
+To scan a type given a rider:
+  If the compiler's abort flag is set, exit.
+  Add the type to the types given the rider's token substring's first byte pointer.
+  Move the rider (compiler rules).
+  Scan the type's name given the rider.
+  Put the type's name into the type's plural name.
+  Pluralize the type's plural name.
+  If the rider's token substring is "has" or "have",
+    Scan the type given the rider (has or have);
+    Exit.
+  If the rider's token substring is not "is" or "are",
+    Abort with "Error #11. Expected an 'is' or 'are' after the type name, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  If the rider's token substring is any numeric literal,
+    Scan the type given the rider (unit of measure);
+    Exit.
+  If the rider's token substring is not any indefinite article,
+    Abort with "Error #12. Expected an indefinte article before the type definition, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan the type's base name given the rider.
+  Scan any optional info for the type given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #13. Type definitions need to end with a period, found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the type.
+
+To add a type to some types given a locus:
+  Create the type.
+  Append the type to the types.
+  Put the locus into the type's locus.
+
+To scan a name given a rider:
+  Clear the name.
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is any name starter,
+    Extend the name with the rider's token substring;
+    Move the rider (compiler rules).
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is any name ender, break.
+    Extend the name with the rider's token.
+    Move the rider (compiler rules).
+  Repeat.
+  If the name is blank,
+    Abort with "Error #14. Expected a type name or variable name before a name ender, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+
+To decide if a string is any name starter: \ compare with name ender
+  If the string is any mark, say no.
+  If the string is any symbol, say no.
+  If the string is any article, say no.
+  If the string is any conjunction, say yes.
+  If the string is any possessive, say no.
+  If the string is any verb, say yes.
+  If the string is any operator, say yes.
+  If the string is any preposition, say yes.
+  If the string is any qualifier, say no.
+  If the string is any literal, say no.
+  If the string is "called", say yes.
+  If the string is "equal", say yes.
+  If the string is blank, say no.
+  Say yes.
+
+To decide if a byte is any symbol:
+  If the byte is the caret byte, say yes.
+  If the byte is the bar byte, say yes.
+  If the byte is the asterisk byte, say yes.
+  If the byte is the cross byte, say yes.
+  If the byte is the dash byte, say yes.
+  If the byte is the slash byte, say yes.
+  If the byte is the left-alligator byte, say yes.
+  If the byte is the right-alligator byte, say yes.
+  If the byte is the left-brace byte, say yes.
+  If the byte is the right-brace byte, say yes.
+  If the byte is the equal-sign byte, say yes.
+  If the byte is 128, say yes.
+  If the byte is 130, say yes.
+  If the byte is between 132 and 137, say yes.
+  If the byte is 139, say yes.
+  If the byte is between 145 and 153, say yes.
+  If the byte is 155, say yes.
+  If the byte is between 161 and 180, say yes.
+  If the byte is between 183 and 191, say yes.
+  If the byte is 215, say yes.
+  If the byte is 247, say yes.
+  Say no.
+
+To decide if a string is any article:
+  If the string is any indefinite article, say yes.
+  If the string is "the", say yes.
+  Say no.
+
+To decide if a string is any conjunction:
+  If the string is "and", say yes.
+  If the string is "both", say yes.
+  If the string is "but", say yes.
+  If the string is "either", say yes.
+  If the string is "neither", say yes.
+  If the string is "nor", say yes.
+  If the string is "or", say yes.
+  Say no.
+
+To decide if a string is any possessive:
+  If the string is "'s", say yes.
+  If the string is "'", say yes.
+  Say no.
+
+To decide if a string is any verb:
+  If the string is "are", say yes. \ are not \ aren't
+  If the string is "be", say yes. \
+  If the string is "can", say yes. \ cannot \ can't
+  If the string is "cannot", say yes.
+  If the string is "could", say yes. \ could not \ couldn't
+  If the string is "do", say yes. \ do not \ don't
+  If the string is "does", say yes. \ does not \ doesn't
+  If the string is "is", say yes. \ is not \ isn't
+  If the string is "may", say yes. \ may not \ mayn't
+  If the string is "should", say yes. \ should not \ shouldn't
+  If the string is "was", say yes. \ was not \ wasn't
+  If the string is "will", say yes. \ will not \ won't
+  If the string is "would", say yes. \ would not \ wouldn't
+  If the string is "has", say yes. \ used in type definitions
+  If the string is "have", say yes. \ used in type definitions
+  If the string ends with "n't", say yes.
+  \ trouble makers
+  If the string is "begins", say yes. \ does not begin \ doesn't begin
+  If the string is "ends", say yes. \ does not end \ doesn't end
+  If the string is "looks", say yes. \ does not look \ doesn't look
+  If the string is "needs", say yes. \ does not need \ doesn't need
+  If the string is "starts", say yes. \ does not start \ doesn't start
+  Say no.
+
+To decide if a string is any operator:
+  If the string is "plus", say yes.
+  If the string is "minus", say yes.
+  If the string is "times", say yes.
+  If the string is "divided", say yes.
+  If the string is "then", say yes.
+  Say no.
+
+To decide if a string is any preposition:
+  If the string is "about", say yes.
+  If the string is "above", say yes.
+  If the string is "across", say yes.
+  If the string is "after", say yes.
+  If the string is "against", say yes.
+  If the string is "all", say yes.
+  If the string is "alone", say yes.
+  If the string is "along", say yes.
+  If the string is "among", say yes.
+  If the string is "any", say yes.
+  If the string is "anywhere", say yes.
+  If the string is "around", say yes.
+  If the string is "as", say yes.
+  If the string is "at", say yes.
+  If the string is "away", say yes.
+  If the string is "back", say yes.
+  If the string is "backward", say yes.
+  If the string is "backwards", say yes.
+  If the string is "before", say yes.
+  If the string is "beginning", say yes.
+  If the string is "behind", say yes.
+  If the string is "below", say yes.
+  If the string is "beneath", say yes.
+  If the string is "beside", say yes.
+  If the string is "between", say yes.
+  If the string is "beyond", say yes.
+  If the string is "bigger", say yes.
+  If the string is "by", say yes.
+  If the string is "close", say yes.
+  If the string is "deep", say yes.
+  If the string is "diagonally", say yes.
+  If the string is "down", say yes.
+  If the string is "downward", say yes.
+  If the string is "ending", say yes.
+  If the string is "everywhere", say yes.
+  If the string is "except", say yes.
+  If the string is "finishing", say yes.
+  If the string is "facing", say yes.
+  If the string is "for", say yes.
+  If the string is "forward", say yes.
+  If the string is "from", say yes.
+  If the string is "given", say yes.
+  If the string is "giving", say yes.
+  If the string is "high", say yes.
+  If the string is "in", say yes.
+  If the string is "inside", say yes.
+  If the string is "into", say yes.
+  If the string is "larger", say yes.
+  If the string is "leaning", say yes.
+  If the string is "left", say yes.
+  If the string is "leftward", say yes.
+  If the string is "leftways", say yes.
+  If the string is "like", say yes.
+  If the string is "limiting", say yes.
+  If the string is "long", say yes.
+  If the string is "near", say yes.
+  If the string is "of", say yes.
+  If the string is "off", say yes.
+  If the string is "on", say yes.
+  If the string is "only", say yes.
+  If the string is "onto", say yes.
+  If the string is "out", say yes.
+  If the string is "outside", say yes.
+  If the string is "over", say yes.
+  If the string is "past", say yes.
+  If the string is "pointing", say yes.
+  If the string is "returning", say yes.
+  If the string is "right", say yes.
+  If the string is "rightward", say yes.
+  If the string is "rightways", say yes.
+  If the string is "shorter", say yes.
+  If the string is "sideway", say yes.
+  If the string is "sideways", say yes.
+  If the string is "similar", say yes.
+  If the string is "smaller", say yes.
+  If the string is "somewhere", say yes.
+  If the string is "slantwise", say yes.
+  If the string is "slantway", say yes.
+  If the string is "slantways", say yes.
+  If the string is "starting", say yes.
+  If the string is "tall", say yes.
+  If the string is "taller", say yes.
+  If the string is "thru", say yes.
+  If the string is "through", say yes.
+  If the string is "throughout", say yes.
+  If the string is "to", say yes.
+  If the string is "toward", say yes.
+  If the string is "towards", say yes.
+  If the string is "under", say yes.
+  If the string is "underneath", say yes.
+  If the string is "until", say yes.
+  If the string is "unto", say yes.
+  If the string is "up", say yes.
+  If the string is "upward", say yes.
+  If the string is "upon", say yes.
+  If the string is "using", say yes.
+  If the string is "via", say yes.
+  If the string is "while", say yes.
+  If the string is "wide", say yes.
+  If the string is "with", say yes.
+  If the string is "within", say yes.
+  If the string is "without", say yes.
+  Say no.
+
+To decide if a string is any qualifier:
+  If the string is blank, say no.
+  If the string's first's target is the left-paren byte, say yes.
+  Say no.
+
+To decide if a string is any literal:
+  If the string is any pointer literal, say yes.
+  If the string is any numeric literal, say yes.
+  If the string is any string literal, say yes.
+  If the string is any flag literal, say yes.
+  If the string is any hex literal, say yes.
+  Say no.
+
+To decide if a string is any pointer literal:
+  If the string is "nil", say yes.
+  Say no.
+
+To decide if a string is any string literal:
+  If the string is blank, say no.
+  If the string's first's target is the double-quote byte, say yes.
+  Say no.
+
+To decide if a string is any flag literal:
+  If the string is "yes", say yes.
+  If the string is "no", say yes.
+  Say no.
+
+To decide if a string is any hex literal:
+  If the string is blank, say no.
+  If the string's first's target is the dollar-sign byte, say yes.
+  Say no.
+
+To extend a string with another string:
+  If the other string is blank, exit.
+  If the string is not blank,
+    Append the space byte to the string.
+  Append the other string to the string.
+
+To decide if a string is any name ender: \ compare with name starter
+  If the string is any mark, say yes.
+  If the string is any symbol, say yes.
+  If the string is any article, say yes.
+  If the string is any conjunction, say yes.
+  If the string is any possessive, say yes.
+  If the string is any verb, say yes.
+  If the string is any operator, say yes.
+  If the string is any preposition, say yes.
+  If the string is any qualifier, say yes.
+  If the string is any literal, say yes.
+  If the string is "called", say yes.
+  If the string is "equal", say yes.
+  If the string is blank, say yes.
+  Say no.
+
+To abort with a string and a rider:
+  If the rider's token substring is not blank,
+    Abort with the string and the rider's token substring's first byte pointer;
+    Exit.
+  [If the rider's token substring is blank,]
+  Abort with the string and the rider's source substring's last byte pointer.
+
+To pluralize a string: \ nouns only
+  If the string is "alumnus",
+    Put "alumni" into the string;
+    Exit.
+  If the string is "auto",
+    Put "autos" into the string;
+    Exit.
+  If the string is "cello",
+    Put "cellos" into the string;
+    Exit.
+  If the string is "dwarf",
+    Put "dwarfs" into the string;
+    Exit.
+  If the string is "foot",
+    Put "feet" into the string;
+    Exit.
+  If the string is "genus",
+    Put "genera" into the string;
+    Exit.
+  If the string is "goose",
+    Put "geese" into the string;
+    Exit.
+  If the string is "hippo",
+    Put "hippos" into the string;
+    Exit.
+  If the string is "louse",
+    Put "lice" into the string;
+    Exit.
+  If the string is "memo",
+    Put "memos" into the string;
+    Exit.
+  If the string is "mouse",
+    Put "mice" into the string;
+    Exit.
+  If the string is "ox",
+    Put "oxen" into the string;
+    Exit.
+  If the string is "phenomenon",
+    Put "phenomena" into the string;
+    Exit.
+  If the string is "photo",
+    Put "photos" into the string;
+    Exit.
+  If the string is "phylum",
+    Put "phyla" into the string;
+    Exit.
+  If the string is "piano",
+    Put "pianos" into the string;
+    Exit.
+  If the string is "pimento",
+    Put "pimentos" into the string;
+    Exit.
+  If the string is "pro",
+    Put "pros" into the string;
+    Exit.
+  If the string is "proof",
+    Put "proofs" into the string;
+    Exit.
+  If the string is "radius",
+    Put "radii" into the string;
+    Exit.
+  If the string is "rhinoceros",
+    Put "rhinoceri" into the string;
+    Exit.
+  If the string is "roof",
+    Put "roofs" into the string;
+    Exit.
+  If the string is "solo",
+    Put "solos" into the string;
+    Exit.
+  If the string is "soprano",
+    Put "sopranos" into the string;
+    Exit.
+  If the string is "staff",
+    Put "staffs" into the string;
+    Exit.
+  If the string is "tooth",
+    Put "teeth" into the string;
+    Exit.
+  If the string is "torus",
+    Put "tori" into the string;
+    Exit.
+  If the string is "turf",
+    Put "turfs" into the string;
+    Exit.
+  If the string is "virus",
+    Put "viruses" into the string;
+    Exit.
+  If the string ends with "sh",
+    Append "es" to the string;
+    Exit.
+  If the string ends with "ch",
+    Append "es" to the string;
+    Exit.
+  If the string ends with "man",
+    Remove the last two bytes from the string;
+    Append "en" to the string;
+    Exit.
+  If the string ends with "child",
+    Append "ren" to the string;
+    Exit.
+  If the string ends with "ex",
+    Remove the last two bytes from the string;
+    Append "ices" to the string;
+    Exit. \ or add -es
+  If the string ends with "fe",
+    Remove the last two bytes from the string;
+    Append "ves" to the string;
+    Exit.
+  If the string ends with "is",
+    Remove the last two bytes from the string;
+    Append "es" to the string;
+    Exit.
+  If the string ends with "ix",
+    Remove the last two bytes from the string;
+    Append "ices" to the string;
+    Exit. \ or add ES
+  If the string ends with "ma",
+    Append "ta" to the string;
+    Exit. \ or add S
+  If the string ends with any consonant and "y",
+    Remove the last byte from the string;
+    Append "ies" to the string;
+    Exit.
+  If the string ends with any vowel and "o",
+    Append "s" to the string;
+    Exit.
+  If the string ends with any vowel and "y",
+    Append "s" to the string;
+    Exit.
+  If the string ends with "f",
+    Remove the last byte from the string;
+    Append "ves" to the string;
+    Exit.
+  If the string ends with "s",
+    Append "es" to the string;
+    Exit.
+  If the string ends with "x",
+    Append "es" to the string;
+    Exit.
+  If the string ends with "z",
+    Append "es" to the string;
+    Exit.
+  Append "s" to the string.
+
+To scan a type given a rider (has or have):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Put "record" into the type's base name.
+  Scan the type's fields given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #15. Type definitions need to end with a period, found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the type.
+
+To scan a field given a rider:
+  If the compiler's abort flag is set, exit.
+  Scan the field given the rider (type part).
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is "called",
+      Scan the field given the rider (called part);
+      Repeat.
+    If the rider's token substring is "at",
+      Scan the field given the rider (redefine part);
+      Repeat.
+    If the rider's token substring is "(reference)",
+      Scan the field given the rider (reference part);
+      Repeat.
+  \End of loop. End of Routine.
+
+To scan a field given a rider (type part):
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is any numeric literal,
+    Scan the field given the rider (type part - byte array);
+    Exit.
+  Scan the field given the rider (type part - normal).
+
+To scan a field given a rider (type part - byte array):
+  If the compiler's abort flag is set, exit.
+  Convert the rider's token substring to a ratio.
+  Reduce the ratio.
+  If the ratio's denominator is not 1,
+    Abort with "Error #16. error: Byte array size must be an integer." and the rider;
+    Exit.
+  Put the ratio's numerator into the field's count.
+  Move the rider (compiler rules).
+  If the rider's token substring is not "byte" or "bytes",
+    Abort with "Error #17. Expected 'bytes' after the field size" and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Put "byte" into the field's type name.
+
+To scan a field given a rider (type part - normal):
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is not any indefinite article,
+    Abort with "Error #18. I was expecting an indefinite article, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  If the rider's token substring is "another",
+    Put "other" into the field's name.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Extend the field's name with the name.
+
+To scan a field given a rider (called part):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  If the field's type name is blank,
+    Put the field's name into the field's type name. \ byte array type name is already filled in
+  Scan the field's name given the rider.
+
+To scan a field given a rider (redefine part):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  If the rider's token substring is not "the",
+    Abort with "Error #19. Expected 'the', but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan the field's redefinition target name given the rider.
+
+To scan a field given a rider (reference part):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Set the field's reference flag.
+
+To scan a type given a rider (unit of measure):
+  If the compiler's abort flag is set, exit.
+  Convert the rider's token substring to the type's scale.
+  If the type's scale is 0,
+    Abort with "Error #20. Type scale factor must not be zero." and the type's locus;
+    Exit.
+  Move the rider (compiler rules).
+  Scan the type's base name given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #21. Type definitions need to end with a period, found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the type.
+
+To decide if a string is any indefinite article:
+  If the string is "a", say yes.
+  If the string is "an", say yes.
+  If the string is "another", say yes.
+  If the string is "some", say yes.
+  Say no.
+
+To scan any optional info for a type given a rider:
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is "to",
+    Scan any optional info for the type given the rider (pointer);
+    Exit.
+  If the rider's token substring is "with",
+    Scan any optional info for the type given the rider (record);
+    Exit.
+
+To scan any optional info for a type given a rider (pointer):
+  Move the rider (compiler rules).
+  If the rider's token substring is not any indefinite article,
+    Abort with "Error #22. The 'to' here needs to be followed by an indefinite article, not '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan the type's target name given the rider.
+
+To scan any optional info for a type given a rider (record):
+  Move the rider (compiler rules).
+  Scan the type's fields given the rider.
+
+To scan a global given a rider:
+  If the compiler's abort flag is set, exit.
+  Add the global to the globals given "global" and the rider's token substring's first byte pointer.
+  Move the rider (compiler rules).
+  Scan the global's name given the rider.
+  If the rider's token substring is "has" or "have",
+    Scan the global given the rider (has or have);
+    Exit.
+  If the rider's token substring is not "is" or "are",
+    Abort with "Error #23. Expected an 'is' or an 'are' , but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  If the rider's token substring is not any indefinite article,
+    Scan the global given the rider (literal term);
+    Exit.
+  Move the rider (compiler rules).
+  Scan the global's type name given the rider.
+  If the rider's token substring is the start of any optional info,
+    Scan the global given the rider (optional info);
+    Exit.
+  If the rider's token substring is "equal",
+    Scan the global given the rider (data part);
+    Exit.
+  If the rider's token substring is not the period byte,
+    Abort with "All global definitions must end with a period. Including this one." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the global.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

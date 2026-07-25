@@ -5031,7 +5031,7 @@ To scan a field given a rider (called part):
   If the compiler's abort flag is set, exit.
   Move the rider (compiler rules).
   If the field's type name is blank,
-    Put the field's name into the field's type name. \ byte array type name already filled in
+    Put the field's name into the field's type name. \ byte array type name is already filled in
   Scan the field's name given the rider.
 
 To scan a field given a rider (redefine part):
@@ -5340,7 +5340,6 @@ To scan a type given a rider (unit of measure):
     Exit.
   Move the rider (compiler rules).
   Index the type.
-
 
 To scrub an index:
   [Loop.]
