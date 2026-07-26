@@ -838,10 +838,82 @@ To scan a global given a rider:
     Scan the global given the rider (data part);
     Exit.
   If the rider's token substring is not the period byte,
-    Abort with "All global definitions must end with a period. Including this one." and the rider;
+    Abort with "Error #24. Global variable definitions must end with a period." and the rider;
     Exit.
   Move the rider (compiler rules).
   Index the global.
+
+To add a variable to some variables given a kind and a locus:
+  Create the variable given the kind.
+  Append the variable to the variables.
+  Put the locus into the variable's locus.
+
+To create a variable given a kind:
+  Allocate memory for the variable.
+  Put the kind into the variable's kind.
+  Put 1 into the variable's count.
+
+To scan a global given a rider (has or have):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Put "~inline " then the global's name then " type" into a name.
+  Put the name then "s" into a plural name.
+  Add a type to the types given the name and the plural name and "record" and the global's locus.
+  Index the type.
+  Put the type's name into the global's type name.
+  Scan the type's fields given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #25. Global variable definitions must end with a period." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the global.
+
+To scan a global given a rider (literal term):
+  If the compiler's abort flag is set, exit.
+  Scan the global's global body given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #26. Global variable definitions must end with a period." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the global.
+
+To scan a global body given a rider:
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is blank, exit.
+  Put the rider's token substring's first byte pointer into the global body's first byte pointer.
+  Put -1 into the global body's last byte pointer.
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is blank, exit.
+    If the rider's token substring is the colon byte, exit.
+    If the rider's token substring is the period byte, exit.
+    Put the rider's token's last byte pointer into the global body's last byte pointer.
+    Move the rider (compiler rules).
+  Repeat.
+
+To index a global:
+  If the compiler's abort flag is set, exit.
+  If the global is nil, exit.
+  If the global's name is in the global index,
+    Abort with "Error #27. Global variable '" then the global's name then "' has already been declared." and the global's locus;
+    Exit.
+  Index the global given the global's name and the global index.
+
+To scan a global given a rider (optional info):
+  If the compiler's abort flag is set, exit.
+  Put "~inline " then the global's name then " type" into a name.
+  Put the name then "s" into a plural name.
+  Add a type to the types given the name and the plural name and the global's type name and the global's locus.
+  Index the type.
+  Put the type's name into the global's type name.
+  Scan any optional info for the type given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #28. Global variable definitions must end with a period." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the global.
+
+
 
 
 

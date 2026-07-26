@@ -5093,14 +5093,14 @@ To scan some fields given a rider:
 To scan a global body given a rider:
   If the compiler's abort flag is set, exit.
   If the rider's token substring is blank, exit.
-  Put the rider's token substring's first byte pointer into the global body's first.
-  Put -1 into the global body's last.
+  Put the rider's token substring's first byte pointer into the global body's first byte pointer.
+  Put -1 into the global body's last byte pointer.
   Loop.
     If the compiler's abort flag is set, exit.
     If the rider's token substring is blank, exit.
     If the rider's token substring is the colon byte, exit.
     If the rider's token substring is the period byte, exit.
-    Put the rider's token's last into the global body's last.
+    Put the rider's token's last byte pointer into the global body's last byte pointer.
     Move the rider (compiler rules).
   Repeat.
 
