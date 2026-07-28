@@ -814,6 +814,10 @@ To scan any optional info for a type given a rider (record):
   Move the rider (compiler rules).
   Scan the type's fields given the rider.
 
+To decide if a string is the start of any global:
+  If the string is "the", say yes.
+  Say no.
+
 To scan a global given a rider:
   If the compiler's abort flag is set, exit.
   Add the global to the globals given "global" and the rider's token substring's first byte pointer.
@@ -913,67 +917,91 @@ To scan a global given a rider (optional info):
   Move the rider (compiler rules).
   Index the global.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+To scan a global given a rider (data part):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  If the rider's token substring is not "to",
+    Abort with "Error #29. Expected 'to' after the word 'equal', found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan the global's global body given the rider.
+  If the rider's token substring is not the period byte,
+    Abort with "Error #30. Global variable definitions must end with a period." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Index the global.
+
+To decide if a string is the start of any routine:
+  If the string is "to", say yes.
+  Say no.
+
+To scan a routine given a rider:
+  If the compiler's abort flag is set, exit.
+  Add the routine to the routines given the rider's token substring's first byte pointer.
+  Move the rider (compiler rules).
+  Scan the routine's routine header given the rider.
+  If the rider's token substring is the semi-colon byte,
+    Scan the routine given the rider (alternate wording);
+    Exit.  \ *** for alternate wordings (alternative routine headers)
+  If the rider's token substring is not the colon byte,
+    Abort with "Error #31 Expected ':' before the routine body." and the routine's locus;
+    Exit.
+  Move the rider (compiler rules).
+  Scan the routine's routine body given the rider.
+
+To add a routine to some routines given a locus:
+  Create the routine.
+  Append the routine to the routines.
+  Put the locus into the routine's locus.
+
+To scan a routine header given a rider:
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is blank, exit.
+  Put the rider's token substring's first byte pointer into the routine header's first byte pointer.
+  Put -1 into the routine header's last byte pointer.
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is blank, exit.
+    If the rider's token substring is the semi-colon byte, exit. \ *** alternate wordings
+    If the rider's token substring is the colon byte, exit.
+    If the rider's token substring is the period byte, exit.
+    Put the rider's token's last byte pointer into the routine header's last byte pointer.
+    Move the rider (compiler rules).
+  Repeat.
+
+To scan a routine given a rider (alternate wording):  \ *** for alternate wordings
+  Privatize the rider.
+  Move the rider (compiler rules).
+  If the rider's token substring is not "To",
+    Abort with "Error #30. Expected 'To' after an anternative routine header." and the original rider;
+    Exit.
+  Put the original rider's token substring's first byte pointer into the routine's routine body's first byte pointer.
+  Put the original rider's token substring's last byte pointer into the routine's routine body's last byte pointer.
+  Move the original rider (compiler rules).
+
+To scan a routine body given a rider:
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is blank, exit.
+  If the rider's token substring is the start of any definition, exit.
+  Put the rider's token substring's first byte pointer into the routine body's first byte pointer. \ TODO: complete
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is blank, exit.
+    Put the rider's token's last byte pointer into the routine body's last byte pointer. \ TODO
+    If the rider's token substring is the colon byte,
+      Abort with "Error #32. Unexpected routine declaration inside a routine body. The previous statement has not been terminated. Add '.' to end the previous routine body." and the rider;
+      Exit.
+    If the rider's token substring is not the period byte,
+      Move the rider (compiler rules);
+      Repeat.
+    Move the rider (compiler rules).
+    If the rider's token substring is the start of any definition, exit.
+  Repeat.
+
+To decide if a string is the start of any definition:
+  If the string is "to", say yes.
+  If the string is "a", say yes.
+  If the string is "an", say yes.
+  If the string is "the", say yes.
+  If the string is "some", say yes.
+  Say no.
