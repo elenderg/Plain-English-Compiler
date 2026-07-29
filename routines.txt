@@ -1,0 +1,1535 @@
+To write on the next line of StdOut:
+To get a string from the command line arguments:
+To add a byte to another byte:
+To add a byte to a number:
+To add a fraction to another fraction:
+To add some horizontal twips and some vertical twips to the current spot:
+To add a line to a figure:
+To add a name to some choices:
+To add a number and another number to a pair:
+To add a number to another number and a third number to a fourth number:
+To add a number to a byte:
+To add a number to a fraction:
+To add a number to a pair:
+To add a number to another number:
+To add a pair to another pair:
+To add a pdf object given a kind:
+To add a quora to a terminal:
+To add a spot to a figure: append the spot to the figure.
+To add a string to some string things:
+To adjust a box given a number and another number and a third number and a fourth number:
+To adjust an item:
+To adjust a line with a number and another number and a third number and a fourth number:
+To adjust spacing given a string:
+To align a text given an alignment:
+To append a buffer to a file:
+To append a byte to a string:
+To append a byte to a string given a count:
+To append a flag to a string:
+To append a fraction to a string:
+To append a number to a string:
+To append a pointer to a string:
+To append a spot to a polygon:
+To append a string to another string:
+To append a string to another string given a count:
+To append a string to a pdf object: \ this guys adds CRLF
+To append a string to a pdf object without advancing:
+To append some things to some other things:
+To append a timer to a string:
+To append a vertex to a polygon:
+To append an x coord and a y coord to a polygon:
+To append zeros to a string until its length is a number:
+To assign a pointer given a byte count:
+To autoscroll a text given a spot and a flag:
+To beep:
+To begin a landscape sheet:
+To begin a landscape sheet given a title string:
+To begin a portrait sheet:
+To begin a portrait sheet given a title string:
+To begin printing:
+To begin printing a pdf:
+To begin a sheet:
+To begin a sheet given a box:
+To begin a sheet given a box and a title string:
+To begin a sheet given a title string:
+To bitwise and a byte with another byte:
+To bitwise and a byte with a number:
+To bitwise and a number with another number:
+To bitwise or a byte with another byte:
+To bitwise or a byte with a number:
+To bitwise or a number with another number:
+To bitwise xor a byte with another byte:
+To bitwise xor a byte with a number:
+To bitwise xor a number with another number:
+To bump a byte limiting it to another byte and a third byte:
+To bump a number: add 1 to the number.
+To bump a number limiting it to another number and a third number:
+To bump a rider:
+To bump a rider by a number:
+To buzz:
+To capitalize any selected rows in a text:
+To capitalize a string:
+To capitalize a text:
+To center a box at the bottom of another box:
+To center a dot on the current spot:
+To change the current hue by some points:
+To change a hue by some points:
+To change a roundy box given a radius:
+To change a text given a box:
+To change a text given a font height:
+To change a text given a font name:
+To clear a box:
+To clear a byte:
+To clear a color:
+To clear an ellipse:
+To clear a flag:
+To clear a font:
+To clear a fraction:
+To clear an ip address:
+To clear a line:
+To clear a number:
+To clear a pair:
+To clear a rider:
+To clear the screen:
+To clear the screen to a color:
+To clear the screen to white:
+To clear the screen without refreshing it:
+To clear a selection:
+To clear the stack:
+To clear a string:
+To clear a substring:
+To clear a terminal:
+To clear some things:
+To clear a wyrd:
+To close a file:
+To cluck:
+To compare a string to another string given a length and another length returning a number:
+To compatibly handle any message with a window a message number a w-param and an l-param:
+To compatibly wait for a process pointer:
+To convert an absolute position to a position given a text:
+To convert a binary string into a number:
+To convert a box to a string:
+To convert a byte to a nibble:
+To convert a byte to a nibble string:
+To convert a byte to a query byte:
+To convert a color to a colorref:
+To convert a color to a rgb:
+To convert a colorref to a color:
+To convert a colorref to a rgb:
+To convert a flag to a hex string:
+To convert a font to an hfont:
+To convert a font info to pdf em units:
+To convert some font widths to pdf em units:
+To convert a fraction to a hex string:
+To convert a fraction to a mixed:
+To convert a fraction to a string given a number: 
+To convert a hex string to a fraction:
+To convert a hex string to a number:
+To convert an l-param to a key: 
+To convert an l-param to a spot:
+To convert a mixed to a fraction:
+To convert a nibble to a nibble string:
+To convert a nibble string to a hex string:
+To convert a number to a byte:
+To convert a number to pdf em units given an emsquare number and a font:
+To convert a pchar to a string:
+To convert a pointer and a length to a string:
+To convert a number to a hex string:
+To convert a number to a nibble string:
+To convert a pointer to a string:
+To convert some points to some precise degrees:
+To convert a position to an absolute position given a text:
+To convert some precise degrees to some points:
+To convert a query string to a string:
+To convert some rows to a string:
+To convert a string and an actual font info and an original font info into a buffer for pdf output:
+To convert a string to a flag:
+To convert a string to a fraction:
+To convert a string to a nibble string:
+To convert a string to a number:
+To convert a string to a number between another number and a third number:
+To convert a string to a pdf string:
+To convert a string to a pointer: 
+To convert a string to a query string:
+To convert a string to some rows:
+To convert a string to a uuid:
+To convert a string to a wide string:
+To convert a string to a wide string and null terminate:
+To convert a url to a url record:
+To convert a wyrd to a nibble string:
+To copy bytes from a pointer to another pointer for a byte count: 
+To copy an event into another event:
+To copy a gpbitmap into another gpbitmap:
+To copy the guts of a text into another text:
+To copy a picture into another picture:
+To copy a polygon into another polygon:
+To copy a row into another row:
+To copy some rows into some other rows:
+To copy a text into another text:
+To copy a vertex into another vertex:
+To copy some vertices into some other vertices:
+To create the connect handle of a winhttp request using  a url record:
+To create a console:
+To create a crypt session with a passphrase string: 
+To create a dyad:
+To create an event:
+To create a font info given a font:
+To create a font info given a font and a string: 
+To create some font widths given a font:
+To create some font widths given a font and a string:
+To create a gpbitmap given a buffer:
+To create the hbrush of a canvas given a color:
+To create the hfont of a canvas given a font:
+To create the hpen of a canvas given a color:
+To create an hrgn given a box:
+To create an hrgn given an ellipse:
+To create an hrgn given a polygon:
+To create an hrgn given a roundy box:
+To create an index given a bucket count:
+To create the lexicon:
+To create the open handle of a winhttp request:
+To create a path in the file system:
+To create a pdf object given a kind:
+To create a pdf outline entry given a title string and a page height and a destination number:
+To create a picture:
+To create a picture given a buffer:
+To create a picture given a gpbitmap:
+To create a picture given a url:
+To create a polygon:
+To create a quora:
+To create a refer:
+To create the request handle of a winhttp request using a url record:
+To create a row given a byte:
+To create a row given a string:
+To create a socket given a host string and a port number: 
+To create a string thing given a string:
+To create a terminal in a box:
+To create a text:
+To create a vertex:
+To create a vertex array given a count:
+To create a vertex array given some vertices:
+To create a vertex given a spot:
+To create a vertex given an x coord and a y coord:
+To create a winhttp request for posting to a url:
+To cut a number in half:
+To darken a color by an amount:
+To darken a color some percent:
+To darken the current color about some percent:
+To de-sign a fraction:
+To de-sign a number:
+To de-sign a pair:
+To de-sign a string:
+To debug a box:
+To debug a byte:
+To debug a color:
+To debug a flag:
+To debug a font:
+To debug a fraction:
+To debug a line:
+To debug a number:
+To debug a number and another number:
+To debug a pair:
+To debug a pointer:
+To debug a rgb:
+To debug a string:
+To debug a wyrd:
+To decide if a box is another box:
+To decide if a box is inside another box:
+To decide if a box is touching another box:
+To decide if a byte is alphanumeric:
+To decide if a byte is another byte:
+To decide if a byte is another byte or a third byte:
+To decide if a byte is any consonant:
+To decide if a byte is any digit:
+To decide if a byte is any letter:
+To decide if a byte is any numeric starter:
+To decide if a byte is any punctuation mark:
+To decide if a byte is any sign:
+To decide if a byte is any valid drive:
+To decide if a byte is any vowel:
+To decide if a byte is between another byte and a third byte:
+To decide if a byte is between a number and another number:
+To decide if a byte is greater than another byte:
+To decide if a byte is greater than a number:
+To decide if a byte is greater than or equal to another byte:
+To decide if a byte is in a string:
+To decide if a byte is less than another byte:
+To decide if a byte is less than a number:
+To decide if a byte is less than or equal to another byte:
+To decide if a byte is like another byte: 
+To decide if a byte is noise:
+To decide if a byte is a number:
+To decide if a byte is a number or another number:
+To decide if a byte is printable:
+To decide if a byte is a string:
+To decide if a byte is symbolic:
+To decide if a byte is whitespace:
+To decide if the caret of a text is at the beginning:
+To decide if the caret of a text is at the end:
+To decide if the caret of a text is on the first line:
+To decide if the caret of a text is on the last line:
+To decide if a choice is a string:
+To decide if a color and another color are clear:
+To decide if a color is another color:
+To decide if a color is clear:
+To decide if a color is dark:
+To decide if a color is light:
+To decide if a color is normal:
+To decide if a color is very dark:
+To decide if a color is very light:
+To decide if a color is very very dark:
+To decide if a color is very very light:
+To decide if a counter is past a number:
+To decide if the current spot is above or below a box:
+To decide if the current spot is left or right of a box:
+To decide if the current spot is to the right of a box:
+To decide if the current spot is within some twips of a box:
+To decide if a difference is within a grid:
+To decide if an event is any shortcut:
+To decide if an event is modified:
+To decide if a finger is past the end of a string:
+To decide if a number is another number:
+To decide if a flag is on:
+To decide if a flag is set:
+To decide if a fraction is another fraction:
+To decide if a fraction is greater than another fraction:
+To decide if a fraction is greater than or equal to another fraction:
+To decide if a fraction is less than another fraction:
+To decide if a fraction is less than or equal to another fraction:
+To decide if a fraction is negative:
+To decide if a fraction is a number:
+To decide if an index is empty:
+To decide if an input is from windows telling us to set the cursor:
+To decide if an input is from windows telling us to redraw all of our stuff:
+To decide if an input is from windows telling us the user has quit:
+To decide if an input is a left click:
+To decide if an item is found:
+To decide if a key is any digit key:
+To decide if a key is any letter key:
+To decide if a key is any modifier key:
+To decide if a key is any pad key:
+To decide if a key is any printable key:
+To decide if a key is any symbol key:
+To decide if a key is any wm-char key:
+To decide if a key is down:
+To decide if a key is up:
+To decide if a key was down:
+To decide if a key was toggled:
+To decide if a key was up:
+To decide if a key with an l-param is any repeated escape or modifier key:
+To decide if the left mouse button is down:
+To decide if a line is above a box:
+To decide if a line is above a coord:
+To decide if a line is below a box:
+To decide if a line is below a coord:
+To decide if a line is in a box:
+To decide if a mixed is a number:
+To decide if the mouse has been dragged from a spot given a grid:
+To decide if the mouse is in a box:
+To decide if a number is another number and a string is another string:
+To decide if a number is between another number and a third number:
+To decide if a number is even:
+To decide if a number is evenly divisible by another number:
+To decide if a number is a multiple of another number:
+To decide if a number is negative:
+To decide if a number is odd:
+To decide if a number is positive:
+To decide if a number is prime:
+To decide if a pair is another pair:
+To decide if a pair is a number:
+To decide if a pair is a number and another number:
+To decide if a path is directory-format:
+To decide if a path is drive-format:
+To decide if a path is empty in the file system:
+To decide if a path is file-format:
+To decide if a path is in the file system:
+To decide if a path is read-only:
+To decide if a pointer does exist:
+To decide if a number is greater than another number:
+To decide if a number is greater than or equal to another number:
+To decide if a number is less than another number:
+To decide if a number is less than or equal to another number:
+To decide if a pointer is null and void:
+To decide if a polygon is closed:
+To decide if a reply is something like another reply:
+To decide if a row is blank:
+To decide if a row of a text is selected:
+To decide if a row of a text is visible:
+To decide if a selection is another selection:
+To decide if something is selected in a text:
+To decide if a spot is above a box:
+To decide if a spot is above a horizontal line:
+To decide if a spot is above or below a box:
+To decide if a spot is below a box:
+To decide if a spot is below a horizontal line:
+To decide if a spot is in an ellipse:
+To decide if a spot is in a picture:
+To decide if a spot is in a polygon:
+To decide if a spot is in some polygons:
+To decide if a spot is in a roundy box:
+To decide if a spot is in a text:
+To decide if a spot is in a box:
+To decide if a spot is to the left of a box:
+To decide if a spot is left or right of a box:
+To decide if a spot is on a box:
+To decide if a spot is on an ellipse:
+To decide if a spot is on a line:
+To decide if a spot is on a picture:
+To decide if a spot is on a polygon:
+To decide if a spot is on a roundy box:
+To decide if a spot is outside a box:
+To decide if a spot is to the right of a box:
+To decide if a spot is touching a box:
+To decide if a spot is within a grid of another spot:
+To decide if a spot is within some twips of another spot:
+To decide if a spot is within some twips of a box:
+To decide if the stack has just one thing on it:
+To decide if a string ends with another string:
+To decide if a string starts with another string:
+To decide if a string starts with a byte:
+To decide if a string is another string:
+To decide if a string is another string or a third string:
+To decide if a string is any ratio literal:
+To decide if a string is any integer:
+To decide if a string is any integer literal:
+To decide if a string is any mixed literal:
+To decide if a string is any numeric literal:
+To decide if a string is any sign:
+To decide if a string is any word:
+To decide if a string is blank:
+To decide if a string is a byte:
+To decide if a string is dos-compatible:
+To decide if a string is greater than another string:
+To decide if a string is greater than or equal to another string:
+To decide if a string is in another string:
+To decide if a string is in an index:
+To decide if a string is less than another string:
+To decide if a string is less than or equal to another string:
+To decide if a string is misspelled:
+To decide if a string is wider than a box: 
+To decide if a substring is on any contraction:
+To decide if a terminal is full:
+To decide if a text can be redone:
+To decide if a text can be undone:
+To decide if a text is modified:
+To decide if there is something to backspace in a text:
+To decide if there is something to remove in a text:
+To decide if there is text on the windows clipboard:
+To decide if some things are empty:
+To decide if a token is numeric:
+To decide if the user clicks on some choices:
+To decide if we can find a pointer: 
+To decide if we could find a pointer:
+To decide if we did find a pointer:
+To decide if we're above a box:
+To decide if we're above a coord:
+To decide if we're above a horizontal line:
+To decide if we're above or below a box:
+To decide if we're above a spot:
+To decide if we're below a box:
+To decide if we're below a coord:
+To decide if we're below a horizontal line:
+To decide if we're below a spot:
+To decide if we're facing north: 
+To decide if we're left of a box:
+To decide if we're left or right of a box:
+To decide if we're outside a box:
+To decide if we're right of a box:
+To decide if we're in a box:
+To decide if we're within some twips of a box:
+To decide if you feel like it:
+To decrypt a buffer given a passphrase string: 
+To deselect a text:
+To destroy a crypt session:
+To destroy a gpimage:
+To destroy a gpimageattributes:
+To destroy the hbrush of a canvas:
+To destroy the hfont of a canvas:
+To destroy the hpen of a canvas:
+To destroy an hrgn:
+To destroy an index:
+To destroy a path in the file system:
+To destroy a picture:
+To destroy a socket:
+To destroy a vertex given a polygon:
+To destroy a winhttp request:
+To divide a fraction by another fraction:
+To divide a fraction by a number:
+To divide a number by a fraction:
+To divide a pair by another pair:
+To divide a pair by a number:
+To divide a pair by a number and another number:
+To divide a number by another number:
+To divide a number by another number giving a quotient and a remainder:
+To double a number:
+To draw and fill a box with a color:
+To draw any visible rows of a text:
+To draw a box:
+To draw a box with a color:
+To draw a box with a border color and a fill color:
+To draw the caret in a text:
+To draw a circle some twips wide:
+To draw a console:
+To draw a dot some twips wide on the current spot with a color:
+To draw a dot some twips wide on a spot with a color:
+To draw an ellipse:
+To draw an ellipse on a spot with a color:
+To fill an ellipse on a spot with a color:
+To draw an ellipse with a border color and a fill color:
+To draw an ellipse with a color:
+To stroke a fancy arrow some twips long with a color:
+To draw a figure with a color:
+To draw a figure with some sides about some twips wide:
+To draw a figure with some sides and some twips:
+To draw a figure with some sides and some twips using a color:
+To draw a half circle given a size:
+To draw a hexagon given a side length:
+To draw a line:
+To stroke a line about some twips long:
+To draw a line as tall as a box with a color:
+To draw a line as wide as a box with a color:
+To stroke a line some twips to some other twips long:
+To stroke a line some twips long:
+To draw a line using some twips for the length:
+To draw a line with a color:
+To stroke a line with a color about some twips long:
+To stroke a line with a color some twips long:
+To stroke a line with a color some twips to some other twips long:
+To draw a number in a box with a color:
+To put masking tape around a box: \ note that this masks the box's border as well
+To draw a picture:
+To draw a picture on a gpgraphic at an x coord and a y coord:
+To draw a polygon:
+To draw a polygon with a border color and a fill color:
+To draw a polygon with a color:
+To draw a quarter circle given a size:
+To draw a quarter circle between some twips and some other twips wide:
+To draw a rectangle some twips wide by some other twips high:
+To draw a roundy box:
+To draw a roundy box with a border color and a fill color:
+To draw a roundy box with a color:
+To draw a row of a text:
+To draw the selection box for a row of a text:
+To draw a spiral given a size:
+To draw a spot:
+To draw a spot with a color:
+To draw a star given a point count and a size:
+To draw a string at the left of a box:
+To draw a string at the left of a box with a color:
+To draw a string at the left of a box with a color and a font:
+To draw a string at the left of a box with a font:
+To draw a string at the right of a box:
+To draw a string at the right of a box with a color:
+To draw a string at the right of a box with a color and a font:
+To draw a string at the right of a box with a font:
+To draw a string at a spot with a color:
+To draw a string at a spot with a color and a font:
+To draw a string in a box:
+To draw a string in a box over a number with a color and a font and an alignment:
+To draw a string in a box with an alignment:
+To draw a string in a box with a color:
+To draw a string in a box with a color and an alignment:
+To draw a string in a box with a color and a font and an alignment:
+To draw a string in a box with a font and an alignment:
+To draw a string in the center of a box:
+To draw a string in the center of a box with a color:
+To draw a string in the center of a box with a color and a font:
+To draw a string in the center of a box with a font:
+To draw a terminal:
+To draw a text:
+To duplicate a path to another path in the file system:
+To encrypt a buffer given a passphrase string: \ sets i/o error if failure
+To end printing:
+To end printing a pdf:
+To end a sheet:
+To enlarge a box by some twips:
+To enlarge an ellipse by some twips:
+To enque an event:
+To clear inside a box:
+To estimate a rise and a run given a heading:
+To extend any selection in a text given a spot:
+To extend a box to include another box:
+To extract a designator from a path:
+To extract a directory from a path:
+To extract a directory name from a path:
+To extract a directory name w/o slash from a path:
+To extract a drive from a path:
+To extract an extension from a path:
+To extract a file name from a path:
+To extract a file name w/o extension from a path:
+To extract a picture given a box:
+To extract a string from a text:
+To face any which way:
+To face east:
+To face north:
+To face south:
+To face west:
+To fill a box with a color:
+To fill bytes with a byte starting at a pointer for a byte count:
+To fill a string with a byte given a count:
+To finalize after run:
+To finalize the canvases:
+To finalize the cgi:
+To finalize the colors:
+To finalize com:
+To finalize a context:
+To finalize the cursors:
+To finalize the fonts:
+To finalize the memory canvas:
+To finalize the module:
+To finalize the mouse:
+To finalize the printer canvas:
+To finalize the screen:
+To finalize the screen canvas:
+To finalize a talker:
+To finalize the window:
+To finalize winsock:
+To find a choice given a spot:
+To find a dyad given some dyads and a name:
+To find next given a row and a text and a flag:
+To find next given a text and a flag:
+To find the next misspelling given a row and a text and a flag:
+To find the next misspelling in a text given a flag:
+To find a pdf object given a kind:
+To find a pointer given a string and an index:
+To find a refer given a string and an index:
+To find a refer given a string and some refers:
+To find a sector given a grid and a spot:
+To find a square root of a number: \ rounds down
+To find a string thing given a string and some string things:
+To find a substring in a string given another string:
+To find a value string given some dyads and a name:
+To find a value string given the environment variables and a name:
+To flip a fraction:
+To flip the gpbitmap in a picture:
+To flip a gpimage:
+To flip a picture:
+To flip a polygon:
+To flush all events:
+To flush any messages:
+To flush an event queue:
+To format a number and a singular string or a plural string into a string:
+To get an abca and an abcc given a string and a canvas:
+To get an abca given a string and a canvas:
+To get some addrinfo routines:
+To get a box for the caret in a text:
+To get a box for a line:
+To get a box given a row and a text:
+To get a bucket given a bucket# and an index:
+To get a bucket given an index:
+To get a bucket given a string and an index:
+To get a bucket# given a string and an index: \ based on the djb2 algorithm
+To get a byte from a string:
+To get a center spot given a spot and another spot:
+To get a color given a spot:
+To get a column# given a row and a spot and a text:
+To get a count of items in a path in the file system:
+To get a description for a path:
+To get a difference between a pair and another pair:
+To get a difference between a pair and another pair given a grid pair:
+To get a drive kind for a path:
+To get a drive name for a path:
+To get the first-eighth equivalent of a heading:
+To get the first-quarter equivalent of a heading:
+To seed the random number generator:
+To get a gcd given a number and another number:
+To get an ip address given a host string:
+To get an item from a path:
+To get an lcm given a number and another number:
+To get a letter from the alphabet:
+To get a number from the stack:
+To get an offset pair given a string and a box and a font and an alignment:
+To get an outlinetextmetric given a font:
+To get a position given a spot and a text:
+To get a rise and a run given a heading: \ see Madhava's Numbers
+To get a row given a row# and a text:
+To get a row given a spot and a text:
+To get a selection box given a row and a text:
+To get a size given a path in the file system:
+To get a sockaddr given a host string:
+To get a spot given a position and a text:
+To get a string from the stack:
+To get a string from the windows clipboard:
+To get a thing from some things:
+To get a token from a reply:
+To get a width given a byte and a canvas:
+To get a width given a byte and some font widths:
+To get a width given a number and some font widths: \ indexes are 0 based
+To get a width given a string and a canvas: \ assumes font is already selected in canvas
+To get a width given a string and a canvas and a font:
+To get a width given a string and a font: \ assumes memory canvas
+To globalize a box given a pair:
+To globalize a spot given a pair:
+To go back to where we were:
+To guarantee one row in a text:
+To handle align given a text and an alignment:
+To handle any wm-activate with a w-param:
+To handle any wm-char with a w-param and an l-param:
+To handle any wm-create with a window:
+To handle any wm-destroy:
+To handle any wm-lbuttondblclk with a l-param:
+To handle any wm-lbuttondown with a l-param:
+To handle any wm-paint with a window:
+To handle any wm-rbuttondblclk with a l-param:
+To handle any wm-rbuttondown with a l-param:
+To handle any wm-setcursor:
+To handle any wm-keydown with a w-param and an l-param:
+To handle capitalize given a text:
+To handle copy given a text:
+To handle cut given a text:
+To handle an event given a console:
+To handle an event given a terminal:
+To handle events given a console:
+To handle events given a terminal:
+To handle font height given a text and a box and a font height:
+To handle font height given a text and a font height:
+To handle font name given a text and a font name:
+To handle indent given a text:
+To handle lowercase given a text:
+To handle outdent given a text:
+To handle paste given a text:
+To handle pen given a text and a color:
+To handle redo given a text:
+To handle reverse given a text:
+To handle select all given a text:
+To handle sort any selected rows given a text:
+To handle undo given a text:
+To handle uppercase given a text:
+To hide the cursor:
+To make a box some twips by some other twips:
+To make a box some twips high by some other twips wide:
+To make a box some twips smaller than another box:
+To imagine a box some twips smaller than another box on every side:
+To make a box some twips wide by some other twips high:
+To make a box with a left coord and a top coord and a right coord and a bottom coord:
+To make a box with a spot and another spot:
+To make a color from a hue and a saturation and a lightness:
+To make a dot some twips wide:
+To make a dot between some twips and some other twips wide:
+To make an ellipse given a box:
+To make an ellipse some twips by some other twips:
+To make an ellipse with a left coord and a top coord and a right coord and a bottom coord:
+To make an ellipse with a spot and another spot:
+To create a figure using a string and a center spot:
+To make a horizontal line a fraction of the way up from the bottom of a box:
+To make a line along the bottom of a box:
+To make a line across a box a fraction of the way up from the bottom:
+To make a line along the top of a box:
+To make a line across the center of a box:
+To make a line some twips up from the bottom of a box:
+To make a line with a spot and another spot:
+To make a line with an x coord and a y coord and another x coord and another y coord:
+To make a roundy box from a box and a radius:
+To make a roundy box some twips by some other twips:
+To make a roundy box with a left coord and a top coord and a right coord and a bottom coord and a radius:
+To make a roundy box with a spot and another spot and a radius:
+To make a spot with an x coord and a y coord:
+To include a font in the current pdf:
+To include a font in a pdf object:
+To indent any selected rows in a text:
+To index a pointer given a string and an index:
+To index a string in an index:
+To initalize the terminal:
+To initialize before run:
+To initialize the canvases:
+To initialize the cgi:
+To initialize the colors:
+To initialize com:
+To initialize a context:
+To initialize the cursors:
+To initialize the fonts:
+To initialize the memory canvas:
+To initialize the module:
+To initialize the mouse:
+To initialize the printer canvas:
+To initialize the screen:
+To initialize the screen canvas:
+To initialize a talker:
+To initialize the window:
+To initialize winsock:
+To insert a byte into a text:
+To insert a spot into a polygon after a vertex:
+To insert a string into a text:
+To insert a thing into some things after another thing:
+To insert a thing into some things before another thing:
+To insert some things into some other things after a thing:
+To insert some things into some other things before a thing:
+To insert a vertex into a polygon after another vertex:
+To insert a vertex into a polygon at a spot:
+To insert a vertex into a polygon before another vertex:
+To intersect a box with another box giving a third box:
+To invert a flag:
+To jump the caret left in a text:
+To jump the caret right in a text:
+To lighten a color by an amount:
+To lighten a color some percent:
+To lighten the current color about some percent:
+To lighten a hue by some degrees:
+To lighten a hue by some points:
+To limit a box to another box:
+To limit the caret in a text:
+To limit a number to another number and a third number:
+To limit the origin of a text:
+To limit a spot to a box:
+To limit some texts to a count:
+To draw some choices in a box:
+To draw some choices in a box with a color:
+To load the lexicon:
+To load the lexicon given a buffer:
+To load the lexicon given a path:
+To localize a box given a pair:
+To localize a spot given a pair:
+To lowercase any selected bytes in a text:
+To lowercase a byte:
+To lowercase the character under a finger and put it into a string:
+To lowercase a string:
+To lowercase a text:
+To make a fraction with a number and another number:
+To make a fraction pair given a box and another box:
+To mask inside a box:
+To mask inside an ellipse:
+To mask inside an hrgn:
+To mask inside a polygon:
+To mask inside a roundy box:
+To mask only inside a box:
+To mask only inside an ellipse:
+To mask only inside a polygon:
+To mask only inside a roundy box:
+To mask only outside a box:
+To mask only outside an ellipse:
+To mask only outside a polygon:
+To mask only outside a roundy box:
+To mask outside a box:
+To mask outside an ellipse:
+To mask outside an hrgn:
+To mask outside a polygon:
+To mask outside a roundy box:
+To minimize a window:
+To mirror the gpbitmap in a picture:
+To mirror a gpimage:
+To mirror a picture:
+To mirror a polygon:
+To move the anchor left to any non-alphanumeric byte in a text:
+To move back some twips:
+To move a box to the bottom of another box:
+To move a box close to the left of another box:
+To move a box down some twips:
+To move a box given a pair:
+To move a box given a fraction pair and a spot:
+To move a box given some x twips and some y twips:
+To move a box left to a coord:
+To move a box to the left of another box:
+To move a box left some twips:
+To move a box to the right of another box:
+To move a box right some twips:
+To move a box to a spot:
+To move a box to the top left corner of another box:
+To move a box to the top of another box:
+To move a box up some twips:
+To move the caret down in a text:
+To move the caret down one page in a text:
+To move the caret to the first byte of the current row of a text:
+To move the caret to the first byte of a text:
+To move the caret to the last byte of the current row of a text:
+To move the caret to the last byte of a text:
+To move the caret left to any non-alphanumeric byte in a text:
+To move the caret left to any non-noise byte in a text:
+To move the caret left to any non-symbolic byte in a text:
+To move the caret left in a text:
+To move the caret right to any non-alphanumeric byte in a text:
+To move the caret right to any non-noise byte in a text:
+To move the caret right to any non-symbolic byte in a text:
+To move the caret right in a text:
+To move the caret up in a text:
+To move the caret up one page in a text:
+To move an ellipse down some twips:
+To move an ellipse given a pair:
+To move an ellipse given some x twips and some y twips:
+To move an ellipse left some twips:
+To move an ellipse right some twips:
+To move an ellipse to a spot:
+To move an ellipse up some twips:
+To move a finger over a number:
+To move left some twips and down some other twips:
+To move some twips left and some other twips down:
+To move some twips left and some other twips up:
+To move a line down some twips:
+To move a line given a pair:
+To move a line given some x twips and some y twips:
+To move a line left some twips:
+To move a line to a spot:
+To move a line right some twips:
+To move a line up some twips:
+To start in the center:
+To start in the center of a box:
+To move a picture down some twips:
+To move a picture given a pair:
+To move a picture given some x twips and some y twips:
+To move a picture left some twips:
+To move a picture right some twips:
+To move a picture to a spot:
+To move a picture up some twips:
+To move a polygon down some twips:
+To move a polygon given a pair:
+To move a polygon given some x twips and some y twips:
+To move a polygon left some twips:
+To move a polygon left some twips and up down other twips:
+To move a polygon left some twips and up some other twips:
+To move a polygon right some twips:
+To move a polygon right some twips and up down other twips:
+To move a polygon right some twips and up some other twips:
+To move a polygon to a spot:
+To move a polygon up some twips:
+To move a rider given a separator byte:
+To move some twips right and some other twips down:
+To move some twips right and some other twips up:
+To move to a spot:
+To move a spot about some twips in any direction:
+To move a spot to another spot:
+To move a spot given a pair:
+To move a spot given some x twips and some y twips:
+To move a spot down some twips:
+To move a spot left some twips:
+To move a spot right some twips:
+To move a spot some twips right and some other twips down:
+To move a spot up some twips:
+To move some squares:
+To move some squares slantways:
+To move a substring given a number:
+To move a text down some twips:
+To move a text given a pair:
+To move a text given some x twips and some y twips:
+To move a text left some twips:
+To move a text right some twips:
+To move a text to a spot:
+To move a text up some twips:
+To move a thing from some things to some other things:
+To move some things to some other things:
+To move some twips:
+To move down some twips:
+To move left some twips:
+To move right some twips:
+To move up some twips:
+To move a vertex down some twips:
+To move a vertex given a pair:
+To move a vertex given some x twips and some y twips:
+To move a vertex left some twips:
+To move a vertex right some twips:
+To move a vertex to a spot:
+To move a vertex up some twips:
+To move a window left:
+To move a window right:
+To multiply a fraction by a number:
+To scale a number given a fraction:
+To multiply a pair by another pair:
+To multiply a pair by a number:
+To multiply a pair by a number and another number:
+To multiply a number by another number:
+To negate a fraction:
+To negate a number:
+To negate a pair:
+To non-destructively resize a picture given a fraction pair:
+To non-destructively resize a picture given a twip pair:
+To normalize an angle:
+To normalize a box:
+To normalize a canvas:
+To normalize an ellipse:
+To normalize a fraction and another fraction:
+To normalize a heading:
+To normalize a horizontal line:
+To normalize a hue:
+To normalize a picture:
+To normalize a selection:
+To normalize a text:
+To normalize a vertical line:
+To null terminate a string:
+To null terminate a wide string:
+To open a file given a path:
+To open a file given a path and some milliseconds:
+To outdent any selected rows in a text:
+To outdent a box given some twips:
+To outline a box with a color:
+To output the arc of an ellipse given a string:
+To output a color without advancing:
+To output lineto given a spot:
+To output lineto given an x number and a y number:
+To output moveto given a spot:
+To output moveto given an x number and a y number:
+To output a number without advancing:
+To output the pdf border given a color:
+To output the pdf fill given a color:
+To output setcolor given a border color and a fill color:
+To output a spot without advancing:
+To output a string:
+To output a string without advancing:
+To output stroke and fill given a border color and a fill color:
+To pick a lightness between a percent and another percent:
+To pick a brownish color:
+To pick a brownish color about some percent of the time: 
+To pick a color:
+To pick a color between another color and a third color:
+To pick a color like another color:
+To pick a dark color:
+To pick a greenish color:
+To pick a greenish color about some percent of the time:
+To pick a heading:
+To pick a letter height between some twips and some other twips:
+To pick a letter of the alphabet:
+To pick a light color:
+To pick a number:
+To pick a number within an amount of another number:
+To pick a pastel color:
+To pick a rainbow color:
+To pick a solid color:
+To pick a spot in the bottom a fraction of a box:
+To pick a spot anywhere in a box:
+To pick a spot in the middle a fraction of a box:
+To pick a spot in the top half of a box:
+To pick a spot in the top middle a fraction of a box:
+To pick a spot on a horizontal line:
+To pick a spot in a box:
+To pick a spot in a box about some twips above the center:
+To pick a spot in a box about some twips below the center:
+To pick a spot in a box some twips to some other twips above the center:
+To pick a spot in a box some twips to some other twips below the center:
+To pick a spot within a distance of another spot:
+To pick a random number between a min number and a max number:
+To pick a really dark color:
+To pick a really light color:
+To pick a really really dark color:
+To pick a really really light color:
+To play a wave:
+To play a wave and wait:
+To play a wave file:
+To play a wave file and wait:
+To position a substring on a string:
+To post a data string to a url and receive a response string: 
+To prepend a byte to a string:
+To prepend a string to another string:
+To prepend a thing to some things:
+To prepend some things to some other things:
+To put the actual data of a font into a buffer:
+To put the bottom side of a box into a horizontal line:
+To put the bottom of a box into a line:
+To put a box and a radius into a roundy box:
+To center a box in another box:
+To center a box on the screen:
+To put a box into another box:
+To center a box on a spot:
+To center a box some twips by some other twips in another box:
+To put a box's bottom line into a horizontal line:
+To put a box's bottom-center into a spot:
+To put a box's center into a spot:
+To put a box's center-bottom into a spot:
+To put a box's center-top into a spot:
+To put a box's height into a height:
+To put a box's left line into a line:
+To put a box's left-bottom into a spot:
+To put a box's left-center into a spot:
+To put a box's right line into a line:
+To put a box's right-center into a spot:
+To put a box's right-top into a spot:
+To put a box's top line into a horizontal line:
+To put a box's top-center into a spot:
+To put a box's width into a width:
+To put a box's x-extent into a width:
+To put a box's y-extent into a height:
+To put a byte and a number into a fraction:
+To put a byte into another byte:
+To put a byte into eax:
+To put a byte into a number:
+To put a byte into a string:
+To put a byte into a wyrd:
+To put the character under a finger into a character:
+To put a color into another color:
+To put a date/time into another date/time:
+To put a date/time's string into a string:
+To put eax into a byte:
+To put eax into a number:
+To put eax into a wyrd:
+To center an ellipse in a box:
+To put an ellipse into another ellipse:
+To center an ellipse on a spot:
+To put a finger on the first character of a string:
+To put a number into another number:
+To put a number into eax:
+To convert a flag to a string:
+To put a font into another font:
+To put some font widths into a buffer:
+To put a font's adjusted height into a height:
+To put a fraction into another fraction:
+To convert a fraction to a string:
+To put a fraction pair into another fraction pair:
+To put a fraction's absolute value into another fraction:
+To put a gpimage's gprect into a gprect:
+To put a gpimage's height into a height:
+To put a gpimage's width into a width:
+To put a gprect into another gprect:
+To put a hue and a saturation and a lightness into a color:
+To put an index's count into a count:
+To put an index's used bucket count into a count:
+To put a left coord and a top coord and a right coord and a bottom coord and a radius into a roundy box:
+To put a left coord and a top coord and a right coord and a bottom coord into a box:
+To put a left coord and a top coord and a right coord and a bottom coord into an ellipse:
+To put the left side of a box into a vertical line:
+To center a line in a box:
+To put a line into another line:
+To put a line's bottom into a coord:
+To put a line's box into a box:
+To put a line's center into a spot:
+To put a line's left into a coord:
+To put a line's right into a coord:
+To put a line's top into a coord:
+To put masking tape below a figure:
+To center a line on a spot:
+To put the mouse's spot into a spot:
+To put a name and a height into a font:
+To put a name into a font:
+To put a number and another number into a pair:
+To put a number into a big-endian unsigned wyrd:
+To put a number into a byte:
+To put a number into a fraction:
+To put a number into a pair:
+To convert a number to a string:
+To put a number into a wyrd:
+To put a number on the stack:
+To put a number and another number into a fraction:
+To put a number's absolute value into another number:
+To put an outlinetextmetric into another outlinetextmetric:
+To put a pair into another pair:
+To put a pair's absolute value into another pair:
+To center a picture in a box:
+To center a picture on a spot:
+To center a polygon in a box:
+To center a polygon on the screen:
+To center a polygon on a spot:
+To put a polygon's box into a box:
+To put a polygon's center into a spot:
+To put a polygon's center-bottom into a spot:
+To put a polygon's center-top into a spot:
+To put a polygon's height into a height:
+To put a polygon's left-bottom into a spot:
+To put a polygon's left-center into a spot:
+To put a polygon's left-top into a spot:
+To put a polygon's right-bottom into a spot:
+To put a polygon's right-center into a spot:
+To put a polygon's right-top into a spot:
+To put a polygon's width into a width:
+To put a polygon's x-extent into a width:
+To put a polygon's y-extent into a height:
+To put a rider into another rider:
+To put the right side of a box into a vertical line:
+To put a roundy box into another roundy box:
+To put a row's working string into a substring:
+To put a selection into another selection:
+To put a sockaddr into another sockaddr:
+To put a spot and another spot and a radius into a roundy box:
+To put a spot and another spot into a box:
+To put a spot and another spot into an ellipse:
+To put a spot and another spot into a line:
+To center a spot in a box:
+To put a string into another string:
+To put a string into a letter:
+To put a string into a text:
+To put a string on the windows clipboard:
+To put a string's length into a length:
+To put a string's width into a width:
+To put a substring into another substring:
+To put the system's date/time into a date/time:
+To put the system's last error into a number:
+To put the system's last winsock error into a number:
+To put the system's tick count into some ticks:
+To center a terminal in a box:
+To center a text in a box:
+To center a text on a spot:
+To put a text's first line into a string:
+To put a text's first non-blank line into a string:
+To put a text's globalized origin into a spot:
+To put a text's grid into a grid:
+To put a text's normalized selection into a selection:
+To put a text's row count into a count:
+To put a text's row height into a height:
+To put a text's rows/box into a count:
+To put a text's selected byte count into a count:
+To put a text's selected row count into a count:
+To put a text's status string into a string:
+To append a thing to some things:
+To put some things into some other things:
+To put some things' count into a count:
+To convert a timer to a string:
+To put a timer's string into a string:
+To put a timer's ticks into some ticks:
+To put a token on the stack:
+To put the top side of a box into a horizontal line:
+To put the top of a box into a line:
+To put a wyrd into another wyrd:
+To put a wyrd into a big-endian unsigned wyrd:
+To put a wyrd into a byte:
+To put a wyrd into eax:
+To put a wyrd into a number:
+To put an x coord and a y coord and another x coord and another y coord into a line:
+To relinquish control:
+To quote a string:
+To raise a number to another number:
+To read the bible:
+To read the bible given a path:
+To read a byte from a console:
+To read a console into a string:
+To read a file into a buffer:
+To read a flag from a console:
+To read a fraction from a console:
+To read a number from a console:
+To read a path into a buffer:
+To load a path into a picture:
+To read a path into a picture:
+To read a reply from a terminal:
+To read a response string from a winhttp request:
+To read stdin into a buffer:
+To read a string from a console:
+To read a url into a buffer:
+To reassign a pointer given a byte count:
+To receive a buffer from a socket:
+To receive the response from a winhttp request:
+To reduce a fraction:
+To refresh the cursor:
+To refresh the screen given a box:
+To remember a text:
+To remember a text with an operation:
+To remember where we are:
+To remove any selected bytes in a text:
+To remove any trailing backslash from a string:
+To remove any trailing linefeed byte from a string:
+To remove any trailing return byte from a string:
+To remove bytes from a string given a substring:
+To remove every byte in a text:
+To remove the first byte from a string:
+To remove the last byte from a string:
+To remove the last two bytes from a string:
+To remove leading bytes from a string given a count:
+To remove any leading noise from a string:
+To remove the rows of a text between a row and another row:
+To remove a thing from some things:
+To remove trailing bytes from a string given a count:
+To remove any trailing noise from a string:
+To rename a path to another path in the file system:
+To renumber some rows:
+To replace a byte with another byte in a string:
+To reque an event:
+To reset the alphabet:
+To reset the caret of a text:
+To reset the context:
+To reset a count:
+To reset the drawing origin:
+To reset a flag:
+To reset the origin of a text:
+To void a pointer:
+To reset the rainbow colors:
+To reset a timer:
+To resize a box given a fraction pair:
+To resize a box given a twip pair:
+To resize an ellipse given a fraction pair:
+To resize an ellipse given a twip pair:
+To resize a line given a fraction pair:
+To resize a line given a twip pair:
+To resize a picture to a width by a height:
+To resize a polygon given a fraction pair:
+To resize a polygon given a twip pair:
+To resize a text given a fraction pair:
+To resize a text given a twip pair:
+To restart a timer:
+To restore a canvas:
+To restore a context:
+To restore a window:
+To reverse any selected rows of a text:
+To reverse a color:
+To reverse a flag:
+To invert a number:
+To reverse a string:
+To reverse some things:
+To rotate a box:
+To rotate an ellipse:
+To rotate a gpimage:
+To rotate a gpimage given an angle:
+To rotate a line:
+To rotate a picture:
+To rotate a polygon:
+To rotate a spot around a center spot:
+To rotate a text:
+To round a number to another number:
+To round a number down to the nearest multiple of another number:
+To round a number to the nearest multiple of another number:
+To round a number up to the nearest multiple of another number:
+To round a number up to the nearest power of two:
+To round a pair to another pair:
+To round a pair to the nearest multiple of another pair:
+To round a pair to the nearest multiple of a number:
+To round a pair to a number:
+To save a canvas:
+To save a context:
+To say a number:
+To speak a string:
+To speak a string and wait:
+To scale a box given a fraction:
+To scale a box to a percent:
+To scale an ellipse given a fraction:
+To scale an ellipse to a percent:
+To scale a font given a fraction:
+To multiply a fraction by another fraction:
+To scale a line given a fraction:
+To scale a line to a percent:
+To scale a pair given a fraction:
+To scale a pair given a fraction pair:
+To scale a pair to a percent:
+To scale a picture given a fraction:
+To scale a picture to a percent:
+To scale a polygon given a fraction:
+To scale a polygon to a percent:
+To scale a roundy box given a fraction:
+To scale a roundy box to a percent:
+To scale a text to a fraction:
+To scale a text given a fraction:
+To scale a text to a percent:
+To scale a vertex given a fraction:
+To scroll a console given an event:
+To scroll a text to the bottom:
+To scroll a text to the caret:
+To scroll a text to the caret and center it:
+To scroll a text down one line:
+To scroll a text down one page:
+To scroll a text given a difference:
+To scroll a text to the top:
+To scroll a text up one line:
+To scroll a text up one page:
+To select every byte in a text:
+To select a row# given a text:
+To send a buffer to a socket:
+To send a data string to a winhttp request:
+To send an email:
+To send a message from a sender to a recipient:
+To send a message from a sender to a recipient via a smtp server:
+To send a message from a sender to a recipient with a subject:
+To send a message from a sender to a recipient with a subject via a smtp server:
+To send a message to a recipient from a sender:
+To send a message to a recipient from a sender via a smtp server:
+To send a message to a recipient from a sender with a subject:
+To send a message to a recipient from a sender with a subject via a smtp server:
+To send a string to a socket and receive a response string:
+To set the colorref of a canvas given a color:
+To set the drawing origin to a spot:
+To set a flag:
+To set a path to read-write mode:
+To shift a byte left some bits:
+To shift a byte right some bits:
+To shift a number left some bits:
+To shift a number right some bits:
+To shift a wyrd left some bits:
+To shift a wyrd right some bits:
+To show a console:
+To show a cursor:
+To show a terminal:
+To indent a box given some twips:
+To shut down:
+To shut down the cgi:
+To simplify a reply:
+To skip any leading linefeed byte in a substring:
+To skip any leading noise in a substring:
+To skip any non-alphanumeric bytes in a substring:
+To skip a line on the terminal:
+To skip word characters in a substring:
+To slap a rider on another rider:
+To slap a rider on a string:
+To slap a substring on any selected bytes in a row of a text:
+To slap a substring on the first byte of a string:
+To slap a substring on the last byte of a string:
+To slap a substring on a string:
+To smooth a polygon:
+To smooth a polygon some times: \ this use to "times" is a fluke, I think -- see "some times is a number"
+To sort any selected rows in a text:
+To sort some rows:
+To space between glyphs:
+To split a buffer into some dyads:
+To split a byte into a nibble and another nibble:
+To split a line into another line and a third line:
+To split a number into a wyrd and another wyrd:
+To split the rows of a text into some rows and some selected rows and some other rows:
+To split a string into a left substring and a right substring given a separator byte:
+To split a string into some string things given a separator byte:
+To split some things into some left things and some right things:
+To split some things into some left things and some right things at a thing:
+To split a wyrd into a byte and another byte:
+To square up any selection in a text:
+To start anywhere in a box:
+To start anywhere on a horizontal line:
+To start at the bottom left corner of a box facing east:
+To start at the bottom left corner of a box facing north:
+To start at the bottom left corner of a box facing south:
+To start at the bottom left corner of a box facing west:
+To start at the bottom of a horizontal line:
+To start at the bottom right corner of a box facing east:
+To start at the bottom right corner of a box facing north:
+To start at the bottom right corner of a box facing south:
+To start at the bottom right corner of a box facing west:
+To start at the left of a horizontal line:
+To start in the center of the bottom of a box:
+To start in the center of the bottom of a box facing east:
+To start in the center of the bottom of a box facing north:
+To start in the center of the bottom of a box facing south:
+To start in the center of the bottom of a box facing west:
+To start in the center of the left of a box facing east:
+To start in the center of the left of a box facing north:
+To start in the center of the left of a box facing south:
+To start in the center of the left of a box facing west:
+To start in the center of the right of a box facing east:
+To start in the center of the right of a box facing north:
+To start in the center of the right of a box facing south:
+To start in the center of the right of a box facing west:
+To start in the center of the top of a box:
+To start in the center of the top of a box facing east:
+To start in the center of the top of a box facing north:
+To start in the center of the top of a box facing south:
+To start in the center of the top of a box facing west:
+To start at the right of a horizontal line:
+To start at a spot:
+To start at a spot facing east:
+To start at a spot facing north:
+To start at a spot facing south:
+To start at a spot facing west:
+To start at the top left corner of a box facing east:
+To start at the top left corner of a box facing north:
+To start at the top left corner of a box facing south:
+To start at the top left corner of a box facing west:
+To start at the top of a vertical line:
+To start at the top right corner of a box facing east:
+To start at the top right corner of a box facing north:
+To start at the top right corner of a box facing south:
+To start at the top right corner of a box facing west:
+To move to the center of a box and face east:
+To move to the center of a box and face north:
+To start in the center of a box facing north minus some points:
+To move to the middle of a box facing south:
+To move to the center of a box facing south:
+To move to the center of a box and face south:
+To move to the center of a box and face west:
+To start a process given a path: \ must be called with a global variable
+To start a timer:
+To start some twips above the middle of the bottom of a box: \ incomplete set of these
+To start some twips below a spot:
+To start some twips from the center of a box:
+To start some twips left and some other twips down from a spot:
+To start some twips left and some other twips up from a spot:
+To start some twips left of a spot:
+To start some twips right and some other twips down from a spot:
+To start some twips right and some other twips up from a spot:
+To start some twips up from a coord:
+To start some twips above a spot:
+To start up:
+To start up the cgi:
+To start with a color:
+To start with nothing in a pointer:
+To stop a process:
+To stop a timer:
+To stroke a character:
+To subtract a byte from another byte:
+To subtract a byte from a number:
+To subtract a fraction from another fraction:
+To subtract a number and another number from a pair:
+To subtract a number from a byte:
+To subtract a number from a fraction:
+To subtract a number from a pair:
+To subtract a pair from another pair:
+To subtract a number from another number:
+To swap a color with another color:
+To swap a pair with another pair:
+To swap a number with another number:
+To swap some things with some other things:
+To take off any masking tape:
+To trim a string:
+To turn around:
+To turn a fraction equal to a number over another number:
+To turn a fraction:
+To turn left:
+To turn left a fraction equal to a number over another number:
+To turn left a fraction:
+To turn left some points:
+To turn right:
+To turn right some degrees:
+To turn right a fraction equal to a number over another number:
+To turn right a fraction:
+To turn right a fraction some percent of the time:
+To turn right some points:
+To unassign a pointer:
+To unlock a gpbitmap given a bitmapdata:
+To unmask everything:
+To unmask inside a box:
+To unmask inside an ellipse:
+To unmask inside an hrgn:
+To unmask inside a polygon:
+To unmask inside a roundy box:
+To unmask outside a box:
+To unmask outside an ellipse:
+To unmask outside an hrgn:
+To unmask outside a polygon:
+To unmask outside a roundy box:
+To unquote a string:
+To refresh the screen:
+To uppercase any selected bytes in a text:
+To uppercase a byte:
+To uppercase the character under a finger and put it into a string:
+To uppercase a string:
+To uppercase a text:
+To use a color:
+To use the fat pen:
+To use a letter height:
+To use a letter height of some twips:
+To use a pen:
+To use the skinny pen:
+To use small pointy letters:
+To deque an event:
+To wait for some milliseconds:
+To wait for a key to come back up:
+To wait for a key to come up:
+To wait for a key to go down:
+To wait on that there key with the ESC on it:
+To wait until speaking is done:
+To wait for a key:
+To wrap a text:
+To write a buffer to a file:
+To write a buffer to a path:
+To write a byte:
+To write a byte to stdout:
+To write a byte without advancing:
+To write a flag:
+To write a flag without advancing:
+To write a fraction:
+To write a fraction without advancing:
+To write a number:
+To write a number without advancing:
+To write some quoras in a box:
+To stroke a string:
+To stroke a string given a center spot and a radius:
+To stroke a string at a spot with a color:
+To write a string on a console:
+To write a string on a console without advancing:
+To stroke a string in a box:
+To stroke a string in a box with a color:
+To stroke a string in the middle of a box:
+To write a string in the middle of the screen:
+To write a string on a terminal:
+To stroke a string a radius from a center spot:
+To stroke a string a radius from the middle of a box:
+To write a string to StdOut:
+To stroke a string while turning a fraction:
+To stroke a string with a color:
+To stroke a string with a color at the bottom of a box:
+To stroke a string with a color at the top of a box:
+To stroke a string with a color in the middle of a box:
+To stroke a string with a color a radius from a center spot:
+To stroke a string with a color some twips down from the top center of a box:
+To write a string with a font and a size and a color and a spot:
+To use large letters:
+To use medium letters:
+To use small letters:
+To yield to windows:
+To zero a box:
+To zero fill a number given a count and append it to a string:
+To zero fill a string given a count:

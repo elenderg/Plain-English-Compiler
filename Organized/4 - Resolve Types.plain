@@ -1,0 +1,244 @@
+To compile a directory (resolve the types):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                           [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [04/16]" to StdOut.
+  Write "  Resolving type definitions…" to Stdout.
+  Start the resolving types timer.
+  Resolve the types (expand things).
+  Resolve the types (index plurals).
+  Resolve the types (base types).
+  Resolve the types (optional info).
+  Stop the resolving types timer.
+
+To resolve some types (expand things):
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a type from the types.
+    If the type is nil, exit.
+    Resolve the type (expand thing).
+  Repeat.
+
+To resolve a type (expand thing): \ type's base type is not resolved yet
+  If the compiler's abort flag is set, exit.
+  If the type is nil, exit.
+  If the type's base type is not nil, exit.
+  If the type's name is "thing", exit.
+  If the type cannot be reduced to "thing" using the base name, exit.
+  Find a base type given 
+    the type's base name and 
+    the type index.
+  \  add thing record
+  Put the type's name then " record" into a name.
+  Put the type's name then " records" into a plural name.
+  Put the base type's name then " record" into a base name.
+  Add a record type to the types given 
+    the name and 
+    the plural name and 
+    the base name.
+  Add a field to the record type's fields given
+    "next " then
+    the type's name and
+    "next" and
+    the type's name and
+    yes.
+  Add another field to the record type's fields given
+    "previous " then
+    the type's name and
+    "previous" and
+    the type's name and
+    yes.
+  If the type's fields are not empty,
+    Append the type's fields to the record type's fields.
+  Index the record type.
+  \ fix up original type to look like a pointer
+  Put the record type's name into the type's target name.
+  \ add chain type
+  Add a chain type to the types given 
+    the type's plural name and 
+    "" and 
+    the base type's plural name.
+  Add a third field to the chain type's fields given
+    "first " then
+    the type's name and
+    "first" and
+    the type's name and
+    yes.
+  Add a fourth field to the chain type's fields given
+    "last " then the type's name and
+    "last" and
+    the type's name and
+    yes.
+  Index the chain type.
+
+To decide if a type can be reduced to a type name:
+  If the type is nil, say no.
+  Privatize the type.
+  Loop.
+    If the type is nil, say no.
+    If the type's name is the type name, say yes.
+    If the type's base type is the type, say no.
+    Put the type's base type into the type.
+  Repeat.
+
+To add a field to some fields given a name and a nickname and a type name and a reference flag:
+  Add the field to the fields given "field" and nil.
+  Put the name into the field's name.
+  Put the nickname into the field's nickname.
+  Put the type name into the field's type name.
+  Put the reference flag into the field's reference flag.
+
+To resolve some types (index plurals):
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a type from the types.
+    If the type is nil, exit.
+    Resolve the type (index plural).
+  Repeat.
+
+To resolve a type (index plural):
+  If the compiler's abort flag is set, exit.
+  If the type is nil, exit.
+  If the type's plural name is blank, exit.
+  If the type can be reduced to "thing" using the base name, exit.
+  Index the type given the type's plural name.
+
+To decide if a type can be reduced to a string using the base name:
+  If the type is nil, say no.
+  If the type's name is the string, say yes.
+  If the type's cooking flag is set, say no.
+  Set the type's cooking flag.
+  Find a base type given the type's base name and the type index.
+  If the base type is nil, 
+    Clear the type's cooking flag; 
+    Say no.
+  If the base type can be reduced to the string using the base name,
+    Clear the type's cooking flag;
+    Say yes.
+  Clear the type's cooking flag.
+  Say no.
+
+To resolve some types (base types):
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a type from the types.
+    If the type is nil, exit.
+    Resolve the type (base type).
+  Repeat.
+
+To resolve a type (base type):
+  If the compiler's abort flag is set, exit.
+  If the type is nil, exit.
+  If the type's base type is not nil, exit.
+  Find the type's base type given the type's base name and the type index.
+  If the type's base type is nil,
+    Abort with "Error #33. Base type '" then the type's base name then "' is not defined. Make sure the type has been declared before it is used and that the type name is spelled correctly." and the type's locus;
+    Exit.
+  Set the type's cooking flag.
+  If the type's base type's cooking flag is set,
+    Abort with "Error #34. Recursive type definition involving '" then the type's base name then "'. Break the recursive type dependency by using a different base type." and the type's locus;
+    Exit.
+  Resolve the type's base type (base type).
+  Clear the type's cooking flag.
+
+To resolve some types (optional info):
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a type from the types.
+    If the type is nil, exit.
+    Resolve the type (optional info).
+  Repeat.
+
+To resolve a type (optional info):
+  If the compiler's abort flag is set, exit.
+  If the type is nil, exit.
+  If the type's optional info resolved flag is set, exit.
+  If the type's base type is the type, exit. \ for built in types
+  Check for invalid optional info on the type.
+  Set the type's cooking flag.
+  Resolve the type's base type (optional info).
+  If the type can be reduced to "pointer",
+    Resolve the type (optional info - pointer).
+  If the type can be reduced to "record",
+    Resolve the type (optional info - record).
+  If the type can be reduced to "number",
+    Resolve the type (optional info - scale).
+  Clear the type's cooking flag.
+  Set the type's optional info resolved flag.
+
+To resolve a type (optional info - pointer):
+  If the compiler's abort flag is set, exit.
+  If the type's target type is not nil, exit.
+  If the type's target name is blank,
+    Put the type's base type's target type into the type's target type;
+    Exit.
+  Find the type's target type given the type's target name and the type index.
+  If the type's target type is nil,
+    Abort with "Error #35. Pointer target type is not defined. Specify a type that has been declared." and the type's locus;
+    Exit.
+
+To resolve a type (optional info - record):
+  If the compiler's abort flag is set, exit.
+  If the type's fields are empty,
+    Copy the type's base type's fields into the type's fields;
+    Exit.
+  Loop.
+    If the compiler's abort flag is set, exit.
+    Get a field from the type's fields (backwards).
+    If the field is nil, break.
+    If the field is duplicated in the type's fields,
+      Abort with "Error #36. The '" then the field's name then "' field is is already defined in this record." and the field's locus;
+      Exit.
+    Resolve the field.
+    If the compiler's abort flag is set, exit.
+    If the field's type's cooking flag is set,
+      Abort with "Error #37. Recursive type definition involving '" then the field's type's name then "'. Break the recursive type dependency by using a different base type." and the field's locus;
+      Exit.
+    Resolve the field's type (optional info).
+    If the field's reference flag is not set, repeat.
+    If the field's type cannot be reduced to "pointer",
+      Abort with "Error #38. The field '" then the field's name then "' is marked as a reference, but its base type is not a pointer. References can only be used with pointer fields." and the field's locus;
+      Exit.
+  Repeat.
+  Eliminate duplicate nicknames from the type's fields.
+  If the type cannot be reduced to "thing record", exit.
+  If the type's fields' count is greater than 2, exit.
+  Copy the type's base type's fields into the type's fields (data fields only).
+
+To eliminate duplicate nicknames from some variables:
+  Create an index given 101.
+  Eliminate duplicate nicknames from the variables given the index.
+  Destroy the index.
+
+To eliminate duplicate nicknames from some variables given an index:
+  If the index is nil, exit.
+  Loop.
+    Get a variable from the variables.
+    If the variable is nil, exit.
+    Eliminate duplicate nicknames given the variable and the index.
+  Repeat.
+
+To eliminate duplicate nicknames given a variable and an index:
+  If the variable is nil, exit.
+  If the index is nil, exit.
+  Find another variable given the variable's nickname and the index.
+  If the other variable is nil,
+    Find the other variable given the variable's name and the index.
+  If the other variable is nil,
+    Index the variable given the variable's nickname and the index;
+    Exit.
+  Clear the other variable's nickname.
+  Clear the variable's nickname.
+
+To resolve a type (optional info - scale):
+  If the compiler's abort flag is set, exit.
+  Put the type's base type into a base type.
+  If the type's scale is 0,
+    Put the type's base type's scale into the type's scale;
+    Exit.
+  If the base type's scale is 0, exit.
+  Multiply the type's scale by the base type's scale.
+  Put the base type's base type into the type's base type.
+
+
+
+

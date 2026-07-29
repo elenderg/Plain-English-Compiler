@@ -3564,9 +3564,9 @@ To eliminate duplicate nicknames from some variables:
 To eliminate duplicate nicknames from some variables given an index:
   If the index is nil, exit.
   Loop.
-  Get a variable from the variables.
-  If the variable is nil, exit.
-  Eliminate duplicate nicknames given the variable and the index.
+    Get a variable from the variables.
+    If the variable is nil, exit.
+    Eliminate duplicate nicknames given the variable and the index.
   Repeat.
 
 To eliminate duplicate nicknames given a variable and an index:
