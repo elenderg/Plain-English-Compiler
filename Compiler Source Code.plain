@@ -3774,8 +3774,8 @@ To find a type and a nickname given a name:
     If the type is not nil, break.
     Skip to the next word in the substring.
   Repeat.
-  Put the name's first into another substring's first.
-  Put the substring's first minus 2 into the other substring's last.
+  Put the name's first byte pointer into another substring's first byte pointer.
+  Put the substring's first byte pointer minus 2 into the other substring's last byte pointer.
   If the other substring is not blank,
     Put the other substring into the nickname.
   If the other substring is blank,
@@ -5381,9 +5381,10 @@ To set the compiled flag in a variable:
     Put "Put the " then the variable's literal's name then " into the " then the variable's name then ". " into the variable's initializer string.
 
 To skip to the next word in a substring:
+  [Loop.]
     If the substring is blank, exit.
-    If the substring's first byte pointer's target is noise, break.
-    Add 1 to the substring's first byte pointer.
+      If the substring's first byte pointer's target is noise, break.
+      Add 1 to the substring's first byte pointer.
   Repeat.
   Skip any leading noise in the substring.
 

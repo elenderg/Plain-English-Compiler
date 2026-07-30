@@ -1,0 +1,243 @@
+To compile a directory (resolve the globals):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                      [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [05/16]" to StdOut.
+  Write "  Resolving global symbols…" to Stdout.
+  Start the resolving globals timer.
+  Resolve the globals.
+  Stop the resolving globals timer.
+
+To resolve some globals:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a global from the globals.
+    If the global is nil, exit.
+    Resolve the global.
+  Repeat.
+
+To resolve a global:
+  If the global is nil, exit.
+  If the compiler's abort flag is set, exit.
+  If the global's global body is not blank,
+    Resolve the global (compile body).
+  If the global's type name is blank,
+    Abort with "Error #39. Expected a type name for global variable '" then the global's name then "'." and the global's locus;
+    Exit.
+  Resolve the global as a variable.
+
+To resolve a global (compile body):
+  If the global is nil, exit.
+  If the compiler's abort flag is set, exit.
+  Slap a rider on the global's global body.
+  Move the rider (compiler rules).
+  If the rider's token substring is not any literal,
+    Abort with "Error #40. expected a literal for the global variable initializer. Found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Compile a literal given the rider.
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is not blank,
+    Abort with "Error #41. Is a period missing around here?" and the rider;
+    Exit.
+  If the global's type name is blank,
+    Put the literal's type's name into the global's type name.
+  Put the literal into the global's literal.
+  Index the literal.
+
+To compile a literal given a rider:
+  If the compiler's abort flag is set, exit.
+  Add the literal to the literals given the rider's token substring's first byte pointer.
+  If the rider's token substring is any flag literal,
+    Compile the literal given the rider (flag);
+    Exit.
+  If the rider's token substring is any hex literal,
+    Compile the literal given the rider (hex);
+    Exit.
+  If the rider's token substring is any numeric literal,
+    Compile the literal given the rider (numeric);
+    Exit.
+  If the rider's token substring is any pointer literal,
+    Compile the literal given the rider (pointer);
+    Exit.
+  If the rider's token substring is any string literal,
+    Compile the literal given the rider (string);
+    Exit.
+  Abort with "Error #42. Internal error - compile a term given a rider (literal). The literal's data type could not be properly identified." and the rider.
+
+To compile a literal given a rider (flag):
+  If the compiler's abort flag is set, exit.
+  Convert the rider's token substring to a flag.
+  Convert the flag to the literal's data.
+  Move the rider (compiler rules).
+  Put "flag" into the literal's type name.
+  Resolve the literal.
+
+To resolve a variable:
+  If the compiler's abort flag is set, exit.
+  If the variable is nil, exit.
+  If the variable's type is not nil, exit.
+  If the variable's type name is not blank,
+    Resolve the variable (explicit type name);
+    Exit.
+  Find the variable's type and the variable's nickname given the variable's name.
+  If the variable's type is not nil,
+    Put the variable's type's name into the variable's type name;
+    Exit.
+  Abort with "Error #43. I can't find the '" then the variable's name then "' type." and the variable's locus.
+
+To resolve a variable (explicit type name):
+  Find the variable's type given the variable's type name and the type index.
+  If the variable's type is nil,
+    Abort with "Error #44. I can't find the '" then the variable's type name then "' type." and the variable's locus;
+    Exit.
+
+To find a type and a nickname given a name:
+  Void the type.
+  Clear the nickname.
+  Slap a substring on the name.
+  Loop.
+    If the substring is blank, exit.
+    Find the type given the substring and the type index.
+    If the type is not nil, break.
+    Skip to the next word in the substring.
+  Repeat.
+  Put the name's first byte pointer into another substring's first byte pointer.
+  Put the substring's first byte pointer minus 2 into the other substring's last byte pointer.
+  If the other substring is not blank,
+    Put the other substring into the nickname.
+  If the other substring is blank,
+    Put the substring into the nickname.
+
+To skip to the next word in a substring:
+  [Loop.]
+    If the substring is blank, exit.
+      If the substring's first byte pointer's target is noise, break.
+      Add 1 to the substring's first byte pointer.
+  Repeat.
+  Skip any leading noise in the substring.
+
+To compile a literal given a rider (hex):
+  If the compiler's abort flag is set, exit.
+  Put the rider's token substring into a nibble substring.
+  Add 1 to the nibble substring's first byte pointer.
+  Convert the nibble substring to the literal's data.
+  Move the rider (compiler rules).
+  Put "hex string" into the literal's type name.
+  Resolve the literal.
+
+To convert a nibble substring to a string:
+  Employ convert a nibble string to a hex string.
+
+To compile a literal given a rider (numeric):
+  If the compiler's abort flag is set, exit.
+  If the rider is followed by any unit of measure,
+    Compile the literal given the rider (numeric - with unit of measure);
+    Exit.
+  If the rider's token substring is any integer literal,
+    Compile the literal given the rider (numeric - integer);
+    Exit.
+  If the rider's token substring is any ratio literal,
+    Compile the literal given the rider (numeric - ratio);
+    Exit.
+  If the rider's token substring is any mixed literal,
+    Compile the literal given the rider (numeric - ratio);
+    Exit.
+
+To decide if a rider is followed by any unit of measure:
+  Privatize the rider.
+  Move the rider (compiler rules).
+  If the rider's token substring is not any name starter, say no.
+  Scan a name given the rider.
+  Find a type given the name and the type index.
+  If the type is nil, say no.
+  If the name is not "times", say yes. \ special because times is an infix operator and a unit of measure
+  If the rider's token substring is the start of any expression, say no.
+  Say yes.
+
+To decide if a string is the start of any expression:
+  If the string is any sign, say yes.
+  If the string is any indefinite article, say yes.
+  If the string is "the", say yes.
+  If the string is any literal, say yes.
+  Say no.
+
+To compile a literal given a rider (numeric - with unit of measure):
+  If the compiler's abort flag is set, exit.
+  Convert the rider's token substring to a ratio.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Find a type given the name and the type index.
+  If the type is nil,
+    Abort with "Error #45. '" then the name then "' is an invalid unit of measure." and the literal's locus;
+    Exit.
+  If the type cannot be reduced to "number",
+    Abort with "Error #46.'" then the name then "' is an invalid unit of measure." and the literal's locus;
+    Exit.
+  Put the type's scale into a final ratio.
+  If the type's scale is 0,
+    Put 1/1 into the final ratio.
+  Multiply the final ratio by the ratio.
+  Reduce the final ratio.
+  If the final ratio's denominator is 0,
+    Abort with "Error #47. We seem to have an invalid unit of measure here." and the literal's locus.
+  Put the final ratio's numerator divided by the final ratio's denominator into a number.
+  Put the type's name into the literal's type name.
+  Convert the number to the literal's data.
+  Resolve the literal.
+
+To compile a literal given a rider (numeric - integer):
+  If the compiler's abort flag is set, exit.
+  Convert the rider's token substring to a number.
+  Convert the number to the literal's data.
+  Move the rider (compiler rules).
+  Put "number" into the literal's type name.
+  Resolve the literal.
+
+To compile a literal given a rider (numeric - ratio):
+  If the compiler's abort flag is set, exit.
+  Convert the rider's token substring to a ratio.
+  Convert the ratio to the literal's data.
+  Move the rider (compiler rules).
+  Put "ratio" into the literal's type name.
+  Resolve the literal.
+
+To compile a literal given a rider (pointer):
+  If the compiler's abort flag is set, exit.
+  Convert nil to the literal's data.
+  Move the rider (compiler rules).
+  Put "pointer" into the literal's type name.
+  Resolve the literal.
+
+To compile a literal given a rider (string):
+  If the compiler's abort flag is set, exit.
+  Put the rider's token substring into the literal's data.
+  Unquote the literal's data.
+  Move the rider (compiler rules).
+  Put "string" into the literal's type name.
+  Resolve the literal.
+
+To index a literal:
+  If the compiler's abort flag is set, exit.
+  If the literal is nil, exit.
+  If the literal's name is in the literal index,
+    Abort with "Error #48. Internal error - index a literal" and the literal's locus;
+    Exit.
+  Index the literal given the literal's name and the literal index.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
