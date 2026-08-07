@@ -954,6 +954,9 @@ To add a routine to some routines given a locus:
   Append the routine to the routines.
   Put the locus into the routine's locus.
 
+To create a routine:
+  Allocate memory for the routine.
+
 To scan a routine header given a rider:
   If the compiler's abort flag is set, exit.
   If the rider's token substring is blank, exit.

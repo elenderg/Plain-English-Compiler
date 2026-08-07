@@ -2894,7 +2894,7 @@ To compile a term given a rider and a name (possessive - field):
   Compile the term given the rider and the deep field term.
 
 To convert some monikettes to a moniker:
-  Convert the monikettes to the moniker given the monikettes' last.
+  Convert the monikettes to the moniker given the monikettes' last monikette.
 
 To convert some monikettes to a moniker given a monikette:
   Clear the moniker.
@@ -3549,6 +3549,7 @@ To decide if a type should be forgotten:
   Say yes.
 
 To decide if a variable is duplicated in some variables:
+  [Loop.]
     Get another variable from the variables.
     If the other variable is nil, say no.
     If the other variable's name is blank, repeat.
