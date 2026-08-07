@@ -63,7 +63,7 @@ To compile some monikettes and some parameters given a rider:
     If the rider's token substring is any monikette string,
       Compile the monikettes and the parameters given the rider (monikette string);
       Repeat.
-  Abort with "'" then the rider's token substring then "' is not valid in a routine header." and the rider.
+  Abort with "'The identifier " then the rider's token substring then "' is not valid in a routine header." and the rider.
 
 To compile some monikettes and some parameters given a rider (definite article):
   If the compiler's abort flag is set, exit.
@@ -182,6 +182,16 @@ To add a monikette to some monikettes given a type:
   Append the monikette to the monikettes.
   Put the type into the monikette's type.
 
+To decide if a string is any monikette string:
+  If the string is blank, say no.
+  If the string is "the", say no.
+  If the string is any indefinite article, say no.
+  If the string is any possessive, say no.
+  If the string is any literal, say no.
+  If the string is any mark, say no.
+  If the string is any symbol, say no.
+  Say yes.
+
 To compile some monikettes and some parameters given a rider (monikette string):
   If the compiler's abort flag is set, exit.
   Add a monikette to the monikettes given the rider's token.
@@ -195,27 +205,90 @@ To decide if a moniker is in an index:
   If the refer's pointer is nil, say no.
   Say yes.
 
-To decide if a string is any monikette string:
-  If the string is blank, say no.
-  If the string is "the", say no.
-  If the string is any indefinite article, say no.
-  If the string is any possessive, say no.
-  If the string is any literal, say no.
-  If the string is any mark, say no.
-  If the string is any symbol, say no.
-  Say yes.
+To decide if any of some monikettes are negative words:
+  \Loop.
+    Get a monikette from the monikettes.
+    If the monikette is nil, say no.
+    If the monikette's string is any negative word, say yes.
+  Repeat.
 
+To decide if a string is any negative word:
+  If the string is "not", say yes.
+  If the string is "cannot", say yes.
+  If the string is "nothing", say yes.
+  If the string ends with "n't", say yes.
+  Say no.
 
+To index a routine given some monikettes and an index:
+  If the routine is nil, exit.
+  Clear a partial moniker.
+  Loop.
+    Get a monikette from the monikettes.
+    If the monikette is nil, exit.
+    Append the monikette to the partial moniker.
+    If the monikette is the monikettes' last monikette, break.
+    Index the partial moniker given the index (special).
+  Repeat.
+  Index the routine given the partial moniker as a moniker and the index (special).
 
+To index a partial moniker given an index (special):
+  Find a refer given the partial moniker and the index.
+  If the refer is not nil, exit.
+  Index the partial moniker in the index.
 
+To index a routine given a moniker and an index (special):
+  Find a refer given the moniker and the index.
+  If the refer is not nil,
+    Put the routine into the refer's pointer;
+    Exit.
+  Index the routine given the moniker and the index.
 
+To decide if a rider is the start of any function:
+  If the compiler's abort flag is set, say no.
+  If the rider's token substring is not "put", say no.
+  Privatize the rider.
+  Move the rider (compiler rules).
+  If the rider's token substring is not any article, say no.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  If the rider's token substring is any possessive, say yes.
 
-
-
-
-
-
-
+To compile the header of a routine given a rider (function):
+  If the compiler's abort flag is set, exit.
+  Set the routine's function flag.
+  Add a monikette to the routine's monikettes given "put".
+  Move the rider (compiler rules).
+  If the rider's token substring is any indefinite article,
+    Set a flag.
+  If the flag is set,
+    Compile the routine's monikettes and the routine's parameters given the rider (indefinite article).
+  If the flag is not set,
+    Compile the routine's monikettes and the routine's parameters given the rider (definite article).
+  If the rider's token substring is not any possessive,
+    Abort with "An 's is missing or misplaced here." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Add another monikette to the routine's monikettes given "'s " then the name.
+  If the rider's token substring is not "into",
+    Abort with "I was expecting the word 'into', but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Add a third monikette to the routine's monikettes given "into".
+  Convert the routine's monikettes to a moniker.
+  If the moniker is in the routine index,
+    Abort with "I already know how to '" then the moniker then "'." and the routine's locus;
+    Exit.
+  Index the routine given the routine's monikettes and the routine index.
+  Move the rider (compiler rules).
+  If the rider's token substring is not any indefinite article,
+    Abort with "I was expecting an indefinite article, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Compile the routine's monikettes and the routine's parameters given the rider (indefinite article).
+  If the rider's token substring is not blank,
+    Abort with "There's extra stuff on the end of this function." and the rider;
+    Exit.
+  Convert the routine's monikettes to the routine's moniker.
+  Index the routine given the routine's monikettes and the routine index. \ for employs
 
 
 
