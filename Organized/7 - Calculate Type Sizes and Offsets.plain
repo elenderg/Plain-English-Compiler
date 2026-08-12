@@ -1,0 +1,11 @@
+To compile a directory (calculate lengths and offsets of types):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                       [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [07/16]" to StdOut.
+  Write "  Calculating type sizes and offsets…" to Stdout.
+  Start the calculating timer.
+  Calculate the lengths of the types.
+  Calculate the offsets in the types.
+  Calculate the redefinition offsets in the types.
+  Stop the calculating timer.
+
