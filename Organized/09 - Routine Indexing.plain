@@ -1,0 +1,169 @@
+To compile a directory (index the routines for utility use):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                 [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [09/16]" to StdOut.
+  Write "  Indexing routines for internal use…" to Stdout.
+  Start the indexing utilities timer.
+  Index the routines for utility use.
+  Scrub the utility index.
+  Reindex the utility index.
+  Stop the indexing utilities timer.
+
+To index some routines for utility use:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a routine from the routines.
+    If the routine is nil, exit.
+    Index the routine for utility use.
+  Repeat.
+
+To index a routine for utility use:
+  If the compiler's abort flag is set, exit.
+  If the routine is nil, exit.
+  If the routine's function flag is set, exit.
+  If the routine's parameters' count is 0, exit.
+  Copy the routine's monikettes into some monikettes.
+  Reduce the monikettes for utility use.
+  Convert the monikettes to a moniker.
+  Destroy the monikettes.
+  If the moniker is in the routine index, exit.
+  Find a refer given the moniker and the utility index.
+  If the refer is not nil,
+    Put nil into the refer's pointer;
+    Exit.
+  Index the routine given the moniker and the utility index.
+
+To copy some monikettes into some other monikettes:
+  Destroy the other monikettes.
+  Loop.
+    Get a monikette from the monikettes.
+    If the monikette is nil, exit.
+    Copy the monikette into another monikette.
+    Append the other monikette to the other monikettes.
+  Repeat.
+
+To copy a monikette into another monikette:
+  If the monikette is nil,
+    Void the other monikette;
+    Exit.
+  Allocate memory for the other monikette.
+  Put the monikette's string into the other monikette's string.
+  Put the monikette's type into the other monikette's type.
+  Put the monikette's variable into the other monikette's variable.
+  \ don't copy substring
+  Put the monikette's current type into the other monikette's current type.
+
+To reduce some monikettes for utility use:
+  [Loop.]
+    Get a monikette from the monikettes.
+    If the monikette is nil, exit.
+    If the monikette's type is nil, repeat.
+    Reduce the monikette's type to a type for utility use.
+    If the type is not nil,
+      Put the type into the monikette's type.
+  Repeat.
+
+To reduce a type to another type for utility use:
+  Put the type into the other type.
+  Loop.
+    If the other type is nil, exit.
+    If the other type's name is "hex string", exit.
+    If the other type's name is "string", exit.
+    If the other type's name is "number", exit.
+    If the other type's name is "pointer", exit.
+    If the other type's name is "thing",
+      Void the other type;
+      Exit.
+    If the other type's base type is the other type,
+      Void the other type;
+      Exit.
+    Put the other type's base type into the other type.
+  Repeat.
+
+To convert some monikettes to a moniker:
+  Convert the monikettes to the moniker given the monikettes' last monikette.
+
+To convert some monikettes to a moniker given a monikette:
+  Clear the moniker.
+  Loop.
+    Get a current monikette from the monikettes.
+    If the current monikette is nil, exit.
+    Append the current monikette to the moniker.
+    If the current monikette is the monikette, exit.
+  Repeat.
+
+To append a monikette to a moniker:
+  If the monikette is nil, exit.
+  If the moniker is not blank,
+    Append the space byte to the moniker.
+  If the monikette's type is not nil,
+    Append "[" and the monikette's type's name and "]" to the moniker (fast);
+    Exit.
+  If the monikette's string is not blank,
+    Append the monikette's string to the moniker;
+    Exit.
+
+To append a string and another string and a third string to a fourth string (fast):
+  Put the fourth string's length into a length.
+  Add the string's length to the length.
+  Add the other string's length to the length.
+  Add the third string's length to the length.
+  Reassign a pointer given the length.
+  Put the pointer into a byte pointer.
+  Copy bytes from the fourth string's first byte pointer to the byte pointer for the fourth string's length.
+  Add the fourth string's length to the byte pointer.
+  Copy bytes from the string's first byte pointer to the byte pointer for the string's length.
+  Add the string's length to the byte pointer.
+  Copy bytes from the other string's first byte pointer to the byte pointer for the other string's length.
+  Add the other string's length to the byte pointer.
+  Copy bytes from the third string's first byte pointer to the byte pointer for the third string's length.
+  Unassign the fourth string's first byte pointer.
+  Put the pointer into the fourth string's first byte pointer.
+  Put the pointer plus the length minus 1 into the fourth string's last byte pointer.
+
+To scrub an index:
+  [Loop.]
+    Get a bucket given the index.
+    If the bucket is nil, exit.
+    If the bucket's refers are empty, repeat.
+    Scrub the bucket's refers.
+  Repeat.
+
+To scrub some refers:
+  Swap the refers with some other refers.
+  Loop.
+    Put the other refers' first into a refer.
+    If the refer is nil, exit.
+    Remove the refer from the other refers.
+    If the refer's pointer is nil,
+      Destroy the refer;
+      Repeat.
+    Append the refer to the refers.
+  Repeat.
+
+To reindex the utility index:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a bucket given the utility index.
+    If the bucket is nil, exit.
+    If the bucket's refers are empty, repeat.
+    Reindex the utility index given the bucket's refers.
+  Repeat.
+
+To reindex the utility index given some refers:
+  [Loop.]
+    Get a refer from the refers.
+    If the refer is nil, exit.
+    Put the refer's pointer into a routine.
+    If the routine is nil,
+      Abort with "Internal error - index the untility routines given some refers";
+      Exit.
+    Copy the routine's monikettes into some monikettes.
+    Reduce the monikettes for utility use.
+    Index the routine given the monikettes and the routine index.
+    Destroy the monikettes.
+  Repeat.
+
+
+
+

@@ -3473,7 +3473,7 @@ To copy bytes from a pointer to another pointer for a byte count: \ copy handlin
   Intel $03F1. \ add esi,ecx
   Intel $4E. \ dec esi
   Intel $03F9. \ add edi,ecx
-  Intel $4F. \ dec esi
+  Intel $4F. \ dec esi - > should be dec edi
   \ backward
   Intel $8A16. \ mov dl,[esi]
   Intel $8817. \ mov [edi],dl
@@ -12178,9 +12178,11 @@ To read a url into a buffer:
   Call "wininet.dll" "InternetCloseHandle" with the internet handle.
 
 To reassign a pointer given a byte count:
-  If the pointer is nil, assign the pointer given the byte count;
+  If the pointer is nil, 
+    Assign the pointer given the byte count;
     Exit.
-  If the byte count is 0, unassign the pointer;
+  If the byte count is 0, 
+    Unassign the pointer;
     Exit.
   Privatize the byte count.
   Round the byte count up to the nearest power of two.
