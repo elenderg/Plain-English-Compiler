@@ -1,0 +1,191 @@
+To compile a directory (compile the bodies of the routines):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "              [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [10/16]" to StdOut.
+  Write "  Compiling routine bodies…" to Stdout.
+  Start the compiling routine bodies timer.
+  Compile the bodies of the routines.
+  Stop the compiling routine bodies timer.
+
+To compile the bodies of the routines:
+  Compile the body of the routine called "Initialize before run".
+  Compile the body of the routine called "Run".
+  Compile the body of the routine called "Finalize after run".
+
+To compile the body of the routine called a string:
+  If the compiler's abort flag is set, exit.
+  Find a routine given the string and the routine index.
+  If the routine is nil,
+    Abort with "I could not find a routine to '" then the string then "'.";
+    Exit.
+  Compile the body of the routine.
+
+To compile the body of a routine:
+  If the routine is nil, exit.
+  If the compiler's abort flag is set, exit.
+  If the routine's compiled flag is set, exit.
+  Set the routine's compiled flag.
+  Slap a rider on the routine's routine body.
+  Move the rider (compiler rules).
+  If the rider's token substring is the semi-colon byte,
+    Compile the body of the routine given the rider (alternate wording);
+    Exit. \ *** alternate wording
+  If the rider's token substring is "employ",
+    Compile the body of the routine given the rider (employ);
+    Exit.
+  Put the current routine into a saved routine.
+  Put the routine into the current routine.
+  Create the routine's nickname index given 101.
+  Eliminate duplicate nicknames from the routine's parameters given the routine's nickname index.
+  Compile the body of the routine (prolog).
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is blank, break.
+    Compile the next statement given the rider.
+  Repeat.
+  Compile the body of the routine (epilog).
+  Put the saved routine into the current routine.
+
+To compile the body of a routine given a rider (alternate wording): \ *** alternate wording
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules). \ *** do we need this? 
+  Put the routine's next routine into a target routine.
+  If the target routine is nil,
+    Abort with "You've defined an alternate wording here, but I'm not sure what you're rewording." and the rider;
+    Exit.
+  Put the target routine's moniker into the routine's employs moniker.
+  Compile the body of the target routine.
+
+To compile the body of a routine given a rider (employ):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Compile a routine reference given the rider.
+  Convert the routine reference to the routine's employs moniker.
+  Destroy the routine reference.
+  If the rider's token substring is not ".",
+    Abort with "Employ statments should end with a period not with a '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  If the rider's token substring is not blank,
+    Abort with "Use only 1 employ per routine" and the rider;
+    Exit.
+  Find another routine given the routine's employs moniker and the routine index.
+  If the other routine is nil,
+    Abort with "I can't find the '" then the routine's employs moniker then "' routine you're trying to employ." and the routine's locus;
+    Exit.
+  Compile the body of the other routine.
+
+To compile the body of a routine (epilog):
+  If the routine is nil, exit.
+  If the compiler's abort flag is set, exit.
+  Add a fragment given the finalize tag.
+  Loop.
+    Get a variable from the routine's locals.
+    If the variable is nil, break.
+    If the variable's kind is "Scratch", repeat.
+    If the variable's type should not be finalized, repeat.
+    Add another fragment given the push address tag and the variable.
+    Find another routine given "~Finalize" and the variable's type.
+    If the other routine is nil,
+      Abort with "Internal error - compile the body of a routine (epilog)";
+      Exit.
+    Add a third fragment given the call internal tag and the other routine.
+  Repeat.
+  Add a fourth fragment given the epilog tag.
+
+To compile the body of the routine called a string:
+  If the compiler's abort flag is set, exit.
+  Find a routine given the string and the routine index.
+  If the routine is nil,
+    Abort with "I could not find a routine to '" then the string then "'.";
+    Exit.
+  Compile the body of the routine.
+
+To compile a routine reference given a rider:
+  If the rider's token substring is "To",
+    Move the rider (compiler rules).
+  If the rider is the start of any function,
+    Compile the routine reference given the rider (function);
+    Exit.
+  If the rider's token substring is "decide",
+    Compile the routine reference given the rider (decide).
+  Loop.
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is blank, exit.
+    If the rider's token substring is ".", exit.
+    If the rider's token substring is "the",
+      Compile the routine reference given the rider (definite article);
+      Repeat.
+    If the rider's token substring is any indefinite article,
+      Compile the routine reference given the rider (indefinite article);
+      Repeat.
+    If the rider's token substring is any monikette string,
+      Compile the routine reference given the rider (monikette string);
+      Repeat.
+  Abort with "'" then the rider's token substring then "' is not valid in an employ statement." and the rider.
+
+To compile a routine reference given a rider (function):
+  If the compiler's abort flag is set, exit.
+  Add a monikette to the routine reference given "put".
+  Move the rider (compiler rules).
+  If the rider's token substring is any indefinite article,
+    Set a flag.
+  If the flag is set,
+    Compile the routine reference given the rider (indefinite article).
+  If the flag is not set,
+    Compile the routine reference given the rider (definite article).
+  If the rider's token substring is not any possessive,
+    Abort with "I was expecting an 's, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Add another monikette to the routine reference given "'s " then the name.
+  If the rider's token substring is not "into",
+    Abort with "I was expecting the word 'into', but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Add a third monikette to the routine reference given "into".
+  Move the rider (compiler rules).
+  If the rider's token substring is not any indefinite article,
+    Abort with "I was expecting an indefinite article, but found '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Compile the routine reference given the rider (indefinite article).
+
+To compile a routine reference given a rider (indefinite article):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Find a type and a nickname given the name.
+  If the type is nil,
+    Abort with "Invalid employ statement, I don't understand '" then the name then "'." and the rider;
+    Exit.
+  Add a monikette to the routine reference given the type.
+
+To compile a routine reference given a rider (definite article):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Prepend "the " to the name.
+  Add a monikette to the routine reference given the name.
+
+To compile a routine reference given a rider (decide):
+  Move the rider (compiler rules).
+  If the rider's token substring is not "if",
+    Abort with "We always say DECIDE IF, not DECIDE and then '" then the rider's token substring then "'." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+
+
+
+To compile a routine reference given a rider (monikette string):
+  If the compiler's abort flag is set, exit.
+  Add a monikette to the routine reference given the rider's token.
+  Move the rider (compiler rules).
+
+To compile the body of a routine (prolog):
+  If the routine is nil, exit.
+  If the compiler's abort flag is set, exit.
+  Add a fragment given the prolog tag.
+  Add another fragment given the loop tag.
+
+
+
