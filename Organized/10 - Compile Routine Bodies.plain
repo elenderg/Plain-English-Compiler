@@ -290,7 +290,6 @@ To compile an expression given a rider:
     Compile the expression given the rider (times);
     Repeat.
 
-
 To compile a term given a rider:
   Clear the term.
   If the compiler's abort flag is set, exit.
@@ -300,6 +299,72 @@ To compile a term given a rider:
     Compile the term given the rider (as part).
   If the rider's token substring is "/",
     Compile the term given the rider (runtime ratio).
+
+To compile a term given a rider (common part):
+  If the compiler's abort flag is set, exit.
+  If the rider's token substring is the dash byte,
+    Compile the term given the rider (negated term);
+    Exit.
+  If the rider's token substring is the cross byte,
+    Compile the term given the rider (posigated term);
+    Exit.
+  If the rider's token substring is the start of any variable,
+    Compile the term given the rider (variable);
+    Exit.
+  If the rider's token substring is the start of any new local,
+    Compile the term given the rider (new local);
+    Exit.
+  If the rider's token substring is any literal,
+    Compile the term given the rider (literal);
+    Exit.
+  Abort with "I expected a term hereabouts but all I found was '" then the rider's token substring then "'." and the rider.
+
+To compile a term given a rider (negated term):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Compile another term given the rider.
+  If the compiler's abort flag is set, exit.
+  If the other term's variable is nil,
+    Abort with "Invalid negate, I don't understand the variable '" then the other term's phrase then "'." and the rider;
+    Exit.
+  Add an intermediate given the other term's type name and the rider's token substring's first byte pointer.
+  Add several fragments given 
+    "put" and 
+    the other term's variable and 
+    "into" and 
+    the intermediate and 
+    the other term's locus.
+  Add two fragments given 
+    "negate" and 
+    the intermediate and 
+    the rider's token substring's first byte pointer.
+  Put the intermediate into the term's variable.
+  Clear the term's phrase.
+
+To add several fragments given a string and a variable and another string and another variable and a locus:
+  Add a fragment given the push address tag and the other variable.
+  Add another fragment given the push address tag and the variable.
+  Add a monikette to some monikettes given the string.
+  Add another monikette to the monikettes given the variable's type.
+  Add a third monikette to the monikettes given the other string.
+  Add a fourth monikette to the monikettes given the other variable's type.
+  Find a routine given the monikettes.
+  If the routine is nil,
+    Convert the monikettes to a moniker.
+  Destroy the monikettes.
+  If the routine is nil,
+    Abort with "I don't know how to '" then the moniker then "'." and the locus;
+    Exit.
+  Add a third fragment given the call internal tag and the routine.
+
+To add an intermediate given a type name and a locus:
+  If the current routine is nil,
+    Void the intermediate;
+    Exit.
+  Add the intermediate to the current routine's locals given "local" and the locus.
+  Generate the intermediate's name given "~I".
+  Put the type name into the intermediate's type name.
+  Resolve the intermediate.
 
 To compile a term given a rider (as part):
   If the compiler's abort flag is set, exit.
@@ -320,25 +385,6 @@ To compile a term given a rider (as part):
   Add a fragment given the load address tag and the term's variable and the scratch.
   Put the scratch into the term's variable.
   Clear the term's phrase.
-
-To compile a term given a rider (common part):
-  If the compiler's abort flag is set, exit.
-  If the rider's token substring is the dash byte,
-    Compile the term given the rider (negated term);
-    Exit.
-  If the rider's token substring is the cross byte,
-    Compile the term given the rider (posigated term);
-    Exit.
-  If the rider's token substring is the start of any variable,
-    Compile the term given the rider (variable);
-    Exit.
-  If the rider's token substring is the start of any new local,
-    Compile the term given the rider (new local);
-    Exit.
-  If the rider's token substring is any literal,
-    Compile the term given the rider (literal);
-    Exit.
-  Abort with "I expected a term hereabouts but all I found was '" then the rider's token substring then "'." and the rider.
 
 To compile a term given a rider (dereference - in place):
   If the term's variable is nil,
@@ -372,20 +418,6 @@ To compile a term given a rider (literal):
   Put the literal into the term's variable.
   Clear the term's phrase.
   Compile the term given the rider (possessives).
-
-To compile a term given a rider (negated term):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  Compile another term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the other term's variable is nil,
-    Abort with "Invalid negate, I don't understand the variable '" then the other term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given the other term's type name and the rider's token substring's first byte pointer.
-  Add several fragments given "put" and the other term's variable and "into" and the intermediate and the other term's locus.
-  Add two fragments given "negate" and the intermediate and the rider's token substring's first byte pointer.
-  Put the intermediate into the term's variable.
-  Clear the term's phrase.
 
 To compile a term given a rider (new local):
   If the compiler's abort flag is set, exit.
