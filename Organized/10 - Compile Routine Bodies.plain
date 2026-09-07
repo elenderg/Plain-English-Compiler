@@ -33,9 +33,10 @@ To compile the body of a routine:
   If the rider's token substring is "employ",
     Compile the body of the routine given the rider (employ);
     Exit.
-  Put the current routine into a saved routine.
+  Put the current routine into a routine called saved routine.
   Put the routine into the current routine.
-  Create the routine's nickname index given 101.
+  Put 101 into a number called bucket count.
+  Create the routine's nickname index given the bucket count.
   Eliminate duplicate nicknames from the routine's parameters given the routine's nickname index.
   Compile the body of the routine (prolog).
   Loop.
@@ -74,43 +75,6 @@ To compile the body of a routine given a rider (employ):
     Abort with "I can't find the '" then the routine's employs moniker then "' routine you're trying to employ." and the routine's locus;
     Exit.
   Compile the body of the other routine.
-
-To compile the body of a routine (epilog):
-  If the routine is nil, exit.
-  If the compiler's abort flag is set, exit.
-  Add a fragment given the finalize tag.
-  Loop.
-    Get a variable from the routine's locals.
-    If the variable is nil, break.
-    If the variable's kind is "Scratch", repeat.
-    If the variable's type should not be finalized, repeat.
-    Add another fragment given the push address tag and the variable.
-    Find another routine given "~Finalize" and the variable's type.
-    If the other routine is nil,
-      Abort with "Internal error - compile the body of a routine (epilog)";
-      Exit.
-    Add a third fragment given the call internal tag and the other routine.
-  Repeat.
-  Add a fourth fragment given the epilog tag.
-
-To add a fragment given a tag:
-  If the current routine is nil,
-    Void the fragment;
-    Exit.
-  Create the fragment given the tag.
-  Append the fragment to the current routine's fragments.
-
-To create a fragment given a tag:
-  Allocate memory for the fragment.
-  Put the tag into the fragment's tag.
-
-To compile the body of the routine called a string:
-  If the compiler's abort flag is set, exit.
-  Find a routine given the string and the routine index.
-  If the routine is nil,
-    Abort with "I could not find a routine to '" then the string then "'.";
-    Exit.
-  Compile the body of the routine.
 
 To compile a routine reference given a rider:
   If the rider's token substring is "To",
@@ -185,12 +149,56 @@ To compile a routine reference given a rider (decide):
     Exit.
   Move the rider (compiler rules).
 
-
-
 To compile a routine reference given a rider (monikette string):
   If the compiler's abort flag is set, exit.
   Add a monikette to the routine reference given the rider's token.
   Move the rider (compiler rules).
+
+To find a routine given a moniker and a monikette and an index:
+  If the monikette is nil, exit.
+  Void the routine.
+  Privatize the moniker.
+  Put the monikette's type into the monikette's current type.
+  Slap the monikette's current substring on the monikette's string.
+  Loop.
+    Append the monikette to the moniker (while bubbling).
+    Find a refer given the moniker and the index.
+    If the refer is not nil,
+      Put the refer's pointer into the routine.
+    If the refer is not nil,
+      Find the routine given the moniker and the monikette's next monikette and the index.
+    If the routine is not nil, break.
+    Bubble the monikette.
+    If the monikette is bubbled out, break.
+    Put the original moniker into the moniker.
+  Repeat.
+
+To append a monikette to a moniker (while bubbling):
+  If the monikette is nil, exit.
+  If the moniker is not blank,
+    Append the space byte to the moniker.
+  If the monikette's current substring is not blank,
+    Append the monikette's current substring to the moniker;
+    Exit.
+  If the monikette's current type is not nil,
+    Append "[" and the monikette's current type's name and "]" to the moniker (fast);
+    Exit.
+
+To bubble a monikette:
+  If the monikette is nil, exit.
+  If the monikette's current substring is not blank,
+    Clear the monikette's current substring;
+    Exit.
+  If the monikette's current type is nil, exit.
+  If the monikette's current type is any built-in type,
+    Put nil into the monikette's current type;
+    Exit.
+  Put the monikette's current type's base type into the monikette's current type.
+To decide if a monikette is bubbled out:
+  If the monikette is nil, say yes.
+  If the monikette's current type is not nil, say no.
+  If the monikette's current substring is not blank, say no.
+  Say yes.
 
 To compile the body of a routine (prolog):
   If the routine is nil, exit.
@@ -341,6 +349,21 @@ To compile a term given a rider (negated term):
   Put the intermediate into the term's variable.
   Clear the term's phrase.
 
+To add an intermediate given a type name and a locus:
+  If the current routine is nil,
+    Void the intermediate;
+    Exit.
+  Add the intermediate to the current routine's locals given "local" and the locus.
+  Generate the intermediate's name given "~I".
+  Put the type name into the intermediate's type name.
+  Resolve the intermediate.
+
+To generate a name given a string:
+  Put the string into the name.
+  Add 1 to the compiler's name count.
+  Convert the compiler's name count to another string.
+  Append the other string to the name.
+
 To add several fragments given a string and a variable and another string and another variable and a locus:
   Add a fragment given the push address tag and the other variable.
   Add another fragment given the push address tag and the variable.
@@ -357,43 +380,131 @@ To add several fragments given a string and a variable and another string and an
     Exit.
   Add a third fragment given the call internal tag and the routine.
 
-To add an intermediate given a type name and a locus:
+To add a fragment given a tag and a variable:
   If the current routine is nil,
-    Void the intermediate;
+    Void the fragment;
     Exit.
-  Add the intermediate to the current routine's locals given "local" and the locus.
-  Generate the intermediate's name given "~I".
-  Put the type name into the intermediate's type name.
-  Resolve the intermediate.
+  Create the fragment given the tag.
+  Append the fragment to the current routine's fragments.
+  Put the variable into the fragment's variable.
+  Set the compiled flag in the variable.
 
-To compile a term given a rider (as part):
+To create a fragment given a tag:
+  Allocate memory for the fragment.
+  Put the tag into the fragment's tag.
+
+To find a routine given some monikettes:
+  Void the routine.
+  Find the routine given a moniker and the monikettes' first monikette and the routine index.
+
+To add a fragment given a tag and a routine:
+  If the current routine is nil,
+    Void the fragment;
+    Exit.
+  Create the fragment given the tag.
+  Append the fragment to the current routine's fragments.
+  Put the routine into the fragment's routine.
+  Compile the body of the routine.
+
+To add two fragments given a string and a variable and a locus:
+  Add a fragment given the push address tag and the variable.
+  Add a monikette to some monikettes given the string.
+  Add another monikette to the monikettes given the variable's type.
+  Find a routine given the monikettes.
+  If the routine is nil,
+    Convert the monikettes to a moniker.
+  Destroy the monikettes.
+  If the routine is nil,
+    Abort with "I don't know how to '" then the moniker then "'." and the locus;
+    Exit.
+  Add another fragment given the call internal tag and the routine.
+
+To compile a term given a rider (posigated term):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Compile the term given the rider.
+  If the term's variable is nil,
+    Abort with "Invalid posigate, I don't understand the variable '" then the term's phrase then "'." and the rider;
+    Exit.
+  Clear the term's phrase.
+
+To decide if a string is the start of any variable:
+  If the string is "the", say yes.
+  Say no.
+
+To compile a term given a rider (variable):
+  If the compiler's abort flag is set, exit.
+  If the current routine is nil,
+    Abort with "I don't know what you're trying to pull here." and the rider;
+    Exit.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Find a variable given the name.
+  Put the variable into the term's variable.
+  Put "the " into the term's phrase.
+  Append the name to the term's phrase.
+  Compile the term given the rider (possessives).
+
+To find a variable given a name:
+  If the current routine is nil,
+    Void the variable;
+    Exit.
+  Find the variable given the name and the current routine's locals.
+  If the variable is not nil, exit.
+  Find the variable given the name and the current routine's parameters.
+  If the variable is not nil, exit.
+  Find the variable given the name and the global index.
+  If the variable is not nil, exit.
+  Find the variable given the name and the literal index.
+
+To compile a term given a rider (possessives):
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is not any possessive, exit.
+    Compile the term given the rider (possessive).
+  Repeat.
+
+To compile a term given a rider (possessive):
+  If the compiler's abort flag is set, exit.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  If the compiler's abort flag is set, exit.
+  If the name is "magnitude",
+    Compile the term given the rider (possessive - magnitude);
+    Exit.
+  If the name is "target",
+    Compile the term given the rider (possessive - target);
+    Exit.
+  If the name is "whereabouts",
+    Compile the term given the rider (possessive - whereabouts);
+    Exit.
+  Compile the term given the rider and the name (possessive - field).
+
+To compile a term given a rider (possessive - magnitude):
   If the compiler's abort flag is set, exit.
   If the term's variable is nil,
-    Abort with "Invalid use of 'as', I don't understand the variable '" then the term's phrase then "'." and the rider;
+    Abort with "Invalid use of magnitude, I don't understand the variable '" then the term's phrase then "'." and the rider;
     Exit.
-  Move the rider (compiler rules).
-  If the rider's token substring is not any indefinite article,
-    Abort with "I was hoping for an indefinite article after 'AS', but I found '" then the rider's token substring then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Scan a type name given the rider.
-  Find a type given the type name and the type index.
-  If the type is nil,
-    Abort with "I can't find the '" then the type name then "' type." and the rider;
-    Exit.
-  Add a scratch given the type's name and the rider's token substring's first byte pointer.
-  Add a fragment given the load address tag and the term's variable and the scratch.
-  Put the scratch into the term's variable.
+  Add a literal to the literals given the rider's token substring's first byte pointer.
+  Convert the term's type's length to the literal's data.
+  Put "number" into the literal's type name.
+  Resolve the literal.
+  Put the literal into the term's variable.
   Clear the term's phrase.
 
-To compile a term given a rider (dereference - in place):
+To add a literal to some variables given a locus:
+  Add the literal as a variable to the variables given "literal" and the locus.
+  Generate the literal's name given "~L".
+
+To compile a term given a rider (possessive - target):
+  If the compiler's abort flag is set, exit.
   If the term's variable is nil,
-    Abort with "Internal error - compile a term given a rider (dereference - in place)" and the rider;
+    Abort with "Invalid use of target, I don't understand the variable '" then the term's phrase then "'." and the rider;
     Exit.
-  Put the term's type's target type's name into the term's type name.
-  Put the term's type's target type into the term's type.
-  Add a fragment given the dereference tag and the term's variable.
-  Clear the term's phrase.
+  If the term's type cannot be reduced to "pointer",
+    Abort with "You can only get the target of pointer types." and the rider;
+    Exit.
+  Compile the term given the rider (dereference).
 
 To compile a term given a rider (dereference):
   If the compiler's abort flag is set, exit.
@@ -412,595 +523,36 @@ To compile a term given a rider (dereference):
   Put the scratch into the term's variable.
   Clear the term's phrase.
 
-To compile a term given a rider (literal):
-  If the compiler's abort flag is set, exit.
-  Compile a literal given the rider.
-  Put the literal into the term's variable.
+To compile a term given a rider (dereference - in place):
+  If the term's variable is nil,
+    Abort with "Internal error - compile a term given a rider (dereference - in place)" and the rider;
+    Exit.
+  Put the term's type's target type's name into the term's type name.
+  Put the term's type's target type into the term's type.
+  Add a fragment given the dereference tag and the term's variable.
   Clear the term's phrase.
-  Compile the term given the rider (possessives).
 
-To compile a term given a rider (new local):
-  If the compiler's abort flag is set, exit.
+To add a scratch given a type name and a locus:
   If the current routine is nil,
-    Abort with "I don't know what you're trying to pull here." and the rider;
+    Void the scratch;
     Exit.
-  Add a local to the current routine's locals given "local" and the rider's token substring's first byte pointer.
-  If the rider's token substring is "another",
-    Put "other" into the local's name.
-  Move the rider (compiler rules).
-  Scan a name given the rider.
-  Extend the local's name with the name.
-  If the rider's token substring is "called",
-    Compile the call'd part given the rider and the local.
-  Resolve the local.
-  If the local is duplicated in the current routine's parameters,
-    Abort with "'" then the local's name then "' is already in use as a parameter." and the local's locus;
-    Exit.
-  If the local is duplicated in the current routine's locals,
-    Abort with "'" then the local's name then "' is already in use as a local variable." and the local's locus;
-    Exit.
-  Eliminate duplicate nicknames given the local and the current routine's nickname index.
-  Put the local into the term's variable.
-  Clear the term's phrase.
-  Compile the term given the rider (possessives).
+  Add the scratch to the current routine's locals given "Scratch" and the locus.
+  Generate the scratch's name given "~S".
+  Put the type name into the scratch's type name.
+  Resolve the scratch.
 
-To compile a term given a rider (posigated term):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  Compile the term given the rider.
-  If the term's variable is nil,
-    Abort with "Invalid posigate, I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Clear the term's phrase.
-
-To compile a term given a rider (possessive - magnitude):
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid use of magnitude, I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add a literal to the literals given the rider's token substring's first byte pointer.
-  Convert the term's type's length to the literal's data.
-  Put "number" into the literal's type name.
-  Resolve the literal.
-  Put the literal into the term's variable.
-  Clear the term's phrase.
-
-To compile a term given a rider (possessive - target):
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid use of target, I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  If the term's type cannot be reduced to "pointer",
-    Abort with "You can only get the target of pointer types." and the rider;
-    Exit.
-  Compile the term given the rider (dereference).
-
-To compile a term given a rider (possessive - whereabouts):
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid use of whereabouts, I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given "pointer" and the rider's token substring's first byte pointer.
-  Add a fragment given the load address tag and the term's variable and the intermediate.
-  Put the intermediate into the term's variable.
-  Clear the term's phrase.
-
-To compile a term given a rider (possessive):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  Scan a name given the rider.
-  If the compiler's abort flag is set, exit.
-  If the name is "magnitude",
-    Compile the term given the rider (possessive - magnitude);
-    Exit.
-  If the name is "target",
-    Compile the term given the rider (possessive - target);
-    Exit.
-  If the name is "whereabouts",
-    Compile the term given the rider (possessive - whereabouts);
-    Exit.
-  Compile the term given the rider and the name (possessive - field).
-
-To compile a term given a rider (possessives):
-  [Loop.]
-    If the compiler's abort flag is set, exit.
-    If the rider's token substring is not any possessive, exit.
-    Compile the term given the rider (possessive).
-  Repeat.
-
-To compile a term given a rider (runtime ratio):
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid use of /, I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile another term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the other term's variable is nil,
-    Abort with "Invalid use of /, I don't understand the variable '" then the other term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given "ratio" and the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Put" and
-    the term's variable and
-    "and" and
-    the other term's variable and
-    "into" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Put the intermediate into the term's variable.
-  Clear the term's phrase.
-
-To compile a term given a rider (variable):
-  If the compiler's abort flag is set, exit.
+To add a fragment given a tag and a variable and another variable:
   If the current routine is nil,
-    Abort with "I don't know what you're trying to pull here." and the rider;
+    Void the fragment;
     Exit.
-  Move the rider (compiler rules).
-  Scan a name given the rider.
-  Find a variable given the name.
-  Put the variable into the term's variable.
-  Put "the " into the term's phrase.
-  Append the name to the term's phrase.
-  Compile the term given the rider (possessives).
+  Create the fragment given the tag.
+  Append the fragment to the current routine's fragments.
+  Put the variable into the fragment's variable.
+  Put the other variable into the fragment's other variable.
+  Set the compiled flag in the variable.
+  Set the compiled flag in the other variable.
 
-To compile a term given a rider and a field term:
-  If the compiler's abort flag is set, exit.
-  If the field term's dereference flag is set,
-    Compile the term given the rider (dereference).
-  If the field term's function is not nil,
-    Compile the term given the rider and the field term (function);
-    Exit.
-  If the term's kind is "scratch",
-    Compile the term given the rider and the field term (in place);
-    Exit.
-  Put the field term's field into a field.
-  Add a scratch given the field's type's name and the rider's token substring's first byte pointer.
-  Add a fragment given the load address tag and the term's variable and the scratch.
-  If the field's offset is not 0,
-    Add a third fragment given the increment tag and the scratch and the field's offset.
-  Put the scratch into the term's variable.
-  Clear the term's phrase.
 
-To compile a term given a rider and a field term (function):
-  If the compiler's abort flag is set, exit.
-  Put the field term's function into a routine.
-  Put the routine's parameters' last into a parameter.
-  If the parameter is nil,
-    Abort with "Internal error - compile a term given a rider and an field term (function)." and the rider;
-    Exit.
-  If the parameter's type is nil,
-    Abort with "Internal error 2 - compile a term given a rider and an field term (function)." and the rider;
-    Exit.
-  Add an intermediate given the parameter's type's name and the rider's token substring's first byte pointer.
-  Add a fragment given the push address tag and the intermediate.
-  If the field term's push flag is set,
-    Add another fragment given the push address tag and the term's variable.
-  Add a third fragment given the call internal tag and the routine.
-  Put the intermediate into the term's variable.
-  Clear the term's phrase.
 
-To compile a term given a rider and a field term (in place):
-  If the compiler's abort flag is set, exit.
-  Put the field term's field into a field.
-  Put the field's type's name into the term's type name.
-  Put the field's type into the term's type.
-  If the field's offset is not 0,
-    Add a third fragment given the increment tag and the term's variable and the field's offset.
-  Clear the term's phrase.
 
-To compile a term given a rider and a name (possessive - field):
-  If the compiler's abort flag is set, exit.
-  If the term's variable is not nil,
-    Put the term's type into a type.
-  Find a field term given the term's phrase and the type and the name.
-  If the field term is not empty,
-    Compile the term given the rider and the field term;
-    Exit.
-  If the term's variable is nil,
-    Abort with "I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  If the type can be reduced to "pointer",
-    Put the type's target type into the type.
-  If the type is nil,
-    Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
-    Exit.
-  Loop.
-  If the compiler's abort flag is set, exit.
-  Get a field from the type's fields.
-  If the field is nil,
-    Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
-    Exit.
-  Find a deep field term given "" and the field's type and the name.
-  If the deep field term is empty, repeat.
-  Put the field into a first field term's field.
-  If the term's type can be reduced to "pointer",
-    Set the first field term's dereference flag.
-  Compile the term given the rider and the first field term.
-  Compile the term given the rider and the deep field term.
-
-To compile an expression given a rider (divided):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  If the rider's token substring is not "by",
-    Abort with "You shoul type 'divided BY'." and the rider;
-    Exit.
-  If the expression's variable is nil,
-    Abort with "Invalid use of 'divided by'. The variable '" then the expression's phrase then "' appears to be null." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid 'divided by', I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given the expression's type name and the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Put" and
-    the expression's variable and
-    "into" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Divide" and
-    the intermediate and
-    "by" and
-    the term's variable and
-    the rider's token substring's first byte pointer.
-  Put the intermediate into the expression's variable.
-  Clear the expression's phrase.
-
-To compile an expression given a rider (minus):
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "Invalid 'minus', I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid 'minus', I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given the expression's type name and the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Put" and
-    the expression's variable and
-    "into" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Subtract" and
-    the term's variable and
-    "from" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Put the intermediate into the expression's variable.
-  Clear the expression's phrase.
-
-To compile an expression given a rider (plus):
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "Invalid 'plus', I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid 'plus', I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given the expression's type name and the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Put" and
-    the expression's variable and
-    "into" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Add" and
-    the term's variable and
-    "to" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Put the intermediate into the expression's variable.
-  Clear the expression's phrase.
-
-To compile an expression given a rider (then):
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "Invalid 'then', I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid 'then', I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given "string" and the rider's token substring's first byte pointer.
-  Add the put or convert fragments given
-    the expression's variable and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Convert the term for concatenation given the rider.
-  Add several fragments given
-    "Append" and
-    the term's variable and
-    "to" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Put the intermediate into the expression's variable.
-  Clear the expression's phrase.
-
-To compile an expression given a rider (times):
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "Invalid 'times', I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid 'times', I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add an intermediate given the expression's type name and the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Put" and
-    the expression's variable and
-    "into" and
-    the intermediate and
-    the rider's token substring's first byte pointer.
-  Add several fragments given
-    "Multiply" and
-    the intermediate and
-    "by" and
-    the term's variable and
-    the rider's token substring's first byte pointer.
-  Put the intermediate into the expression's variable.
-  Clear the expression's phrase.
-
-To compile the next statement given a rider (break):
-  Add a fragment given the break tag.
-  Move the rider (compiler rules).
-
-To compile the next statement given a rider (call - external):
-  Put the rider's token substring into a string.
-  Unquote the string.
-  Move the rider (compiler rules).
-  If the rider's token substring is not any string literal,
-    Abort with "Gee, I was expecting a quoted entry name, but I found '" then the rider's token substring then "'." and the rider;
-    Exit.
-  Put the rider's token substring into another string.
-  Unquote the other string.
-  Move the rider (compiler rules).
-  Add an entry to the imports given the string and the other string.
-  If the rider's token substring is "with",
-    Compile the next statement given the rider (call - with clause).
-  If the rider's token substring is "returning",
-    Compile the next statement given the rider returning a term (call - returning part).
-  Add a fragment given the call external tag and the entry.
-  If the term is empty, exit.
-  If the term's variable is nil,
-    Abort with "I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add another fragment given the save eax tag and the term's variable.
-
-To compile the next statement given a rider (call - indirect):
-  Compile an expression given the rider.
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  If the expression's type cannot be reduced to "pointer",
-    Abort with "I really need a pointer type in this CALL statement." and the rider;
-    Exit.
-  If the rider's token substring is "with",
-    Compile the next statement given the rider (call - with clause).
-  If the rider's token substring is "returning",
-    Compile the next statement given the rider returning a term (call - returning part).
-  Add a fragment given the call indirect tag and the expression's variable.
-  If the term is empty, exit.
-  If the term's variable is nil,
-    Abort with "I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  Add another fragment given the save eax tag and the term's variable.
-
-To compile the next statement given a rider (call - internal):
-  Compile some monikettes given the rider.
-  Find a routine given the monikettes.
-  If the routine is not nil,
-    Add push fragments given the monikettes.
-  If the routine is not nil,
-    Destroy the monikettes;
-    Add a fragment given the call internal tag and the routine;
-    Exit.
-  Convert the monikettes to a moniker.
-  Destroy the monikettes.
-  Abort with "I don't know how to '" then the moniker then "'." and the rider.
-
-To compile the next statement given a rider (call - with clause): \ this guy is recursise so parameters get passed right to left
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  Compile an expression given the rider.
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  If the expression's type is not value pushable,
-    Abort with "'" then the expression's type's name then "' can't be passed properly." and the rider;
-    Exit.
-  If the rider's token substring is "and",
-    Compile the next statement given the rider (call - with clause).
-  Add a fragment given the push value tag and the expression's variable.
-
-To compile the next statement given a rider (call):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  If the rider's token substring is any string literal,
-    Compile the next statement given the rider (call - external);
-    Exit.
-  Compile the next statement given the rider (call - indirect).
-
-To compile the next statement given a rider (exit):
-  If the current routine's decider flag is set,
-    Abort with "What does 'exit' mean here? Yes? No? Maybe?" and the rider;
-    Exit.
-  Add a fragment given the exit tag.
-  Move the rider (compiler rules).
-
-To compile the next statement given a rider (intel):
-  Move the rider (compiler rules).
-  If the rider's token substring is not any hex literal,
-    Abort with "I need some machine code here, I found '" then the rider's token substring then "'." and the rider;
-    Exit.
-  Add a fragment given the intel tag.
-  Put the rider's token substring into a nibble substring.
-  Add 1 to the nibble substring's first.
-  Convert the nibble substring to the fragment's code.
-  Move the rider (compiler rules).
-
-To compile the next statement given a rider (loop):
-  If the compiler's abort flag is set, exit.
-  Add a fragment given the loop tag.
-  Move the rider (compiler rules).
-  If the rider's token substring is not the period byte,
-    Abort with "You seem to have forgotten a period around here." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-
-To compile the next statement given a rider (other):
-  If the compiler's abort flag is set, exit.
-  If the rider's token substring is blank, exit.
-  If the rider's token substring is "exit",
-    Compile the next statement given the rider (exit);
-    Exit.
-  If the rider's token substring is "repeat",
-    Compile the next statement given the rider (repeat);
-    Exit.
-  If the rider's token substring is "break",
-    Compile the next statement given the rider (break);
-    Exit.
-  If the rider's token substring is "say",
-    Compile the next statement given the rider (say);
-    Exit.
-  If the rider's token substring is "intel",
-    Compile the next statement given the rider (intel);
-    Exit.
-  If the rider's token substring is "push",
-    Compile the next statement given the rider (push);
-    Exit.
-  If the rider's token substring is "call",
-    Compile the next statement given the rider (call);
-    Exit.
-  If the rider's token substring is "point",
-    Compile the next statement given the rider (point);
-    Exit.
-  If the rider's token substring is "if",
-    Abort with "Nested 'if' statements are a sure sign of unclear thinking. Think again." and the rider;
-    Exit.
-  If the rider's token substring is "privatize",
-    Abort with "The 'privatize' statement cannot be used here." and the rider;
-    Exit.
-  If the rider's token substring is "loop",
-    Abort with "Looping inside an 'if' statement is a good way to lose your lunch." and the rider;
-    Exit.
-  If the rider's token substring is "employ",
-    Abort with "'Employ' must be the first and only imperative in a routine." and the rider;
-    Exit.
-  Compile the next statement given the rider (call - internal).
-
-To compile the next statement given a rider (point):
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  If the term's kind is "literal",
-    Abort with "You've got the wrong kind of variable here." and the rider.
-  If the term's type's length is not 4,
-    Abort with "You've got the wrong kind of variable here." and the rider.
-  If the rider's token substring is not "to",
-    Abort with "I was expecting the word 'to', but found '" then the rider's token substring then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  If the rider's token substring is not "routine",
-    Abort with "I was expecting the word 'routine' but found '" then the rider's token substring then "'." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-  Compile a routine reference given the rider.
-  Convert the routine reference to a moniker.
-  Destroy the routine reference.
-  Find a routine given the moniker and the routine index.
-  If the routine is nil,
-    Abort with "I can't find the '" then the moniker then "' routine to which you are trying to point." and the rider;
-    Exit.
-  Add a fragment given the routine address tag and the routine.
-  Put the term's variable into the fragment's variable.
-
-To compile the next statement given a rider (privatize):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  Compile a term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "Invalid 'privatize', I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  If the term's kind is not "parameter",
-    Abort with "You can only privatize parameters." and the rider;
-    Exit.
-  Add a local to the current routine's locals given "local" and the rider's token substring's first byte pointer.
-  Put the term's name into the local's name.
-  Put the term's nickname into the local's nickname.
-  Put the term's type name into the local's type name.
-  Resolve the local.
-  Prepend "original " to the term's name.
-  If the term's nickname is not blank,
-    Prepend "original " to the term's nickname.
-  Add several fragments given "put" and the term's variable and "into" and the local and the rider's token substring's first byte pointer.
-  If the rider's token substring is not the period byte,
-    Abort with "You seem to have forgotten a period around here." and the rider;
-    Exit.
-  Move the rider (compiler rules).
-
-To compile the next statement given a rider (push):
-  If the compiler's abort flag is set, exit.
-  Move the rider (compiler rules).
-  Compile an expression given the rider.
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "Invalid 'push', I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  If the expression's type is not value pushable,
-    Abort with "Values of type '" then the expression's type's name then "' can't be pushed." and the rider;
-    Exit.
-  Add a fragment given the push value tag and the expression's variable.
-
-To compile the next statement given a rider (repeat):
-  Add a fragment given the repeat tag.
-  Move the rider (compiler rules).
-
-To compile the next statement given a rider (say):
-  If the current routine's decider flag is not set,
-    Compile the next statement given the rider (call - internal);
-    Exit.
-  Move the rider (compiler rules).
-  Compile an expression given the rider.
-  If the compiler's abort flag is set, exit.
-  If the expression's variable is nil,
-    Abort with "Invalid 'say', I don't understand the variable '" then the expression's phrase then "'." and the rider;
-    Exit.
-  If the expression's type cannot be reduced to "flag",
-    Abort with "I need a definite 'yes' or 'no' here." and the rider;
-    Exit.
-  Add a fragment given the load eax tag and the expression's variable.
-  Add another fragment given the exit tag.
-
-To compile the next statement given a rider returning a term (call - returning part):
-  Move the rider (compiler rules).
-  Compile the term given the rider.
-  If the compiler's abort flag is set, exit.
-  If the term's variable is nil,
-    Abort with "I don't understand the variable '" then the term's phrase then "'." and the rider;
-    Exit.
-  If the term's type is not value pushable,
-    Abort with "A simple 1, 2, or 4-byte variable is required in the 'returning' clause." and the rider.
 
