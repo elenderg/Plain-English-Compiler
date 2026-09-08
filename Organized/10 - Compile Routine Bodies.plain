@@ -1226,13 +1226,32 @@ To add an entry to some imports given an import name and an entry name:
   Append the entry to the import's entries.
   Put the entry name into the entry's name.
 
+To find an import given a string:
+  Void the import.
+  Loop.
+    Get the import from the imports.
+    If the import is nil, exit.
+    If the import's name is the string, exit.
+  Repeat.
 
+To add an import to some imports given an import name:
+  Create the import.
+  Append the import to the imports.
+  Put the import name into the import's name.
 
+To create an import:
+  Allocate memory for the import.
 
+To find an entry given a string and some entries:
+  Void the entry.
+  Loop.
+    Get the entry from the entries.
+    If the entry is nil, exit.
+    If the entry's name is the string, exit.
+  Repeat.
 
-
-
-
+To create an entry:
+  Allocate memory for the entry.
 
 
 
