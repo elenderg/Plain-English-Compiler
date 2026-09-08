@@ -552,6 +552,126 @@ To add a fragment given a tag and a variable and another variable:
   Set the compiled flag in the variable.
   Set the compiled flag in the other variable.
 
+To compile a term given a rider (possessive - whereabouts):
+  If the compiler's abort flag is set, exit.
+  If the term's variable is nil,
+    Abort with "Invalid use of whereabouts, I don't understand the variable '" then the term's phrase then "'." and the rider;
+    Exit.
+  Add an intermediate given "pointer" and the rider's token substring's first byte pointer.
+  Add a fragment given the load address tag and the term's variable and the intermediate.
+  Put the intermediate into the term's variable.
+  Clear the term's phrase.
+
+To compile a term given a rider and a name (possessive - field):
+  If the compiler's abort flag is set, exit.
+  If the term's variable is not nil,
+    Put the term's type into a type.
+  Find a field term given the term's phrase and the type and the name.
+  If the field term is not empty,
+    Compile the term given the rider and the field term;
+    Exit.
+  If the term's variable is nil,
+    Abort with "I don't understand the variable '" then the term's phrase then "'." and the rider;
+    Exit.
+  If the type can be reduced to "pointer",
+    Put the type's target type into the type.
+  If the type is nil,
+    Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
+    Exit.
+  Loop.
+  If the compiler's abort flag is set, exit.
+  Get a field from the type's fields.
+  If the field is nil,
+    Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
+    Exit.
+  Find a deep field term given "" and the field's type and the name.
+  If the deep field term is empty, repeat. \IMPORTANTE
+  Put the field into a first field term's field.
+  If the term's type can be reduced to "pointer",
+    Set the first field term's dereference flag.
+  Compile the term given the rider and the first field term.
+  Compile the term given the rider and the deep field term.
+
+To find a field term given a phrase and a type and a name:
+  Clear the field term.
+  Find the field term given the type and the name.
+  If the field term's field is not nil, exit.
+  If the phrase is not blank,
+    Find a routine given 
+      "Put" and 
+      the phrase and 
+      "'s " then the name and "
+      into".
+  If the routine is not nil,
+    Put the routine into the field term's function;
+    Exit.
+  If the type is nil, exit.
+  Find the routine given 
+    "Put" and 
+    the type and 
+    "'s " then the name and 
+    "into".
+  If the routine is not nil,
+    Set the field term's push flag;
+    Put the routine into the field term's function;
+    Exit.
+  [The code below is used for looking deep within pointers - a debatable feature]
+  \  If the type's target type is not nil,
+  \   Find the routine given "Put" and the type's target type and "'s " then the name and "into".
+  \  If the routine is not nil,
+  \   Set the field term's dereference flag;
+  \   Put the routine into the field term's function;
+   \  Exit.
+
+To find a field term given a type and a name:
+  If the type is nil, exit.
+  Find a field given the name and the type's fields.
+  If the field is not nil,
+    Put the field into the field term's field;
+    Exit.
+  If the type's target type is not nil,
+    Find the field given the name and the type's target type's fields.
+  If the field is not nil,
+    Set the field term's dereference flag;
+    Put the field into the field term's field;
+    Exit.
+
+To find a routine given a string and another string and a third string and a fourth string:
+  Add a monikette to some monikettes given the string.
+  Add another monikette to the monikettes given the other string.
+  Add a third monikette to the monikettes given the third string.
+  Add a fourth monikette to the monikettes given the fourth string.
+  Find the routine given the monikettes.
+  Destroy the monikettes.
+
+To find a routine given a string and a type and another string and a third string:
+  Add a monikette to some monikettes given the string.
+  Add another monikette to the monikettes given the type.
+  Add a third monikette to the monikettes given the other string.
+  Add a fourth monikette to the monikettes given the third string.
+  Find the routine given the monikettes.
+  Destroy the monikettes.
+
+
+
+
+To decide if a field term is empty:
+  If the field term's field is not nil, say no.
+  If the field term's function is not nil, say no.
+  Say yes.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
