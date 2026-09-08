@@ -206,6 +206,17 @@ To compile the body of a routine (prolog):
   Add a fragment given the prolog tag.
   Add another fragment given the loop tag.
 
+To add a fragment given a tag:
+  If the current routine is nil,
+    Void the fragment;
+    Exit.
+  Create the fragment given the tag.
+  Append the fragment to the current routine's fragments.
+
+To create a fragment given a tag:
+  Allocate memory for the fragment.
+  Put the tag into the fragment's tag.
+
 To compile the next statement given a rider:
   If the compiler's abort flag is set, exit.
   If the rider's token substring is "if",
@@ -388,10 +399,6 @@ To add a fragment given a tag and a variable:
   Append the fragment to the current routine's fragments.
   Put the variable into the fragment's variable.
   Set the compiled flag in the variable.
-
-To create a fragment given a tag:
-  Allocate memory for the fragment.
-  Put the tag into the fragment's tag.
 
 To find a routine given some monikettes:
   Void the routine.
@@ -579,13 +586,14 @@ To compile a term given a rider and a name (possessive - field):
     Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
     Exit.
   Loop.
-  If the compiler's abort flag is set, exit.
-  Get a field from the type's fields.
-  If the field is nil,
-    Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
-    Exit.
-  Find a deep field term given "" and the field's type and the name.
-  If the deep field term is empty, repeat. \IMPORTANTE
+    If the compiler's abort flag is set, exit.
+    Get a field from the type's fields.
+    If the field is nil,
+      Abort with "There's no '" then the name then "' field in a '" then the term's type's name then "'." and the rider;
+      Exit.
+    Find a deep field term given "" and the field's type and the name.
+    If the deep field term is empty, 
+      Repeat. \IMPORTANTE
   Put the field into a first field term's field.
   If the term's type can be reduced to "pointer",
     Set the first field term's dereference flag.
@@ -652,25 +660,96 @@ To find a routine given a string and a type and another string and a third strin
   Find the routine given the monikettes.
   Destroy the monikettes.
 
-
-
-
 To decide if a field term is empty:
   If the field term's field is not nil, say no.
   If the field term's function is not nil, say no.
   Say yes.
 
+To compile a term given a rider and a field term:
+  If the compiler's abort flag is set, exit.
+  If the field term's dereference flag is set,
+    Compile the term given the rider (dereference).
+  If the field term's function is not nil,
+    Compile the term given the rider and the field term (function);
+    Exit.
+  If the term's kind is "scratch",
+    Compile the term given the rider and the field term (in place);
+    Exit.
+  Put the field term's field into a field.
+  Add a scratch given the field's type's name and the rider's token substring's first byte pointer.
+  Add a fragment given the load address tag and the term's variable and the scratch.
+  If the field's offset is not 0,
+    Add a third fragment given the increment tag and the scratch and the field's offset.
+  Put the scratch into the term's variable.
+  Clear the term's phrase.
+
+To compile a term given a rider and a field term (function):
+  If the compiler's abort flag is set, exit.
+  Put the field term's function into a routine.
+  Put the routine's parameters' last parameter into a parameter.
+  If the parameter is nil,
+    Abort with "Internal error - compile a term given a rider and an field term (function)." and the rider;
+    Exit.
+  If the parameter's type is nil,
+    Abort with "Internal error 2 - compile a term given a rider and an field term (function)." and the rider;
+    Exit.
+  Add an intermediate given the parameter's type's name and the rider's token substring's first byte pointer.
+  Add a fragment given the push address tag and the intermediate.
+  If the field term's push flag is set,
+    Add another fragment given the push address tag and the term's variable.
+  Add a third fragment given the call internal tag and the routine.
+  Put the intermediate into the term's variable.
+  Clear the term's phrase.
+
+To compile a term given a rider and a field term (in place):
+  If the compiler's abort flag is set, exit.
+  Put the field term's field into a field.
+  Put the field's type's name into the term's type name.
+  Put the field's type into the term's type.
+  If the field's offset is not 0,
+    Add a third fragment given the increment tag and the term's variable and the field's offset.
+  Clear the term's phrase.
+
+To add a fragment given a tag and a variable and a number:
+  If the current routine is nil,
+    Void the fragment;
+    Exit.
+  Create the fragment given the tag.
+  Append the fragment to the current routine's fragments.
+  Put the variable into the fragment's variable.
+  Put the number into the fragment's number.
+  Set the compiled flag in the variable.
+
+To decide if a string is the start of any new local:
+  If the string is any indefinite article, say yes.
+  Say no.
 
 
 
-
-
-
-
-
-
-
-
+To compile a term given a rider (new local):
+  If the compiler's abort flag is set, exit.
+  If the current routine is nil,
+    Abort with "I don't know what you're trying to pull here." and the rider;
+    Exit.
+  Add a local to the current routine's locals given "local" and the rider's token substring's first byte pointer.
+  If the rider's token substring is "another",
+    Put "other" into the local's name.
+  Move the rider (compiler rules).
+  Scan a name given the rider.
+  Extend the local's name with the name.
+  If the rider's token substring is "called",
+    Compile the call'd part given the rider and the local.
+  Resolve the local.
+  If the local is duplicated in the current routine's parameters,
+    Abort with "'" then the local's name then "' is already in use as a parameter." and the local's locus;
+    Exit.
+  If the local is duplicated in the current routine's locals,
+    Abort with "'" then the local's name then "' is already in use as a local variable." and the local's locus;
+    Exit.
+  Eliminate duplicate nicknames given the local and the current routine's nickname index.
+  Put the local into the term's variable.
+  Clear the term's phrase.
+  Compile the term given the rider (possessives).
 
 
 
