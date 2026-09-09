@@ -1,0 +1,44 @@
+To compile a directory (add and compile the built-in startup routine):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                        [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [11/16]" to StdOut.
+  Write "  Adding and compiling built-in startup routines…" to StdOut.
+  \Write "Adding and compiling the built-in startup routine…" then the CRLF string to StdOut.
+  Start the adding built-in startup routine timer.
+  Add and compile the initialize before run and run and finalize after run routine.
+  Stop the adding built-in startup routine timer.
+
+To add and compile the initialize before run and run and finalize after run routine:
+  If the compiler's abort flag is set, exit.
+  Add a routine to the routines given nil.
+  Append "~Initialize before run and Run and Finalize after run" to the routine's header string.
+  Append "Initialize before run. " to the routine's body string.
+  Append the global initializers to the routine's body string.
+  Append "Run. " to the routine's body string.
+  Append the global finalizers to the routine's body string.
+  Append "Finalize after run. " to the routine's body string.
+  Append "Call ""kernel32.dll"" ""ExitProcess"" with 0. " to the routine's body string.
+  Slap the routine's routine header on the routine's header string.
+  Slap the routine's routine body on the routine's body string.
+  Compile the header of the routine.
+  Compile the body of the routine.
+
+To append the global initializers to a string:
+  [Loop.]
+    Get a global from the globals.
+    If the global is nil, exit.
+    If the global's literal is nil, repeat.
+    If the global's compiled flag is not set, repeat.
+    Clear a flag.
+    Append the global's initializer string to the string.
+  Repeat.
+
+To append the global finalizers to a string:
+  [Loop.]
+    Get a global from the globals.
+    If the global is nil, exit.
+    If the global's compiled flag is not set, repeat.
+    If the global's type should not be finalized, repeat.
+    Append "~finalize the " then the global's name then ". " to the string.
+  Repeat.
+
