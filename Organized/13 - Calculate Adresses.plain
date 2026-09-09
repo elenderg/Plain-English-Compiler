@@ -1,0 +1,95 @@
+To compile a directory (address):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "        [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [13/16]" to StdOut.
+  Write "  Calculating addresses…" to Stdout.
+  Start the addressing timer.
+  Put 4096 into an address. \ 4KB?
+  Put the address into the import borough's base address.
+  Address the imports given the address.
+  Put the address minus the import borough's base address into the import borough's length.
+  Round the address up to the nearest multiple of 4096.
+  Put the address into the data borough's base address.
+  Address the globals given the address.
+  Address the literals given the address.
+  Put the address minus the data borough's base address into the data borough's length.
+  Round the address up to the nearest multiple of 4096.
+  Put the address into the code borough's base address.
+  Address the routines given the address.
+  Put the address minus the code borough's base address into the code borough's length.
+  Stop the addressing timer.
+
+To address some imports given an address:
+  Put the address into the current header address.
+  Put the imports' count into a count.
+  Add 1 to the count.
+  Multiply the count by an import header's magnitude.
+  Put the address plus the count into the current thunk address.
+  Get another count given the imports (all entries plus markers).
+  Multiply the other count by 4.
+  Put the current thunk address plus the other count into the current name address.
+  Loop.
+    Get an import from the imports.
+    If the import is nil, break.
+    Address the import.
+  Repeat.
+  Put the current name address minus the address into a number.
+  Add the number to the address.
+
+To get a count given some imports (all entries plus markers):
+  Put 0 into the count.
+  Loop.
+    Get an import from the imports.
+    If the import is nil, exit.
+    Add the import's entries' count to the count.
+    Add 1 to the count.
+  Repeat.
+
+To address an import:
+  Put the current name address into the import's name address.
+  Put the current header address into the import's header address.
+  Put the current name address into the import's import header's name memory address.
+  Put the import's name's length plus 1 into a number.
+  Round the number up to the nearest multiple of 2.
+  Add the number to the current name address.
+  Add an import header's magnitude to the current header address.
+  Put the current thunk address into the import's import header's first thunk memory address.
+  Address the import's entries.
+  Add 4 to the current thunk address.
+
+To address some variables given an address:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a variable from the variables.
+    If the variable is nil, exit.
+    Address the variable given the address.
+  Repeat.
+
+To address a variable given an address:
+  If the compiler's abort flag is set, exit.
+  If the variable is nil, exit.
+  If the variable's compiled flag is not set, exit.
+  Put the image base plus the address into the variable's address.
+  Add the variable's type's length to the address.
+  If the variable's type can be reduced to "string",
+    Add the variable's data's length plus 1 to the address.
+  Round the address up to the nearest multiple of 4.
+
+To address some routines given an address:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a routine from the routines.
+    If the routine is nil, break.
+    Address the routine given the address.
+  Repeat.
+
+To address a routine given an address:
+  If the compiler's abort flag is set, exit.
+  If the routine is nil, exit.
+  If the routine's employs moniker is not blank, exit. \ employs are addressed later
+  If the routine's compiled flag is not set, exit.
+  Put the routine into the current routine.
+  Put the image base plus the address into the routine's address.
+  Address the routine's fragments given the address.
+  Round the address up to the nearest multiple of 4.
+
