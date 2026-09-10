@@ -292,6 +292,12 @@ The compiler is a record with
   A listing buffer.
 
 
+The current header address is an address.
+The current name address is an address.
+The current routine is a routine.
+The current thunk address is an address.
+The data borough is a borough.
+
 To run:
   Start up.
   \Initialize the compiler.
@@ -3004,15 +3010,7 @@ To create a variable given a kind:
   Put the kind into the variable's kind.
   Put 1 into the variable's count.
 
-The current header address is an address.
 
-The current name address is an address.
-
-The current routine is a routine.
-
-The current thunk address is an address.
-
-The data borough is a borough.
 
 To decide if any of some monikettes are negative words:
   \Loop.
