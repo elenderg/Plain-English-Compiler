@@ -1,0 +1,27 @@
+To compile a directory (write the exe):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                                         [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [16/16]" to StdOut.
+  Write "  Writing. the executable file.." to Stdout.
+  Start the writing timer.
+  Write the compiler's exe to the compiler's exe path.
+  If the i/o error is not blank,
+    Abort with the i/o error.
+  Stop the writing timer.
+  Write in strong green "                   [OK]" then the CRLF string to Stdout.
+
+To put the compiler's exe path into a path:
+  Extract a designator from the compiler's directory.
+  Remove any trailing backslash from the designator.
+  Put the compiler's directory then the designator then ".exe" into the path.
+
+To put the compiler's exe size into a size:
+  Put 4096 [section base] into the size.
+  Add the import borough's size to the size.
+  Add the data borough's size to the size.
+  Add the code borough's size to the size.
+
+
+
+
+
