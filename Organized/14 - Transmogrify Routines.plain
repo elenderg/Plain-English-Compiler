@@ -1,0 +1,322 @@
+To compile a directory (transmogrify):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "                           [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [14/16]" to StdOut.
+  Write "  Generating intermediate representation…" to Stdout.
+  Start the transmogrifying timer.
+  Transmogrify the routines.
+  Stop the transmogrifying timer.
+
+To transmogrify some routines:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a routine from the routines.
+    If the routine is nil, break.
+    Transmogrify the routine.
+  Repeat.
+
+To transmogrify a routine:
+  If the compiler's abort flag is set, exit.
+  If the routine is nil, exit.
+  If the routine's employs moniker is not blank, exit.
+  If the routine's compiled flag is not set, exit.
+  Put the routine into the current routine.
+  Transmogrify the routine's fragments.
+
+To transmogrify some fragments:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a fragment from the fragments.
+    If the fragment is nil, exit.
+    Transmogrify the fragment.
+  Repeat.
+
+To transmogrify a fragment:
+  If the compiler's abort flag is set, exit.
+  If the fragment is nil, exit.
+  If the fragment's tag is the push address tag,
+    Transmogrify the fragment (push address);
+    Exit.
+  If the fragment's tag is the call internal tag,
+    Transmogrify the fragment (call internal);
+    Exit.
+  If the fragment's tag is the load address tag,
+    Transmogrify the fragment (load address);
+    Exit.
+  If the fragment's tag is the increment tag,
+    Transmogrify the fragment (increment);
+    Exit.
+  If the fragment's tag is the dereference tag,
+    Transmogrify the fragment (dereference);
+    Exit.
+  If the fragment's tag is the jump false tag,
+    Transmogrify the fragment (jump false);
+    Exit.
+  If the fragment's tag is the not tag,
+    Transmogrify the fragment (not);
+    Exit.
+  If the fragment's tag is the exit tag,
+    Transmogrify the fragment (exit);
+    Exit.
+  If the fragment's tag is the repeat tag,
+    Transmogrify the fragment (repeat);
+    Exit.
+  If the fragment's tag is the break tag,
+    Transmogrify the fragment (break);
+    Exit.
+  If the fragment's tag is the prolog tag,
+    Transmogrify the fragment (prolog);
+    Exit.
+  If the fragment's tag is the epilog tag,
+    Transmogrify the fragment (epilog);
+    Exit.
+  If the fragment's tag is the push value tag,
+    Transmogrify the fragment (push value);
+    Exit.
+  If the fragment's tag is the call external tag,
+    Transmogrify the fragment (call external);
+    Exit.
+  If the fragment's tag is the load eax tag,
+    Transmogrify the fragment (load eax);
+    Exit.
+  If the fragment's tag is the save eax tag,
+    Transmogrify the fragment (save eax);
+    Exit.
+  If the fragment's tag is the call indirect tag,
+    Transmogrify the fragment (call indirect);
+    Exit.
+  If the fragment's tag is the routine address tag,
+    Transmogrify the fragment (routine address);
+    Exit.
+
+To transmogrify a fragment (push address):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  Attach $52 to the fragment's code. \ push edx
+
+To attach address loading code to a hex string given a variable: \ loads into edx
+  If the variable is nil,
+    Attach $C7C200000000 to the hex string;
+    Exit. \ mov edx,0
+  If the variable's kind is "global",
+    Attach $C7C2 and the variable's address to the hex string;
+    Exit. \ mov edx,the variable's address
+  If the variable's kind is "literal",
+    Attach $C7C2 and the variable's address to the hex string;
+    Exit. \ mov edx,the variable's address
+  If the variable's kind is "local",
+    Attach $8D95 and the variable's offset to the hex string;
+    Exit. \ lea edx,[ebp+the variable's offset]
+  If the variable's kind is "scratch",
+    Attach $8B95 and the variable's offset to the hex string;
+    Exit. \ mov edx,[ebp+the variable's offset]
+  If the variable's kind is not "parameter",
+    Abort with "Internal error - attach address loading code to a hex string given a variable";
+    Exit.
+  If the variable's by-value flag is set,
+    Attach $8D95 and the variable's offset to the hex string;
+    Exit. \ lea edx,[ebp+the variable's offset]
+  Attach $8B95 and the variable's offset to the hex string. \ mov edx,[ebp+the variable's offset]
+
+To attach a hex string to another hex string:
+  Employ append a string to another string.
+
+To attach a hex string and a number to another hex string:
+  Append the hex string to the other hex string.
+  Convert the number to a third hex string.
+  Append the third hex string to the other hex string.
+
+To transmogrify a fragment (call internal):
+  Get an address given the fragment's routine.
+  Attach $E8 and the address to the fragment. \ call + the fragment's routine's address
+
+To attach an hex string and an address to a fragment: \ call or jump
+  Put the address into a number.
+  Subtract the fragment's address from the number.
+  Subtract the fragment's code's length from the number.
+  Subtract the hex string's length from the number.
+  Subtract 4 from the number.
+  Attach the hex string and the number to the fragment's code.
+
+To transmogrify a fragment (load address):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  Attach $8995 and the fragment's other variable's offset to the fragment's code. \ mov [ebp+the fragment's variable's offset],edx
+
+To transmogrify a fragment (increment):
+  If the fragment's variable is nil,
+    Abort with "Internal error - transmogrify a fragment (increment)";
+    Exit.
+  If the fragment's variable's kind is not "scratch",
+    Abort with "Internal error 2 - transmogrify a fragment (increment)";
+    Exit.
+  Attach $8185 and the fragment's variable's offset and the fragment's number to the fragment's code. \ add [ebp+the fragment's variable's offset],the fragment's number
+
+To attach a hex string and a number and another number to another hex string:
+  Append the hex string to the other hex string.
+  Convert the number to a third hex string.
+  Append the third hex string to the other hex string.
+  Convert the other number to a fourth hex string.
+  Append the fourth hex string to the other hex string.
+
+To transmogrify a fragment (dereference):
+  Attach $8B95 and the fragment's variable's offset to the fragment's code. \ mov edx,[ebp+the fragment's variable's offset]
+  Attach $8B12 to the fragment's code. \ mov edx,[edx]
+  Attach $8995 and the fragment's variable's offset to the fragment's code. \ mov [ebp+the fragment's variable's offset],edx
+
+To transmogrify a fragment (jump false):
+  Find another fragment given the fragment and the end if tag.
+  If the other fragment is nil,
+    Abort with "Internal error - transmogrify a fragment (jump false)";
+    Exit.
+  Attach $83F800 to the fragment's code. \ cmp eax,0
+  Attach $0F84 and the other fragment's address to the fragment. \ je the destination's address
+
+To find a fragment given another fragment and a tag:
+  Put the other fragment into the fragment.
+  Loop.
+    If the fragment is nil, exit.
+    If the fragment's tag is the tag, exit.
+    Put the fragment's next fragment into the fragment.
+  Repeat.
+
+To transmogrify a fragment (not):
+  Attach $83F001 to the fragment's code. \ xor eax,1
+
+To transmogrify a fragment (exit):
+  Find another fragment given the fragment and the finalize tag.
+  If the other fragment is nil,
+    Abort with "Internal error - transmogrify a fragment (exit)";
+    Exit.
+  Attach $E9 and the other fragment's address to the fragment. \ jmp the destination's address
+
+To transmogrify a fragment (repeat):
+  Find another fragment given the fragment and the loop tag (backwards).
+  If the other fragment is nil,
+    Abort with "Internal error - transmogrify a fragment (repeat)";
+    Exit.
+  Attach $E9 and the other fragment's address to the fragment. \ jmp the destination's address
+
+To find a fragment given another fragment and a tag (backwards):
+  Put the other fragment into the fragment.
+  Loop.
+    If the fragment is nil, exit.
+    If the fragment's tag is the tag, exit.
+    Put the fragment's previous fragment into the fragment.
+  Repeat.
+
+To transmogrify a fragment (break):
+  Put the repeat tag into a tag.
+  Find another fragment given the fragment and the tag.
+  If the other fragment is nil,
+    Put the finalize tag into the tag. \ used for breaks without a loop or after a loop
+  Find a third fragment given the current routine's fragments' last fragment and the tag (backwards).
+  If the third fragment is nil,
+    Abort with "Internal error - transmogrify a fragment (break)";
+    Exit.
+  If the third fragment's next fragment is nil,
+    Abort with "Internal error 2 - transmogrify a fragment (break)";
+    Exit.
+  Attach $E9 and the third fragment's next fragment's address to the fragment. \ jmp the destination's address
+
+To transmogrify a fragment (prolog):
+  Attach $55 to the fragment's code. \ push ebp
+  Attach $8BEC to the fragment's code. \ mov ebp,esp
+  Put the current routine's local size divided by 4 into a number.
+  If the number is not 0,
+    Attach $B9 and the number and $6A004975FB to the fragment's code. \ mov ecx,number; loop: push 0; dec ecx; jnz loop
+  If the current routine's callback flag is set,
+    Attach $535657 to the fragment's code. \ push ebx, esi, edi
+
+To attach a hex string and a number and another hex string to a third hex string:
+  Append the hex string to the third hex string.
+  Convert the number to a fourth hex string.
+  Append the fourth hex string to the third hex string.
+  Append the other hex string to the third hex string.
+
+To transmogrify a fragment (epilog):
+  If the current routine's callback flag is set,
+    Attach $5F5E5B to the fragment's code. \ pop edi, esi, ebx
+  Attach $8BE5 to the fragment's code. \ mov esp,ebp
+  Attach $5D to the fragment's code. \ pop ebp
+  Attach $C2 and the current routine's parameter size to the fragment's code. \ ret the current routine's parameter size
+
+To transmogrify a fragment (push value):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  If the fragment's variable is nil,
+    Abort with "Internal error - transmogrify a fragment (push value)";
+    Exit.
+  If the fragment's variable's type is nil,
+    Abort with "Internal error 2 - transmogrify a fragment (push value)";
+    Exit.
+  Put the fragment's variable's type's length into a length.
+  If the length is 4,
+    Attach $FF32 to the fragment's code;
+    Exit. \ push [edx]
+  If the length is 2,
+    Attach $66FF32 to the fragment's code;
+    Exit. \ push word ptr [edx]
+  If the length is 1,
+    Attach $0FB61252 to the fragment's code;
+    Exit. \ movzxb edx,[edx]; push edx
+  Abort with "Internal error 3 - transmogrify a fragment (push value)".
+
+To transmogrify a fragment (call external):
+  Attach $FF15 and the fragment's entry's address to the fragment's code. \ call [the fragment's entry's address]
+
+To transmogrify a fragment (load eax):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  If the fragment's variable is nil,
+    Abort with "Internal error - transmogrify a fragment (load eax)";
+    Exit.
+  If the fragment's variable's type is nil,
+    Abort with "Internal error 2 - transmogrify a fragment (load eax)";
+    Exit.
+  If the fragment's variable's type's length is not 4,
+    Abort with "Internal error 3 - transmogrify a fragment (load eax)";
+    Exit.
+  Attach $8B02 to the fragment's code. \ mov eax,[edx]
+
+To transmogrify a fragment (save eax):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  If the fragment's variable is nil,
+    Abort with "Internal error - transmogrify a fragment (save eax)";
+    Exit.
+  If the fragment's variable's type is nil,
+    Abort with "Internal error 2 - transmogrify a fragment (save eax)";
+    Exit.
+  Put the fragment's variable's type's length into a length.
+  If the length is 4,
+    Attach $8902 to the fragment's code;
+    Exit. \ mov [edx],eax
+  If the length is 2,
+    Attach $668902 to the fragment's code;
+    Exit. \ mov [edx],ax
+  If the length is 1,
+    Attach $8802 to the fragment's code;
+    Exit. \ mov [edx],al
+  Abort with "Internal error 3 - transmogrify a fragment (save eax)".
+
+To transmogrify a fragment (call indirect):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  Attach $FF12 to the fragment's code. \ call [edx]
+
+To transmogrify a fragment (routine address):
+  Attach address loading code to the fragment's code given the fragment's variable. \ put address into edx
+  If the fragment's routine is nil,
+    Abort with "Internal error - transmogrify a fragment (routine address)";
+    Exit.
+  Get an address given the fragment's routine.
+  Attach $C702 and the address to the fragment's code. \ mov [edx],the address
+
+
+
+
+
+
+
+
+
+
+
+
+
+
