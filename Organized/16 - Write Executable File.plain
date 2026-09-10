@@ -21,7 +21,9 @@ To put the compiler's exe size into a size:
   Add the data borough's size to the size.
   Add the code borough's size to the size.
 
-
-
-
+To compile a directory (stop):
+  Stop the compiler's timer.
+  \Write in strong blue " [17/16]" to StdOut.
+  Write the CRLF string then "          Process finished." to Stdout.
+  \Write in strong green "                                          [OK]" then the CRLF string to Stdout.
 
