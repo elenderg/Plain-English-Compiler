@@ -297,6 +297,8 @@ The current name address is an address.
 The current routine is a routine.
 The current thunk address is an address.
 The data borough is a borough.
+The adding built-in memory routines timer is a timer.
+The adding built-in startup routine timer is a timer.
 
 To run:
   Start up.
@@ -844,10 +846,6 @@ To add a variable to some variables given a kind and a locus:
   Create the variable given the kind.
   Append the variable to the variables.
   Put the locus into the variable's locus.
-
-The adding built-in memory routines timer is a timer.
-
-The adding built-in startup routine timer is a timer.
 
 To address some entries:
     Get an entry from the entries.
@@ -3073,9 +3071,10 @@ To decide if a field term is empty:
   Say yes.
 
 To decide if some fields should be finalized:
-  Get a field from the fields.
-  If the field is nil, say no.
-  If the field's type should be finalized, say yes.
+  [Loop.]
+    Get a field from the fields.
+    If the field is nil, say no.
+    If the field's type should be finalized, say yes.
   Repeat.
 
 To decide if an item looks reamish:
