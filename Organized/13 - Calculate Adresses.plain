@@ -93,3 +93,143 @@ To address a routine given an address:
   Address the routine's fragments given the address.
   Round the address up to the nearest multiple of 4.
 
+To address some fragments given an address:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Get a fragment from the fragments.
+    If the fragment is nil, exit.
+    Address the fragment given the address.
+  Repeat.
+
+To address a fragment given an address:
+  If the compiler's abort flag is set, exit.
+  If the fragment is nil, exit.
+  Put the image base plus the address into the fragment's address.
+  If the fragment's tag is the push address tag,
+    Add 7 to the address;
+    Exit.
+  If the fragment's tag is the call internal tag,
+    Add 5 to the address;
+    Exit.
+  If the fragment's tag is the load address tag,
+    Add 12 to the address;
+    Exit.
+  If the fragment's tag is the increment tag,
+    Add 10 to the address;
+    Exit.
+  If the fragment's tag is the dereference tag,
+    Add 14 to the address;
+    Exit.
+  If the fragment's tag is the jump false tag,
+    Add 9 to the address;
+    Exit.
+  If the fragment's tag is the not tag,
+    Add 3 to the address;
+    Exit.
+  If the fragment's tag is the exit tag,
+    Add 5 to the address;
+    Exit.
+  If the fragment's tag is the repeat tag,
+    Add 5 to the address;
+    Exit.
+  If the fragment's tag is the break tag,
+    Add 5 to the address;
+    Exit.
+  If the fragment's tag is the prolog tag,
+    Address the fragment given the address (prolog);
+    Exit.
+  If the fragment's tag is the epilog tag,
+    Address the fragment given the address (epilog);
+    Exit.
+  If the fragment's tag is the intel tag,
+    Add the fragment's code's length to the address;
+    Exit.
+  If the fragment's tag is the push value tag,
+    Address the fragment given the address (push value);
+    Exit.
+  If the fragment's tag is the call external tag,
+    Add 6 to the address;
+    Exit.
+  If the fragment's tag is the load eax tag,
+    Add 8 to the address;
+    Exit.
+  If the fragment's tag is the save eax tag,
+    Address the fragment given the address (save eax);
+    Exit.
+  If the fragment's tag is the call indirect tag,
+    Add 8 to the address;
+    Exit.
+  If the fragment's tag is the routine address tag,
+    Add 12 to the address;
+    Exit.
+
+To address a fragment given an address (prolog):
+  Add 3 to the address.
+  If the current routine's local size is not 0,
+    Add 10 to the address.
+  If the current routine's callback flag is set,
+    Add 3 to the address.
+
+To address a fragment given an address (epilog):
+  If the current routine's callback flag is set,
+    Add 3 to the address.
+  Add 6 to the address.
+
+To address a fragment given an address (push value):
+  Add 6 to the address.
+  If the fragment's variable is nil,
+    Abort with "Internal error - address a fragment given an address (push value)";
+    Exit.
+  If the fragment's variable's type is nil,
+    Abort with "Internal error 2 - address a fragment given an address (push value)";
+    Exit.
+  Put the fragment's variable's type's length into a length.
+  If the length is 4,
+    Add 2 to the address;
+    Exit.
+  If the length is 2,
+    Add 3 to the address;
+    Exit.
+  If the length is 1,
+    Add 4 to the address;
+    Exit.
+  Abort with "Internal error 3 - address a fragment given an address (push value)".
+
+To address a fragment given an address (save eax):
+  Add 6 to the address.
+  If the fragment's variable is nil,
+    Abort with "Internal error - address a fragment given an address (save eax)";
+    Exit.
+  If the fragment's variable's type is nil,
+    Abort with "Internal error 2 - address a fragment given an address (save eax)";
+    Exit.
+  Put the fragment's variable's type's length into a length.
+  If the length is 4,
+    Add 2 to the address;
+    Exit.
+  If the length is 2,
+    Add 3 to the address;
+    Exit.
+  If the length is 1,
+    Add 2 to the address;
+    Exit.
+  Abort with "Internal error 3 - address a fragment given an address (save eax)".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
