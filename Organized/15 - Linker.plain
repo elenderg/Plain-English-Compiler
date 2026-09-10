@@ -1,0 +1,237 @@
+To compile a directory (link):
+  If the compiler's abort flag is set, exit.
+  Write in strong green "          [OK]" then the CRLF string to Stdout.
+  Write in strong blue " [15/16]" to StdOut.
+  Write "  Linking…" to Stdout.
+  Start the linking timer.
+  Link.
+  Stop the linking timer.
+
+To link:
+  Round up borough sizes.
+  Initialize a DOS header.
+  Initialize a PE header.
+  Fill the compiler's exe with the NULL byte given the compiler's exe size.
+  Blurt the DOS header into the compiler's exe.
+  Blurt the PE header into the compiler's exe.
+  Blurt the imports [DLLs] into the compiler's exe.
+  Blurt the globals into the compiler's exe.
+  Blurt the literals into the compiler's exe.
+  Blurt the routines into the compiler's exe.
+
+To round up borough sizes:
+  Put the import borough's length into the import borough's size.
+  Round the import borough's size up to the nearest multiple of 4096. \ 4KB
+  Put the data borough's length into the data borough's size.
+  Round the data borough's size up to the nearest multiple of 4096.
+  Put the code borough's length into the code borough's size.
+  Round the code borough's size up to the nearest multiple of 4096.
+
+To initialize a DOS header:
+  Put 23117 [$5A4D] into the DOS header's signature.
+  Put 64 [$0040] into the DOS header's AddressOfRelocationTableInFile.
+  Put 256 [$00000100] into the DOS header's AddressOfPEHeaderInFile.
+
+To initialize a PE header:
+  Initialize the PE header (standard header).
+  Initialize the PE header (optional header).
+  Initialize the PE header (version information).
+  Initialize the PE header (directories).
+  Initialize the PE header (import section).
+  Initialize the PE header (data section).
+  Initialize the PE header (code section).
+
+To initialize a PE header (standard header):
+  Put 17744 [$00004550] into the PE header's Signature.
+  Put 332 [$014C] into the PE header's MachineType.
+  Put 3 [$0003] into the PE header's NumberOfSections.
+  Put 0 into the PE header's TimeStamp.
+  Put 0 into the PE header's PointertoSymbolTable.
+  Put 0 into the PE header's NumberOfSymbols.
+  Put 224 [$00E0] into the PE header's SizeOfOptionalHeaderInBytes.
+  Put 33166 [$818E] into the PE header's Characteristics.
+
+To initialize a PE header (optional header):
+  Put 267 [$010B] into the PE header's MagicNumber.
+  Put the code borough's length into the PE header's SizeOfCodeInFile.
+  Put the data borough's length into the PE header's SizeofInitializedDataInFile.
+  Put 0 into the PE header's SizeOfUnInitializedDataInFile.
+  Find a routine given "~Initialize before run and Run and Finalize after run" and the routine index.
+  If the routine is nil,
+    Abort with "Internal error: could not find the startup routine";
+    Exit.
+  Put the routine's address minus the image base into the PE header's AddressOfEntryPointInMemory.
+  Put the code borough's base into the PE header's AddressOfCodeInMemory.
+  Put the data borough's base into the PE header's AddressOfInitializedDataInMemory.
+  Put the image base into the PE header's ImageBase.
+  Put 4096 [$00001000] into the PE header's MemoryAlignment.
+  Put 4096 [$00001000] into the PE header's FileAlignment.
+  Put 0 into the PE header's reserved.
+  Put the compiler's exe size into the PE header's SizeOfImageInMemory.
+  Put 4096 [section base] into the PE header's SizeOfAllHeadersInFile.
+  Put 0 into the PE header's CheckSum.
+  Put 0 into the PE header's DLLCharacteristics.
+  Put 1048576 [$00100000] into the PE header's MaxStack.
+  Put 16384 [$00004000] into the PE header's MinStack.
+  Put 1048576 [$00100000] into the PE header's MaxHeap.
+  Put 16384 [$00004000] into the PE header's MinHeap.
+  Put 0 into the PE header's LoaderFlags.
+
+To initialize a PE header (version information):
+  Put 0 into the PE header's MajorLinkerVersion.
+  Put 0 into the PE header's MinorLinkerVersion.
+  Put 4 [$0004] into the PE header's OSMajorVersion.
+  Put 0 [$0000] into the PE header's OSMinorVersion.
+  Put 0 into the PE header's UserMajorVersion.
+  Put 0 into the PE header's UserMinorVersion.
+  Put 4 [$0004] into the PE header's SubSystemMajorVersion.
+  Put 0 [$0000] into the PE header's SubSystemMinorVersion.
+  Put 3 [$0003] into the PE header's SubSystem.  \ was 2 in CAL-4700. Now is 3 for the command line version.
+
+To initialize a PE header (directories):
+  Put 16 [$00000010] into the PE header's NumberOfDirectories.
+  Put the import borough's base into the PE header's ImageDirectoryEntryImportAddress.
+  Put the import borough's length into the PE header's ImageDirectoryEntryImportSize.
+
+To initialize a PE header (import section):
+  Copy bytes from "idata "'s first byte pointer to the PE header's idata section's name's whereabouts for 6.
+  Put the import borough's length into the PE header's idata section's SizeInBytes.
+  Put the import borough's base into the PE header's idata section's AddressInMemory.
+  Put the import borough's length into the PE header's idata section's SizeInFile.
+  Put the import borough's base into the PE header's idata section's AddressInFile.
+  Put -1073741760 [$C0000040] into the PE header's idata section's Characteristics. \ Initialized, Readable, Writable
+
+To initialize a PE header (data section):
+  Copy bytes from "data  "'s first byte pointer to the PE header's data section's name's whereabouts for 6.
+  Put the data borough's length into the PE header's data section's SizeInBytes.
+  Put the data borough's base into the PE header's data section's AddressInMemory.
+  Put the data borough's length into the PE header's data section's SizeInFile.
+  Put the data borough's base into the PE header's data section's AddressInFile.
+  Put -1073741760 [$C0000040] into the PE header's data section's Characteristics. \ Initialized, Readable, Writable
+
+To initialize a PE header (code section):
+  Copy bytes from "code  "'s first byte pointer to the PE header's code section's name's whereabouts for 6.
+  Put the code borough's length into the PE header's code section's SizeInBytes.
+  Put the code borough's base into the PE header's code section's AddressInMemory.
+  Put the code borough's length into the PE header's code section's SizeInFile.
+  Put the code borough's base into the PE header's code section's AddressInFile.
+  Put -536870880 [$E0000020] into the PE header's code section's Characteristics. \ Executable, Readable, Writable, Code Object
+
+To blurt a DOS header into a buffer:
+  Blurt bytes given 
+    the DOS header's whereabouts and 
+    the DOS header's magnitude and 
+    the buffer and 
+    0.
+
+To blurt bytes given a pointer and a length and a buffer and an offset:
+  Put the buffer's first byte pointer plus the offset into another pointer.
+  Copy bytes from the pointer to the other pointer for the length.
+
+To blurt a PE header into a buffer:
+  Blurt bytes given
+    the PE header's whereabouts and
+    the PE header's magnitude and
+    the buffer and
+    256.
+
+To blurt some imports into a buffer:
+  [Loop.]
+    Get an import from the imports.
+    If the import is nil, exit.
+    Blurt the import into the buffer.
+  Repeat.
+
+To blurt an import into a buffer:
+  Blurt bytes given
+    the import's import header's whereabouts and
+    the import's import header's magnitude and
+    the buffer and
+    the import's header address.
+  Blurt the import's name into the buffer at the import's name address.
+  Blurt the import's entries into the buffer.
+
+To blurt a string into a buffer at an address:
+  Blurt bytes given
+    the string's first byte pointer and
+    the string's length and
+    the buffer and
+    the address.
+
+To blurt some entries into a buffer:
+  [Loop.]
+    Get an entry from the entries.
+    If the entry is nil, exit.
+    Blurt the entry into the buffer.
+  Repeat.
+
+To blurt an entry into a buffer:
+  Blurt bytes given
+    the entry's name address's whereabouts and
+    4 and
+    the buffer and
+    the entry's thunk address.
+  Put the entry's name address plus 2 into an address.
+  Blurt the entry's name into the buffer at the address.
+
+To blurt some variables into a buffer:
+    Get a variable from the variables.
+    If the variable is nil, exit.
+    Blurt the variable into the buffer.
+  Repeat.
+
+To blurt a variable into a buffer:
+  If the variable's compiled flag is not set, exit.
+  If the variable's type can be reduced to "string",
+    Blurt the variable into the buffer (as a string);
+    Exit.
+  Put the variable's address minus the image base into an address.
+  Blurt the variable's data into the buffer at the address.
+
+To blurt a variable into a buffer (as a string):
+  Put the variable's address minus the image base into an address.
+  Put the variable's data's length into a length.
+  Put the address into another address.
+  Add a prototype string's magnitude to the other address.
+  Add the image base to the other address.
+  Put 0 into the prototype string's first byte pointer.
+  Put -1 into the prototype string's last byte pointer.
+  If the length is not 0,
+    Put the other address into the prototype string's first byte pointer.
+  If the length is not 0,
+    Put the prototype string's first byte pointer plus the length minus 1 into the prototype string's last byte pointer.
+  Blurt bytes given
+    the prototype string's whereabouts and
+    the prototype string's magnitude and
+    the buffer and
+    the address.
+  Add the prototype string's magnitude to the address.
+  Blurt the variable's data into the buffer at the address.
+
+To blurt some routines into a buffer:
+  [Loop.]
+    Get a routine from the routines.
+    If the routine is nil, exit.
+    Blurt the routine into the buffer.
+  Repeat.
+
+To blurt a routine into a buffer:
+  If the routine's compiled flag is not set, exit.
+  Blurt the routine's fragments into the buffer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
