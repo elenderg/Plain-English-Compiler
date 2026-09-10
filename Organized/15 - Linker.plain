@@ -219,19 +219,15 @@ To blurt a routine into a buffer:
   If the routine's compiled flag is not set, exit.
   Blurt the routine's fragments into the buffer.
 
+To blurt some fragments into a buffer:
+  [Loop.]
+    Get a fragment from the fragments.
+    If the fragment is nil, exit.
+    Blurt the fragment into the buffer.
+  Repeat.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+To blurt a fragment into a buffer:
+  If the fragment's code is blank, exit.
+  Put the fragment's address minus the image base into an address.
+  Blurt the fragment's code into the buffer at the address.
 
