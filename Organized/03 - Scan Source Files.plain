@@ -303,6 +303,16 @@ To decide if a string is any name starter: \ compare with name ender
   If the string is blank, say no.
   Say yes.
 
+To decide if a string is any mark:
+  If the string's length is not 1, say no.
+  If the string's first's target is any mark, say yes.
+  Say no.
+
+To decide if a string is any symbol:
+  If the string's length is not 1, say no.
+  If the string's first's target is any symbol, say yes.
+  Say no.
+
 To decide if a byte is any symbol:
   If the byte is the caret byte, say yes.
   If the byte is the bar byte, say yes.
@@ -691,6 +701,22 @@ To pluralize a string: \ nouns only
     Exit.
   Append "s" to the string.
 
+To decide if a string ends with any consonant and another string:
+  Slap a substring on the string.
+  Subtract the other string's length from the substring's last byte pointer.
+  If the substring is blank, say no.
+  If the substring's last byte pointer's target is not any consonant, say no.
+  If the string does not end with the other string, say no.
+  Say yes.
+
+To decide if a string ends with any vowel and another string:
+  Slap a substring on the string.
+  Subtract the other string's length from the substring's last byte pointer.
+  If the substring is blank, say no.
+  If the substring's last byte pointer's target is not any vowel, say no.
+  If the string does not end with the other string, say no.
+  Say yes.
+
 To scan a type given a rider (has or have):
   If the compiler's abort flag is set, exit.
   Move the rider (compiler rules).
@@ -701,6 +727,15 @@ To scan a type given a rider (has or have):
     Exit.
   Move the rider (compiler rules).
   Index the type.
+
+To scan some fields given a rider:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    Add a field to the fields given "field" and the rider's token substring's first byte pointer.
+    Scan the field given the rider.
+    If the rider's token substring is not any pause, exit.
+    Scan any pauses given the rider.
+  Repeat.
 
 To scan a field given a rider:
   If the compiler's abort flag is set, exit.
@@ -771,6 +806,20 @@ To scan a field given a rider (reference part):
   If the compiler's abort flag is set, exit.
   Move the rider (compiler rules).
   Set the field's reference flag.
+
+To decide if a string is any pause:
+  If the string is ",", say yes.
+  If the string is ";", say yes.
+  If the string is "and", say yes.
+  If the string is "or", say yes.
+  Say no.
+
+To scan any pauses given a rider:
+  [Loop.]
+    If the compiler's abort flag is set, exit.
+    If the rider's token substring is not any pause, exit.
+    Move the rider (compiler rules).
+  Repeat.
 
 To scan a type given a rider (unit of measure):
   If the compiler's abort flag is set, exit.
@@ -902,6 +951,11 @@ To index a global:
     Abort with "Error #27. Global variable '" then the global's name then "' has already been declared." and the global's locus;
     Exit.
   Index the global given the global's name and the global index.
+
+To decide if a string is the start of any optional info:
+  If the string is "to", say yes.
+  If the string is "with", say yes.
+  Say no.
 
 To scan a global given a rider (optional info):
   If the compiler's abort flag is set, exit.
