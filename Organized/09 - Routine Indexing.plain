@@ -80,9 +80,6 @@ To reduce a type to another type for utility use:
     Put the other type's base type into the other type.
   Repeat.
 
-To convert some monikettes to a moniker:
-  Convert the monikettes to the moniker given the monikettes' last monikette.
-
 To convert some monikettes to a moniker given a monikette:
   Clear the moniker.
   Loop.
