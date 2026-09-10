@@ -636,8 +636,8 @@ To find a field term given a phrase and a type and a name:
     Find a routine given 
       "Put" and 
       the phrase and 
-      "'s " then the name and "
-      into".
+      "'s " then the name and 
+      "into".
   If the routine is not nil,
     Put the routine into the field term's function;
     Exit.
