@@ -2578,8 +2578,6 @@ To center a text in a box (vertically):
   Round the number to the nearest multiple of the tpp.
   Move the text given 0 and the number.
 
-xxx
-
 To change the current hue by some points:
   Change the context's hue by the points.
 
