@@ -67,6 +67,13 @@ To decide if a type should be finalized:
   If the type's fields should be finalized, say yes.
   Say no.
 
+To decide if some fields should be finalized:
+  [Loop.]
+    Get a field from the fields.
+    If the field is nil, say no.
+    If the field's type should be finalized, say yes.
+  Repeat.
+
 To add the allocate routine for a type:
   If the type is nil, exit.
   If the compiler's abort flag is set, exit.
