@@ -129,6 +129,21 @@ To transmogrify a fragment (call internal):
   Get an address given the fragment's routine.
   Attach $E8 and the address to the fragment. \ call + the fragment's routine's address
 
+To get an address given a routine:
+  If the routine's address is not 0,
+    Put the routine's address into the address;
+    Exit.
+  Put -1 into the routine's address.
+  Find another routine given the routine's employs moniker and the routine index.
+  If the other routine is nil,
+    Abort with "I can't find the '" then the routine's employs moniker then "' routine you're trying to employ." and the routine's locus;
+    Exit.
+  If the other routine's address is -1,
+    Abort with "Recursive reference in employ clause." and the routine's locus;
+    Exit.
+  Get the address given the other routine.
+  Put the address into the routine's address.
+
 To attach an hex string and an address to a fragment: \ call or jump
   Put the address into a number.
   Subtract the fragment's address from the number.
