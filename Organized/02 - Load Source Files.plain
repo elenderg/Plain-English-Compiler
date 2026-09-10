@@ -36,3 +36,9 @@ To load a source file:
     Abort with "Error #3. Could not load the file '" then the source file's path then "'.";
     Exit.
 
+To abort with a string:
+  If the compiler's abort flag is set, exit.
+  Set the compiler's abort flag.
+  Put the string into the compiler's abort message.
+  \Show the status.
+
