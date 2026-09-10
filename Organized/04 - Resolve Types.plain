@@ -165,6 +165,34 @@ To resolve a type (optional info):
   Clear the type's cooking flag.
   Set the type's optional info resolved flag.
 
+To check for invalid optional info on a type:
+  If the compiler's abort flag is set, exit.
+  If the type is nil, exit.
+  If the type's target name is not blank,
+    Check for invalid optional info on the type (target).
+  If the type's fields are not empty,
+    Check for invalid optional info on the type (fields).
+  If the type's scale is not 0,
+    Check for invalid optional info on the type (scale).
+
+To check for invalid optional info on a type (target):
+  If the compiler's abort flag is set, exit.
+  If the type cannot be reduced to "pointer",
+    Abort with "Optional 'to' info is only allowed on pointer types." and the type's locus;
+    Exit.
+
+To check for invalid optional info on a type (fields):
+  If the compiler's abort flag is set, exit.
+  If the type cannot be reduced to "record",
+    Abort with "Optional 'with' info is only allowed on record types." and the type's locus;
+    Exit.
+
+To check for invalid optional info on a type (scale):
+  If the compiler's abort flag is set, exit.
+  If the type cannot be reduced to "number",
+    Abort with "Scales are only allowed on number types." and the type's locus;
+    Exit.
+
 To resolve a type (optional info - pointer):
   If the compiler's abort flag is set, exit.
   If the type's target type is not nil, exit.
@@ -204,6 +232,14 @@ To resolve a type (optional info - record):
   If the type's fields' count is greater than 2, exit.
   Copy the type's base type's fields into the type's fields (data fields only).
 
+To copy some fields into some other fields:
+  [Loop.]
+    Get a field from the fields.
+    If the field is nil, exit.
+    Copy the field into another field.
+    Append the other field to the other fields.
+  Repeat.
+
 To eliminate duplicate nicknames from some variables:
   Create an index given 101.
   Eliminate duplicate nicknames from the variables given the index.
@@ -228,6 +264,17 @@ To eliminate duplicate nicknames given a variable and an index:
     Exit.
   Clear the other variable's nickname.
   Clear the variable's nickname.
+
+To copy some fields into some other fields (data fields only):
+  If the fields' first field is nil, exit.
+  If the fields' first field's next field is nil, exit.
+  Put the fields' first field's next field's next field into a field.
+  Loop.
+    If the field is nil, exit.
+    Copy the field into another field.
+    Append the other field to the other fields.
+    Get the field from the fields.
+  Repeat.
 
 To resolve a type (optional info - scale):
   If the compiler's abort flag is set, exit.
