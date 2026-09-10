@@ -292,6 +292,12 @@ The compiler is a record with
   A exe buffer,
   A listing buffer.
 
+The current header address is an address.
+The current name address is an address.
+The current routine is a routine.
+The current thunk address is an address.
+The data borough is a borough.
+
 
 \------------------------------------------------------
 
