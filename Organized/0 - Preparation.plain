@@ -670,6 +670,13 @@ To list a variable in a buffer:
   Append the nibble string to the buffer (with separator).
   Advance the buffer.
 
+To move a rider (code rules - symbol):
+  Bump the rider.
+
+To advance a buffer (twice):
+  Advance the buffer.
+  Advance the buffer.
+
 To list some variables in a buffer:
     Get a variable from the variables.
     If the variable is nil, exit.
@@ -683,7 +690,118 @@ To list some variables under a string in a buffer:
   List the variables in the buffer.
   Advance the buffer.
 
+To append an entry to a buffer (with separator):
+  If the entry is nil,
+    Append "" to the buffer (with separator);
+    Exit.
+  Append the entry's name to the buffer (with separator).
 
+To append a flag to a buffer (with separator):
+  Convert the flag to a string.
+  Append the string to the buffer (with separator).
+
+To append a number to a buffer (as hex with separator):
+  Convert the number to a nibble string.
+  Append the nibble string to the buffer (with separator).
+
+To append a number to a buffer (with separator):
+  Convert the number to a string.
+  Append the string to the buffer (with separator).
+
+To append a ratio to a buffer (with separator):
+  Convert the ratio to a string.
+  Append the string to the buffer (with separator).
+
+To append a routine to a buffer (with separator):
+  If the routine is nil,
+    Append "" to the buffer (with separator);
+    Exit.
+  Append the routine's moniker to the buffer (with separator).
+
+To append a string to a buffer (with separator):
+  Append the string to the buffer.
+  Append "/" to the buffer.
+
+To append a tag to a buffer (as a fragment tag string with separator):
+  If the tag is the break tag,
+    Append "break" to the buffer (with separator);
+    Exit.
+  If the tag is the call external tag,
+    Append "call external" to the buffer (with separator);
+    Exit.
+  If the tag is the call indirect tag,
+    Append "call indirect" to the buffer (with separator);
+    Exit.
+  If the tag is the call internal tag,
+    Append "call internal" to the buffer (with separator);
+    Exit.
+  If the tag is the dereference tag,
+    Append "dereference" to the buffer (with separator);
+    Exit.
+  If the tag is the end if tag,
+    Append "end if" to the buffer (with separator);
+    Exit.
+  If the tag is the epilog tag,
+    Append "epilog" to the buffer (with separator);
+    Exit.
+  If the tag is the exit tag,
+    Append "exit" to the buffer (with separator);
+    Exit.
+  If the tag is the finalize tag,
+    Append "finalize" to the buffer (with separator);
+    Exit.
+  If the tag is the increment tag,
+    Append "increment" to the buffer (with separator);
+    Exit.
+  If the tag is the intel tag,
+    Append "intel" to the buffer (with separator);
+    Exit.
+  If the tag is the jump false tag,
+    Append "jump false" to the buffer (with separator);
+    Exit.
+  If the tag is the load address tag,
+    Append "load address" to the buffer (with separator);
+    Exit.
+  If the tag is the load eax tag,
+    Append "load eax" to the buffer (with separator);
+    Exit.
+  If the tag is the loop tag,
+    Append "loop" to the buffer (with separator);
+    Exit.
+  If the tag is the not tag,
+    Append "not" to the buffer (with separator);
+    Exit.
+  If the tag is the prolog tag,
+    Append "prolog" to the buffer (with separator);
+    Exit.
+  If the tag is the push address tag,
+    Append "push address" to the buffer (with separator);
+    Exit.
+  If the tag is the push value tag,
+    Append "push value" to the buffer (with separator);
+    Exit.
+  If the tag is the save eax tag,
+    Append "save eax" to the buffer (with separator);
+    Exit.
+  If the tag is the repeat tag,
+    Append "repeat" to the buffer (with separator);
+    Exit.
+  If the tag is the routine address tag,
+    Append "routine address" to the buffer (with separator);
+    Exit.
+  Append "?" to the buffer (with separator).
+
+To append a type to a buffer (with separator):
+  If the type is nil,
+    Append "" to the buffer (with separator);
+    Exit.
+  Append the type's name to the buffer (with separator).
+
+To append a variable to a buffer (with separator):
+  If the variable is nil,
+    Append "" to the buffer (with separator);
+    Exit.
+  Append the variable's name to the buffer (with separator).
 
 
 
