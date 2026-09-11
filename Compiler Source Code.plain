@@ -4648,14 +4648,14 @@ To load a source file:
     Exit.
 
 To load some source files:
-  Put ".plain" to a string called new extension.
-  Null terminate the new extension.
+  Put ".plain" to a string called file extension.
+  Null terminate the file extension.
   Loop.
     If the compiler's abort flag is set, exit.
     Get an item from the compiler's directory.
     If the item is not found, break.
     If the item's kind is not "file", repeat.
-    If the item's extension is not the new extension, repeat.
+    If the item's extension is not the file extension, repeat.
     \If the item looks reamish, repeat.
     Add a source file to the source files given the item's path.
     Load the source file.
